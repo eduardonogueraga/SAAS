@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Deteccion;
+use App\Models\Detection;
 use App\Models\Sensor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Deteccion>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Detection>
  */
 
-class DeteccionFactory extends Factory
+class DetectionFactory extends Factory
 {
-    protected $model = Deteccion::class;
+    protected $model = Detection::class;
 
     public function configure()
     {

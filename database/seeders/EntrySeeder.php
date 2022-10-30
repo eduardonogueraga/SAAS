@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Entradas;
+use App\Models\Entry;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class EntradaSeeder extends Seeder
+class EntrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class EntradaSeeder extends Seeder
      */
     public function run()
     {
-        $entrada =  Entradas::create([
+        Entry::create([
             'id' => 1,
             'tipo' => "activacion",
             'modo' =>  "manual",
@@ -35,7 +35,7 @@ class EntradaSeeder extends Seeder
     {
         $date = now()->subDays(rand(0,60));
 
-        $entrada = Entradas::factory()->create([
+     Entry::factory()->create([
             'created_at' => $date
         ]);
 

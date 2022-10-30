@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Entradas extends Model
+class Entry extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -14,7 +14,7 @@ class Entradas extends Model
 
     public function detecciones()
     {
-        return $this->hasMany(Deteccion::class);
+        return $this->hasMany(Detection::class);
     }
 
     public function logs()
@@ -24,7 +24,7 @@ class Entradas extends Model
 
     public function aviso()
     {
-        return $this->belongsTo(Aviso::class);
+        return $this->belongsTo(Notice::class);
     }
 
 }

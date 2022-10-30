@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('entradas', function (Blueprint $table) {
+        Schema::create('notices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('tipo', 100);
-            $table->string('modo', 50);
-            $table->tinyInteger('restaurada')->default(0);;
-            $table->integer('intentos_reactivacion');
+            $table->string('tipo',45);
+            $table->string('asunto', 300);
+            $table->string('cuerpo',500)->nullable();
+            $table->string('telefono',10);
             $table->dateTime('fecha');
             $table->softDeletes();
             $table->timestamps();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entradas');
+        Schema::dropIfExists('notices');
     }
 };

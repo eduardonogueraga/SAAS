@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('sensores', function (Blueprint $table) {
-            $table->unsignedBigInteger('deteccion_id')->nullable()->after('id');
-            $table->foreign('deteccion_id')->references('id')->on('detecciones')->onDelete('cascade');
-
+        Schema::table('entries', function (Blueprint $table) {
+           $table->unsignedBigInteger('notice_id')->nullable()->after('id');
+           $table->foreign('notice_id')->references('id')->on('notices')->onDelete('set null');
         });
     }
 
@@ -27,9 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('sensores', function (Blueprint $table) {
-            $table->dropForeign(['deteccion_id']);
-            $table->dropColumn('deteccion_id');
+        Schema::table('entries', function (Blueprint $table) {
+            $table->dropForeign(['notice_id']);
+            $table->dropColumn('notice_id');
         });
     }
 };

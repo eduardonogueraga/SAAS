@@ -11,9 +11,6 @@ class Sensor extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
-    protected $table = 'sensores';
-
-
 
 
 }

@@ -2,24 +2,24 @@
 
 namespace Database\Factories;
 
-use App\Models\Deteccion;
-use App\Models\Entradas;
+use App\Models\Detection;
+use App\Models\Entry;
 use App\Models\Log;
 use App\Models\Sensor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Entradas>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Entry>
  */
-class EntradasFactory extends Factory
+class EntryFactory extends Factory
 {
-    protected $model = Entradas::class;
+    protected $model = Entry::class;
 
     public function configure()
     {
         return $this->afterCreating(function ($entrada) {
 
-            $entrada->detecciones()->saveMany(Deteccion::factory(rand(1,5))->make());
+            $entrada->detecciones()->saveMany(Detection::factory(rand(1,5))->make());
 
             foreach ($entrada->detecciones as $deteccion){
                 $deteccion->sensor()->save(Sensor::factory()->make());

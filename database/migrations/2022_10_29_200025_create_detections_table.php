@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detecciones', function (Blueprint $table) {
+        Schema::create('detections', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('entradas_id');
-            $table->foreign('entradas_id')->references('id')->on('entradas');
+            $table->unsignedBigInteger('entry_id');
+            $table->foreign('entry_id')->references('id')->on('entries');
 
-         //   $table->unsignedBigInteger('sensores_id')->nullable();
-          //  $table->foreign('sensores_id')->references('id')->on('sensores');
-
-            $table->unsignedBigInteger('avisos_id')->nullable();
-            $table->foreign('avisos_id')->references('id')->on('avisos');
+            $table->unsignedBigInteger('notice_id')->nullable();
+            $table->foreign('notice_id')->references('id')->on('notices');
 
             $table->tinyInteger('intrusismo');
             $table->integer('umbral');
@@ -42,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detecciones');
+        Schema::dropIfExists('detections');
     }
 };

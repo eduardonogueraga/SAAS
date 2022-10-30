@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('entradas_id');
-            $table->foreign('entradas_id')->references('id')->on('entradas');
+            $table->unsignedBigInteger('entry_id');
+            $table->foreign('entry_id')->references('id')->on('entries');
 
             $table->string('descripcion', 1000);
             $table->dateTime('fecha');
