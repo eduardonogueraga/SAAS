@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Detection;
 use App\Models\Entry;
 use App\Models\Log;
+use App\Models\Notice;
 use App\Models\Sensor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,6 +29,7 @@ class EntryFactory extends Factory
             foreach (range(0,rand(1,3)) as $i){
                 $entrada->logs()->save(Log::factory()->make());
             }
+
 
         });
     }

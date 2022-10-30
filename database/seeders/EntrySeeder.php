@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Entry;
+use App\Models\Notice;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,7 @@ class EntrySeeder extends Seeder
      */
     public function run()
     {
-        Entry::create([
+        $entrada =  Entry::create([
             'id' => 1,
             'tipo' => "activacion",
             'modo' =>  "manual",
@@ -24,6 +25,7 @@ class EntrySeeder extends Seeder
             'fecha' => now()->subHours(2),
             'created_at' => now()
         ]);
+
 
         foreach (range(0,30) as $i){
             $this->createRandomEntries();
@@ -35,9 +37,15 @@ class EntrySeeder extends Seeder
     {
         $date = now()->subDays(rand(0,60));
 
-     Entry::factory()->create([
+        $entrada =  Entry::factory()->create([
             'created_at' => $date
         ]);
+
+        if(!rand(0,7)){
+            $entrada->notices()->save(Notice::factory()->make());
+            $entrada->save();
+
+        }
 
     }
 

@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('notices', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->unsignedBigInteger('entry_id');
+            $table->foreign('entry_id')->references('id')->on('entries');
+
             $table->string('tipo',45);
             $table->string('asunto', 300);
             $table->string('cuerpo',500)->nullable();

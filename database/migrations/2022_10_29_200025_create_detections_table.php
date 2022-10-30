@@ -15,13 +15,8 @@ return new class extends Migration
     {
         Schema::create('detections', function (Blueprint $table) {
             $table->bigIncrements('id');
-
             $table->unsignedBigInteger('entry_id');
             $table->foreign('entry_id')->references('id')->on('entries');
-
-            $table->unsignedBigInteger('notice_id')->nullable();
-            $table->foreign('notice_id')->references('id')->on('notices');
-
             $table->tinyInteger('intrusismo');
             $table->integer('umbral');
             $table->tinyInteger('restaurado')->default(0);;

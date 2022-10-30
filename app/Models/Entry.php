@@ -22,9 +22,9 @@ class Entry extends Model
         return $this->hasMany(Log::class);
     }
 
-    public function aviso()
+    public function notices()
     {
-        return $this->belongsTo(Notice::class);
+        return $this->hasMany(Notice::class);
     }
 
 }

@@ -17,4 +17,7 @@ class Detection extends Model
     {
         return $this->hasOne(Sensor::class);
     }
+
+
 }
+
