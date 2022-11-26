@@ -31,6 +31,9 @@
                                         <th class="p-2 whitespace-nowrap">
                                             <div class="font-semibold text-center">Detecciones</div>
                                         </th>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-center">Mensajes</div>
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody class="text-sm divide-y divide-gray-100">
@@ -56,6 +59,16 @@
                                                 @endforeach
                                             @else
                                                 <div class="text-lg text-center">Sin detecciones</div>
+                                            @endif
+                                        </td>
+
+                                        <td class="p-2 whitespace-nowrap">
+                                            @if ($row->notices->isNotEmpty())
+                                                @foreach ($row->notices as $n)
+                                                    <div class="text-lg text-center">{{$n->asunto}}  </div>
+                                                @endforeach
+                                            @else
+                                                <div class="text-lg text-center">Sin mensjes</div>
                                             @endif
                                         </td>
 

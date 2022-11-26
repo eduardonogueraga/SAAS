@@ -10,7 +10,7 @@ class EntriesController extends Controller
     public function index()
     {
         $entries = Entry::query()
-            ->with('detections','detections.sensor')
+            ->with('detections','detections.sensor','notices')
             ->orderBy('fecha', 'DESC')
             ->paginate(30);
 
