@@ -12,9 +12,9 @@ class Entry extends Model
 
     protected $guarded = [];
 
-    public function detecciones()
+    public function detections()
     {
-        return $this->hasMany(Detection::class);
+        return $this->hasMany(Detection::class)->with('sensor');
     }
 
     public function logs()
