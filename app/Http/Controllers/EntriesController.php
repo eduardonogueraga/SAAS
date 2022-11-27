@@ -20,4 +20,9 @@ class EntriesController extends Controller
             'entries' => $entries
         ]);
     }
+
+    public function manage()
+    {
+        return view('entries.orders');
+    }
 }
