@@ -20,9 +20,9 @@ class EntryFactory extends Factory
     {
         return $this->afterCreating(function ($entrada) {
 
-            $entrada->detecciones()->saveMany(Detection::factory(rand(1,5))->make());
+            $entrada->detections()->saveMany(Detection::factory(rand(1,5))->make());
 
-            foreach ($entrada->detecciones as $deteccion){
+            foreach ($entrada->detections as $deteccion){
                 $deteccion->sensor()->save(Sensor::factory()->make());
             }
 

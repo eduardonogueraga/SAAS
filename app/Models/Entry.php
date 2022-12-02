@@ -12,6 +12,7 @@ class Entry extends Model
 
     protected $guarded = [];
 
+    protected $dates = ['fecha'];
     public function detections()
     {
         return $this->hasMany(Detection::class)->with('sensor');
