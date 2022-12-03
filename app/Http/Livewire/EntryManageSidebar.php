@@ -14,11 +14,11 @@ class EntryManageSidebar extends Component
 
     protected $listeners = [
         'loadMore' => 'loadMore',
-        'orderSelected' => 'orderSelected'
+        'entrySelected' => 'entrySelected'
 
     ];
 
-    public function orderSelected($id){
+    public function entrySelected($id){
         $this->select = $id;
     }
     public function loadMore()

@@ -6,7 +6,7 @@
             @if ($entries->isNotEmpty())
                 @foreach ($entries as $row)
 
-                    <li wire:click="$emit('orderSelected', {{$row->id}})" class="items-center flex-auto py-5 px-2 md:px-5 transition duration-500 border-l-8 cursor-pointer {{$select==$row->id ? 'bg-blue-100  selected':'hover:bg-yellow-100'}}
+                    <li wire:click="$emit('entrySelected', {{$row->id}})" class="items-center flex-auto py-5 px-2 md:px-5 transition duration-500 border-l-8 cursor-pointer {{$select==$row->id ? 'bg-blue-100  selected':'hover:bg-yellow-100'}}
                     @if ($row->tipo === 'activacion')
                             border-red-600
                     @elseif ($row->tipo === 'desactivacion')
@@ -51,7 +51,7 @@
                         }
                     }"
                          x-init="observe">
-
+                        @include('shared._loading')
                     </div>
                 @endif
             @else

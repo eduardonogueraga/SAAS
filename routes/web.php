@@ -24,6 +24,6 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/entries', [EntriesController::class, 'index'])->name('entry.index');
-Route::get('/manage', [EntriesController::class, 'manage'])->name('entrymanage.index');
+Route::get('/manage', [EntriesController::class, 'manageEntries'])->name('entrymanage.index');
 
 require __DIR__.'/auth.php';

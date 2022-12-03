@@ -21,8 +21,8 @@ class EntriesController extends Controller
         ]);
     }
 
-    public function manage()
+    public function manageEntries()
     {
-        return view('entries.orders');
+        return view('entries.manage');
     }
 }
