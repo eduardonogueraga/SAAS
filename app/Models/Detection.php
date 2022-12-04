@@ -12,7 +12,7 @@ class Detection extends Model
 
     protected $guarded = [];
 
-
+    protected $dates = ['fecha'];
     public function sensor()
     {
         return $this->hasOne(Sensor::class);

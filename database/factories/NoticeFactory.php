@@ -21,10 +21,12 @@ class NoticeFactory extends Factory
      */
     public function definition()
     {
+        $tipo  = rand(0,1)? "sms":"llamada";
+
         return [
-        'tipo' => rand(0,1)? "aviso":"salto",
-        'asunto' => Arr::random($this->getRandomAsunto()),
-        'cuerpo' => $this->faker->sentence(rand(10,20)),
+        'tipo' => $tipo,
+        'asunto' => $tipo == "sms" ? Arr::random($this->getRandomAsunto()) : null,
+        'cuerpo' =>  $tipo == "sms" ? $this->faker->sentence(rand(10,20))  : null,
         'telefono' => $this->faker->numerify('##########'),
         'fecha' => now()->subHours(2)
         ];

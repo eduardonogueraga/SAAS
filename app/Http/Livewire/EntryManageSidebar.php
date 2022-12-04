@@ -28,6 +28,7 @@ class EntryManageSidebar extends Component
     public function render()
     {
         $entries = Entry::query()
+            ->with('notices')
             ->orderBy('id', 'DESC')
             ->paginate($this->paginate);
 

@@ -8,7 +8,9 @@ use Livewire\Component;
 class EntryManageDetails extends Component
 {
     public Entry $entry;
-    public int $entryId = 30;
+
+    public $previousDatetime;
+    public int $entryId;
 
     protected $listeners = [
         'entrySelected' => 'setEntryId'
@@ -21,10 +23,19 @@ class EntryManageDetails extends Component
 
     public function render()
     {
+
+        if(empty($this->entryId)){
+           $this->entryId = Entry::max('id');
+        }
+
         $this->entry = Entry::query()
             ->with('detections','detections.sensor','notices')
             ->whereId($this->entryId)
             ->first();
+
+        $this->previousDatetime = Entry::select('fecha')
+        ->whereId($this->entryId +1)
+        ->first();
 
         return view('livewire.entry-manage-details');
     }

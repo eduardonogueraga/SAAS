@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('entry_id')->references('id')->on('entries');
 
             $table->string('tipo',45);
-            $table->string('asunto', 300);
+            $table->string('asunto', 300)->nullable();
             $table->string('cuerpo',500)->nullable();
             $table->string('telefono',10);
             $table->dateTime('fecha');
