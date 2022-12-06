@@ -11,4 +11,6 @@ class Log extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+
+    protected $dates = ['fecha'];
 }

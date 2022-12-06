@@ -12,6 +12,7 @@ class Notice extends Model
 
     protected $guarded = [];
 
+    protected $dates = ['fecha'];
 
     public function entradas()
     {

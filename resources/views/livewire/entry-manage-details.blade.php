@@ -35,13 +35,13 @@
                     <p class="leading-relaxed text-base">Ultima actualizacion: {{$entry->updated_at->format('d/m/Y H:i:s')}}</p>
             </div>
             <div class="flex flex-col md:w-1/2 md:pl-12">
-                <h2 class="title-font font-semibold text-gray-800 tracking-wider text-sm mb-3">Acciones</h2>
+                <h2 class="title-font font-semibold text-gray-800 tracking-wider text-sm mb-3">Info</h2>
                 <nav class="flex flex-wrap list-none -mb-1">
                     <li class="lg:w-1/3 mb-1 w-1/2">
-                        <a class="text-gray-600 hover:text-gray-800">Mensajes</a>
+                        <a class="text-gray-600 hover:text-gray-800">Mensajes: {{$entry->notices_count}}</a>
                     </li>
                     <li class="lg:w-1/3 mb-1 w-1/2">
-                        <a class="text-gray-600 hover:text-gray-800">Logs</a>
+                        <a class="text-gray-600 hover:text-gray-800">Logs: {{$entry->logs_count}}</a>
                     </li>
                 </nav>
             </div>
@@ -88,32 +88,8 @@
         </div>
 
         <div class="flex flex-wrap -mx-2">
-            <div class="px-2 w-1/2">
-                <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-                    <div class="text-center relative z-10 w-full">
-                        <h2 class="text-xl text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-                        <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-                        <a class="mt-3 text-purple-500 inline-flex items-center">Learn More
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="px-2 w-1/2">
-                <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-                    <div class="text-center relative z-10 w-full">
-                        <h2 class="text-xl text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-                        <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-                        <a class="mt-3 text-purple-500 inline-flex items-center">Learn More
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @livewire('detail-notices')
+            @livewire('detail-logs')
         </div>
 
 

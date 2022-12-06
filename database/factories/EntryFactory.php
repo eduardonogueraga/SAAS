@@ -26,7 +26,7 @@ class EntryFactory extends Factory
                 $deteccion->sensor()->save(Sensor::factory()->make());
             }
 
-            foreach (range(0,rand(1,3)) as $i){
+            foreach (range(0,rand(1,20)) as $i){
                 $entrada->logs()->save(Log::factory()->make());
             }
 
