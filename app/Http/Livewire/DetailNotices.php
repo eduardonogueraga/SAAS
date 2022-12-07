@@ -25,6 +25,7 @@ class DetailNotices extends Component
 
     public function setEntryId($id)
     {
+        $this->reset('paginate');
         $this->entryId = $id;
     }
 

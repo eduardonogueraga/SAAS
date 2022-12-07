@@ -53,14 +53,14 @@
             <div class="lg:w-3/3 mx-auto">
 
                 <div class="bg-gray-100 rounded flex mb-2 p-4 h-full items-center">
-                    <span class="title-font font-medium font-semibold">Detecciones en esta entrada: {{$entry->detections->count()}}</span>
+                    <span class="title-font font-medium font-semibold">Detecciones en esta entrada: {{$entry->detections_count}}</span>
                 </div>
                 <div class="flex flex-wrap w-full relative mb-4  rounded shadow bg-white h-96 overflow-y-scroll">
 
                     <div class="p-4  md:w-full">
 
-                        @if ($entry->detections->isNotEmpty())
-                            @foreach ($entry->detections as $d)
+                        @if ($detectionsList->isNotEmpty())
+                            @foreach ($detectionsList as $d)
                                 <div class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2
                                 @if($d->intrusismo == 1) bg-amber-400 @endif
                                 ">
@@ -76,6 +76,7 @@
                                     </div>
                                 </div>
                             @endforeach
+                            @include('shared._loadMoreRecords', ['collection'=>$detectionsList, 'loadMethod'=> 'loadMoreDetections'])
                         @else
                             <p class="text-lg text-center">Sin detecciones</p>
                         @endif

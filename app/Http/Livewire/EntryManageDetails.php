@@ -2,22 +2,31 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Detection;
 use App\Models\Entry;
 use Livewire\Component;
 
 class EntryManageDetails extends Component
 {
     public Entry $entry;
+    private $detectionsList;
 
+    public $paginate = 5;
     public $previousDatetime;
     public int $entryId;
 
     protected $listeners = [
-        'entrySelected' => 'setEntryId'
+        'entrySelected' => 'setEntryId',
+        'loadMoreDetections' => 'loadMoreDetections'
     ];
 
+    public function loadMoreDetections()
+    {
+        $this->paginate += 5;
+    }
     public function setEntryId($id)
     {
+        $this->reset('paginate');
         $this->entryId = $id;
     }
 
@@ -29,15 +38,20 @@ class EntryManageDetails extends Component
         }
 
         $this->entry = Entry::query()
-            ->with('detections','detections.sensor')
-            ->withCount('notices', 'logs')
+            ->withCount('notices', 'logs', 'detections')
             ->whereId($this->entryId)
             ->first();
+
+        $this->detectionsList = Detection::query()
+            ->with('sensor')
+            ->whereEntry_id($this->entryId)
+            ->orderBy('fecha', 'DESC')
+            ->paginate($this->paginate);
 
         $this->previousDatetime = Entry::select('fecha')
         ->whereId($this->entryId +1)
         ->first();
 
-        return view('livewire.entry-manage-details');
+        return view('livewire.entry-manage-details', ['detectionsList' => $this->detectionsList]);
     }
 }

@@ -1,7 +1,7 @@
 @if($logsLists->count())
 <div class="px-2 w-1/2">
         <div class="bg-gray-100 rounded flex mb-2  p-4  items-center">
-            <span class="title-font font-medium font-semibold">Logs en esta entrada:{{$this->paginate}} {{$logsLists->count()}} </span>
+            <span class="title-font font-medium font-semibold">Logs en esta entrada:{{$logsLists->count()}} </span>
         </div>
         <div class="flex flex-wrap w-full relative mb-4  rounded shadow bg-white h-96 overflow-y-scroll">
 

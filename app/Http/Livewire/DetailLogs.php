@@ -13,7 +13,7 @@ class DetailLogs extends Component
     private $logsLists;
     public int $entryId;
 
-    public $paginate = 5;
+    public $paginate;
     protected $listeners = [
         'entrySelected' => 'setEntryId',
         'loadMoreLog' => 'loadMoreLog'
@@ -25,9 +25,13 @@ class DetailLogs extends Component
     }
     public function setEntryId($id)
     {
+        $this->reset('paginate');
         $this->entryId = $id;
     }
-
+    public function mount()
+    {
+        $this->paginate = 5;
+    }
     public function render()
     {
         if(empty($this->entryId)){
@@ -38,6 +42,8 @@ class DetailLogs extends Component
             ->whereEntry_id($this->entryId)
             ->orderBy('fecha', 'DESC')
             ->paginate($this->paginate);
+
+
         return view('livewire.detail-logs', ['logsLists' => $this->logsLists]);
     }
 }
