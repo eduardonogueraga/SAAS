@@ -1,5 +1,9 @@
 <div>
     <div class="flex justify-between items-center h-48 border-b-2 mb-8">
+        <label class="px-3 w-full">
+            <input class="rounded-lg p-4 bg-gray-200 transition duration-200 focus:outline-none focus:ring-2 w-full"
+                   name="search" wire:model.debounce.150ms="search" value="{{ request('search') }}" placeholder="Buscar" />
+        </label>
     </div>
     <div class="h-screen overflow-y-scroll">
         <ul class="mt-6">

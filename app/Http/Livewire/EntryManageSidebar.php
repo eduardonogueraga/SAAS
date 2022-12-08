@@ -11,7 +11,11 @@ class EntryManageSidebar extends Component
     public $paginate = 10;
 
     public $select;
+    public $search;
 
+    protected $queryString = [
+        'search' => ['except' => '']
+    ];
     protected $listeners = [
         'loadMore' => 'loadMore',
         'entrySelected' => 'entrySelected'
@@ -27,8 +31,13 @@ class EntryManageSidebar extends Component
     }
     public function render()
     {
+        $filters = [
+            'search' => $this->search
+        ];
+
         $entries = Entry::query()
             ->with('notices')
+            ->applyFilters($filters)
             ->orderBy('id', 'DESC')
             ->paginate($this->paginate);
 
