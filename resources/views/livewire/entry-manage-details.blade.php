@@ -57,11 +57,11 @@
                 </div>
                 <div class="flex flex-wrap w-full relative mb-4  rounded shadow bg-white h-96 overflow-y-scroll">
 
-                    <div class="p-4  md:w-full">
+                    <ul class="p-4  md:w-full">
 
                         @if ($detectionsList->isNotEmpty())
                             @foreach ($detectionsList as $d)
-                                <div class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2
+                                <li class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2
                                 @if($d->intrusismo == 1) bg-amber-400 @endif
                                 ">
                                     <div class="flex-grow">
@@ -74,7 +74,7 @@
                                         <p class="leading-relaxed text-base text-right"> Fecha: {{$d->fecha->format('d/m/Y H:i:s')}}</p>
                                         <p class="leading-relaxed text-base text-right"> Sensor: {{$d->sensor->tipo}}  {{$d->sensor->estado}} ({{$d->sensor->valor_sensor}})</p>
                                     </div>
-                                </div>
+                                </li>
                             @endforeach
                             @include('shared._loadMoreRecords', ['collection'=>$detectionsList, 'loadMethod'=> 'loadMoreDetections'])
                         @else
@@ -82,7 +82,7 @@
                         @endif
 
 
-                    </div>
+                    </ul>
                 </div>
             </div>
 

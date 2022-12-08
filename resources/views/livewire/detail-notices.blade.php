@@ -4,10 +4,13 @@
         <span class="title-font font-medium font-semibold">Avisos en esta entrada: {{$noticeLists->count()}} </span>
     </div>
     <div class="flex flex-wrap w-full relative mb-4  rounded shadow bg-white h-96 overflow-y-scroll">
-
-        <div class="p-4  md:w-full">
+        @if($noticeModal)
+            @php $detailNotice = $noticeLists->filter(function($item) use($selectedNotice) {return $item->id == $selectedNotice;})->first() @endphp
+            @include('notices._noticesModal', ['detailNotice'=>$detailNotice, 'closeMethod' =>'closeNoticeModal'])
+        @endif
+        <ul class="p-4  md:w-full">
             @foreach ($noticeLists as $n)
-                <div class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2">
+                <li wire:click.stop="openNoticeModal('{{$n->id}}')" class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2  cursor-pointer hover:bg-yellow-100" >
                     <div class="flex-grow">
                         <div class="flex flex-wrap">
                             <div class="text-md italic text-gray-400 text-xs md:text-base">
@@ -23,18 +26,18 @@
                             </div>
                             <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Aviso {{ucfirst($n->tipo)}} </h2>
                         </div>
-                        <p class="font-light">@if($n->tipo == 'sms') {{$n->asunto}} @else Tlf: {{$n->telefono}} @endif</p>
+                        <p class="font-light">@if($n->tipo == 'sms') {{Str::limit($n->asunto,25)}} @else Tlf: {{$n->telefono}} @endif</p>
 
                     </div>
 
                     <div class="flex-grow">
                         <p class="leading-relaxed text-base text-right"> Fecha: {{$n->fecha->format('d/m/Y H:i:s')}}</p>
                     </div>
-                </div>
+                </li>
             @endforeach
             @include('shared._loadMoreRecords', ['collection'=>$noticeLists, 'loadMethod'=> 'loadMoreNotices'])
 
-        </div>
+        </ul>
     </div>
 </div>
 @else

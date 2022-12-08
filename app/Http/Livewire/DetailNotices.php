@@ -13,6 +13,9 @@ class DetailNotices extends Component
     public int $entryId;
 
     public $paginate = 5;
+
+    public $selectedNotice;
+    public $noticeModal;
     protected $listeners = [
         'entrySelected' => 'setEntryId',
         'loadMoreNotices' => 'loadMoreNotices',
@@ -29,6 +32,17 @@ class DetailNotices extends Component
         $this->entryId = $id;
     }
 
+    public function openNoticeModal($id)
+    {
+        $this->selectedNotice = $id;
+        $this->noticeModal = true;
+    }
+
+    public function closeNoticeModal()
+    {
+        $this->selectedProduct = null;
+        $this->noticeModal = false;
+    }
 
     public function render()
     {

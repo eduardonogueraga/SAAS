@@ -7,11 +7,11 @@
                 @foreach ($entries as $key => $row)
                     <li wire:click="$emit('entrySelected', {{$row->id}})" class="items-center flex-auto py-5 px-2 md:px-5 transition duration-500 border-l-8 cursor-pointer {{$select==$row->id ? 'bg-blue-100  selected':'hover:bg-yellow-100'}}
                     @if ($row->tipo === 'activacion')
-                            border-red-600
+                            border-green-600
                     @elseif ($row->tipo === 'desactivacion')
-                                border-green-200
+                                border-yellow-600
                     @else
-                         border-gray-200
+                         border-gray-100
                     @endif
                     ">
                         <div class="content">
