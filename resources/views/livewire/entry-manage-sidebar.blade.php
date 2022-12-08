@@ -5,7 +5,7 @@
                    name="search" wire:model.debounce.150ms="search" value="{{ request('search') }}" placeholder="Buscar" />
         </label>
     </div>
-    <div class="max-h-[86rem] overflow-y-scroll">
+    <div class="max-h-[72rem] overflow-y-scroll">
         <ul class="mt-6">
             @if ($entries->isNotEmpty())
                 @foreach ($entries as $key => $row)
