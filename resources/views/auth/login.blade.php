@@ -10,15 +10,6 @@
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- TEST ALPINE LIVEWIRE -->
-        <livewire:counter />
-        <div x-data="{ open: false }">
-            <button @click="open = true">Expand</button>
-
-            <span x-show="open">
-      Content...
-    </span>
-        </div>
-        <!-- TEST ALPINE LIVEWIRE -->
         <form method="POST" action="{{ route('login') }}">
             @csrf
 

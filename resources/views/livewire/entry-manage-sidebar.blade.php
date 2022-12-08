@@ -1,11 +1,11 @@
 <div>
-    <div class="flex justify-between items-center h-48 border-b-2 mb-8">
-        <label class="px-3 w-full">
+    <div class="justify-between items-center h-32 border-b-2 mb-2">
+        <label class="flex px-3 w-full">
             <input class="rounded-lg p-4 bg-gray-200 transition duration-200 focus:outline-none focus:ring-2 w-full"
                    name="search" wire:model.debounce.150ms="search" value="{{ request('search') }}" placeholder="Buscar" />
         </label>
     </div>
-    <div class="h-screen overflow-y-scroll">
+    <div class="max-h-[86rem] overflow-y-scroll">
         <ul class="mt-6">
             @if ($entries->isNotEmpty())
                 @foreach ($entries as $key => $row)
@@ -43,9 +43,9 @@
                 @endforeach
                 @include('shared._loadMoreRecords', ['collection'=>$entries, 'loadMethod'=> 'loadMore'])
             @else
-                <li class="py-5  px-5 transition p-4 border-r-8 border-gary-600">
+                <li class="py-5  px-5 transition p-4 border-l-8 border-yellow-600">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-sm md:text-lg font-semibold main-color-blue-text dark:main-color-yellow-text transition duration-500">No hay entradas disponibles</h3>
+                        <h3 class="text-sm md:text-lg font-semibold">No hay entradas disponibles</h3>
                     </div>
                 </li>
             @endif

@@ -8,7 +8,7 @@ use Livewire\Component;
 class EntryManageSidebar extends Component
 {
 
-    public $paginate = 10;
+    public $paginate = 15;
 
     public $select;
     public $search;
