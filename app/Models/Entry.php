@@ -28,6 +28,10 @@ class Entry extends Model
         return $this->hasMany(Notice::class);
     }
 
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
     public function newEloquentBuilder($query)
     {
         return new EntryQuery($query);

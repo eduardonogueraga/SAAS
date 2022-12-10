@@ -6,6 +6,7 @@ use App\Models\Detection;
 use App\Models\Entry;
 use App\Models\Log;
 use App\Models\Notice;
+use App\Models\Package;
 use App\Models\Sensor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -43,11 +44,15 @@ class EntryFactory extends Factory
 
     public function definition()
     {
+        $packages = Package::inRandomOrder()->pluck('id');
+
         return [
+            'package_id' => $packages->random(),
             'tipo' => rand(0,1) ? "activacion":"desactivacion",
             'modo' => rand(0,3) ? "manual":"automatica",
             'restaurada' => rand(0,10)? 0:1,
             'intentos_reactivacion' => rand(0,3),
+            'saa_version' => 'VE20R2',
             'fecha' => now()->subDays(rand(0,60)),
         ];
     }

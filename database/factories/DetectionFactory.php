@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Detection;
+use App\Models\Package;
 use App\Models\Sensor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -29,8 +30,10 @@ class DetectionFactory extends Factory
     public function definition()
     {
         $umbral = rand(0,3);
+        $packages = Package::inRandomOrder()->pluck('id');
 
         return [
+        'package_id' => $packages->random(),
         'intrusismo' => $umbral==3? 1:0,
         'umbral' => $umbral,
         'restaurado' => rand(0,10)? 0:1,

@@ -18,6 +18,10 @@ class Detection extends Model
         return $this->hasOne(Sensor::class);
     }
 
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
 
 }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetectionsController;
 use App\Http\Controllers\EntriesController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', [EntriesController::class, 'index'])->name('manage.index');
+Route::get('/detecciones', [DetectionsController::class, 'index'])->name('detections.index');
 
 require __DIR__.'/auth.php';

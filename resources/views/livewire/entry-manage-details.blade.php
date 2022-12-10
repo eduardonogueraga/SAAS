@@ -30,7 +30,8 @@
                     @else {{$entry->fecha->diffInDays($previousDatetime->fecha)}} dias @endif</p>
                 </div>
                     <span class="inline-block py-1 px-2 rounded bg-indigo-50 text-indigo-500 text-xs font-medium tracking-widest mb-2 mt-2">Datos del registro</span>
-                    <p class="leading-relaxed text-base">Id de la peticion: </p>
+                    <p class="leading-relaxed text-base">Id de la peticion:  {{$entry->package->id}}</p>
+                    <p class="leading-relaxed text-base">Version del sistema SAA: {{$entry->saa_version}} </p>
                     <p class="leading-relaxed text-base">Fecha del registro: {{$entry->created_at->format('d/m/Y H:i:s')}}</p>
                     <p class="leading-relaxed text-base">Ultima actualizacion: {{$entry->updated_at->format('d/m/Y H:i:s')}}</p>
             </div>

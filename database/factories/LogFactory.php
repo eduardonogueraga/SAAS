@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Log;
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +19,10 @@ class LogFactory extends Factory
      */
     public function definition()
     {
+        $packages = Package::inRandomOrder()->pluck('id');
+
         return [
+            'package_id' => $packages->random(),
             'descripcion' =>  $this->faker->sentence(rand(0,30)),
             'fecha' => now()->subDays(rand(0,60)),
         ];

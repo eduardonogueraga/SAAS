@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('sensors', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('package_id');
+            $table->foreign('package_id')->references('id')->on('packages');
             $table->string('tipo',45);
             $table->string('estado',45);
             $table->integer('valor_sensor')->nullable();

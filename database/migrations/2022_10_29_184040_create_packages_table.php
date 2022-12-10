@@ -13,18 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('logs', function (Blueprint $table) {
+        Schema::create('packages', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->unsignedBigInteger('entry_id');
-            $table->foreign('entry_id')->references('id')->on('entries');
-
-            $table->unsignedBigInteger('package_id');
-            $table->foreign('package_id')->references('id')->on('packages');
-
-            $table->string('descripcion', 1000);
+            $table->string('contenido_peticion', 5000);
+            $table->tinyInteger('intentos')->default(0);
+            $table->tinyInteger('implantado')->default(0);
             $table->dateTime('fecha');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -36,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logs');
+        Schema::dropIfExists('packages');
     }
 };

@@ -15,10 +15,13 @@ return new class extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('package_id');
+            $table->foreign('package_id')->references('id')->on('packages');
             $table->string('tipo', 100);
             $table->string('modo', 50);
             $table->tinyInteger('restaurada')->default(0);;
             $table->integer('intentos_reactivacion');
+            $table->string('saa_version', 50);
             $table->dateTime('fecha');
             $table->softDeletes();
             $table->timestamps();

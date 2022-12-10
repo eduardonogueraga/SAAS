@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Notice;
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 
@@ -22,8 +23,10 @@ class NoticeFactory extends Factory
     public function definition()
     {
         $tipo  = rand(0,1)? "sms":"llamada";
+        $packages = Package::inRandomOrder()->pluck('id');
 
         return [
+        'package_id' => $packages->random(),
         'tipo' => $tipo,
         'asunto' => $tipo == "sms" ? Arr::random($this->getRandomAsunto()) : null,
         'cuerpo' =>  $tipo == "sms" ? $this->faker->sentence(rand(10,20))  : null,

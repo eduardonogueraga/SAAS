@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Package;
 use App\Models\Sensor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
@@ -20,7 +21,10 @@ class SensorFactory extends Factory
      */
     public function definition()
     {
+        $packages = Package::inRandomOrder()->pluck('id');
+
         return [
+            'package_id' => $packages->random(),
             'tipo' => Arr::random($this->getRandomSensorType()),
             'estado' =>  rand(0,10)?"ONLINE":"OFFLINE",
             'valor_sensor' => rand(0,1),

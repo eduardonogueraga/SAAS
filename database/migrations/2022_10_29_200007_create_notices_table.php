@@ -18,6 +18,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('entry_id');
             $table->foreign('entry_id')->references('id')->on('entries');
+            $table->unsignedBigInteger('package_id');
+            $table->foreign('package_id')->references('id')->on('packages');
 
             $table->string('tipo',45);
             $table->string('asunto', 300)->nullable();

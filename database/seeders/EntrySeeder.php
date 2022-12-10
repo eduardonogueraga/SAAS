@@ -18,10 +18,12 @@ class EntrySeeder extends Seeder
     {
         $entrada =  Entry::create([
             'id' => 1,
+            'package_id' => '1',
             'tipo' => "activacion",
             'modo' =>  "manual",
             'restaurada' => 1,
             'intentos_reactivacion' => 0,
+            'saa_version' => 'VE20R2',
             'fecha' => now()->subHours(2),
             'created_at' => now()
         ]);

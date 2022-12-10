@@ -17,6 +17,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('entry_id');
             $table->foreign('entry_id')->references('id')->on('entries');
+            $table->unsignedBigInteger('package_id');
+            $table->foreign('package_id')->references('id')->on('packages');
             $table->tinyInteger('intrusismo');
             $table->integer('umbral');
             $table->tinyInteger('restaurado')->default(0);;
