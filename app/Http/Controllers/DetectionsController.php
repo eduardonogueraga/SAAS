@@ -8,6 +8,6 @@ class DetectionsController extends Controller
 {
     public function index()
     {
-        return view('detections.index');
+        //return view('');
     }
 }

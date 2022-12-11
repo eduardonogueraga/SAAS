@@ -38,7 +38,7 @@ class EntryManageDetails extends Component
         }
 
         $this->entry = Entry::query()
-            ->withCount('notices', 'logs', 'detections','package')
+            ->withCount('notices', 'logs','detections','package')
             ->whereId($this->entryId)
             ->first();
 

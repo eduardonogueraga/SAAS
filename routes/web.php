@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DetectionsController;
 use App\Http\Controllers\EntriesController;
+use App\Http\Controllers\PackagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', [EntriesController::class, 'index'])->name('manage.index');
-Route::get('/detecciones', [DetectionsController::class, 'index'])->name('detections.index');
+Route::get('/history', [PackagesController::class, 'history'])->name('packages.index');
 
 require __DIR__.'/auth.php';
