@@ -23,6 +23,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', [EntriesController::class, 'index'])->name('manage.index');
-Route::get('/history', [PackagesController::class, 'history'])->name('packages.index');
+Route::get('/history', [PackagesController::class, 'history'])->name('history.index');
 
 require __DIR__.'/auth.php';

@@ -1,8 +1,21 @@
 <div>
     <section class="text-gray-600 body-font w-full">
-        <div class="container px-5 py-24 mx-auto flex flex-wrap">
-            <ul>
-                @forelse($history as $h)
+        <section class="text-gray-600 body-font">
+            <div class="container px-5 py-5 mx-auto flex flex-wrap">
+                <h2 class="sm:text-3xl text-2xl text-gray-900 font-medium title-font mb-2 md:w-2/5">ID Paquete</h2>
+                <div class="md:w-3/5 md:pl-6">
+                    <div class="justify-between items-center h-32  mb-2">
+                        <label class="flex px-3 w-full">
+                            <input class="rounded-lg p-4 bg-gray-200 transition duration-200 focus:outline-none focus:ring-2 w-full"
+                                   name="search"  value="{{ request('search') }}" placeholder="Buscar" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container px-5 mx-auto flex flex-wrap">
+            <ul class="px-5 py-5 rounded shadow bg-white">
+            @forelse($history as $h)
                 @php $maxCount = max(sizeof($h->detections), sizeof($h->entries), sizeof($h->notices)) @endphp
 
                 @for($i = 0; $i < $maxCount; $i++)
@@ -28,31 +41,31 @@
 
                                 <div class="flex flex-wrap">
                                     @if(isset($h->detections[$i]))
-                                        <div class="px-4 w-64">
+                                        <div class="px-4 w-3/3">
                                             <div class="h-full flex items-start">
-                                                <div class="flex-grow pl-4 pr-4 pt-4  border-2 rounded-lg  border-gray-200 border-opacity-50 bg-indigo-100">
+                                                <div class="flex pl-4 pr-4 pt-4  border-2 rounded-lg  border-gray-200 border-opacity-50 bg-indigo-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Detección en {{$h->detections[$i]->sensor->tipo}} @if($h->detections[$i]->intrusismo == 1) <b>Intrusismo</b> @endif</h1>
-                                                    <p class="leading-relaxed mb-5"> Fecha: {{$h->detections[$i]->fecha->format('d/m/Y H:i:s')}}</p>
+                                                    <p class="leading-relaxed mb-5 ml-3"> Fecha: {{$h->detections[$i]->fecha->format('d/m/Y H:i:s')}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(isset($h->entries[$i]))
-                                        <div class="px-4 w-64">
+                                        <div class="px-4 w-3/3">
                                             <div class="h-full flex items-start">
-                                                <div class="flex-grow pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-blue-100">
+                                                <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-blue-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">{{ucfirst($h->entries[$i]->tipo)}} {{$h->entries[$i]->modo}} </h1>
-                                                    <p class="leading-relaxed mb-5"> Fecha: {{$h->entries[$i]->fecha->format('d/m/Y H:i:s')}}</p>
+                                                    <p class="leading-relaxed mb-5 ml-3"> Fecha: {{$h->entries[$i]->fecha->format('d/m/Y H:i:s')}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     @endif
                                     @if(isset($h->notices[$i]))
-                                        <div class="px-4 w-64">
+                                        <div class="px-4 w-3/3">
                                             <div class="h-full flex items-start">
-                                                <div class="flex-grow pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-green-100">
+                                                <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-green-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Aviso {{ucfirst($h->notices[$i]->tipo)}} </h1>
-                                                    <p class="leading-relaxed mb-5">Fecha: {{$h->notices[$i]->fecha->format('d/m/Y H:i:s')}}</p>
+                                                    <p class="leading-relaxed mb-5 ml-3">Fecha: {{$h->notices[$i]->fecha->format('d/m/Y H:i:s')}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -65,6 +78,7 @@
                 @empty
                     <p>Sin datos</p>
                 @endforelse
+                @include('shared._loadMoreRecords', ['collection'=>$history, 'loadMethod'=> 'loadMorePackages'])
             </ul>
         </div>
     </section>
