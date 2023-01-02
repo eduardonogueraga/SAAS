@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\DetectionsController;
+
 use App\Http\Controllers\EntriesController;
-use App\Http\Controllers\PackagesController;
+use App\Http\Controllers\DataController;
+use App\Http\Livewire\ShowData;
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +25,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', [EntriesController::class, 'index'])->name('manage.index');
-Route::get('/history', [PackagesController::class, 'history'])->name('history.index');
+Route::get('/', [EntriesController::class, 'index'])->name('panel.index');
+Route::get('/history', [DataController::class, 'history'])->name('history.index');
+Route::get('/data', [DataController::class, 'index'])->name('data.index');
+
+
 
 require __DIR__.'/auth.php';

@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PackagesController extends Controller
+class DataController extends Controller
 {
     public function index()
     {
-
+        return view('data.index');
     }
 
     public function history()
     {
-        return view('packages.index');
+        return view('data.packages.index');
     }
 }

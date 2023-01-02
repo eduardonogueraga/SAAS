@@ -10,6 +10,6 @@ class EntriesController extends Controller
 
     public function index()
     {
-        return view('entries.manage');
+        return view('entries.index');
     }
 }
