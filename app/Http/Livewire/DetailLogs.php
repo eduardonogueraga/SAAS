@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Entry;
 use App\Models\Log;
 use Livewire\Component;
 
 class DetailLogs extends Component
 {
-
+    use ModalTrait;
     public Entry $entry;
     private $logsLists;
     public int $entryId;

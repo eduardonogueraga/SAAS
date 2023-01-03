@@ -3,12 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Http\Controllers\CargaElementosPaginacion;
+use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Package;
 use Livewire\Component;
 
 class ShowHistory extends Component
 {
-
+   use ModalTrait;
     public $paginate = 2;
     private $history;
 

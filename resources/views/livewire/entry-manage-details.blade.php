@@ -57,14 +57,16 @@
                     <span class="title-font font-medium font-semibold">Detecciones en esta entrada: {{$entry->detections_count}}</span>
                 </div>
                 <div class="flex flex-wrap w-full relative mb-4  rounded shadow bg-white h-96 overflow-y-scroll">
-
+                    @if($dataModal)
+                        @php $info = $detectionsList->filter(function($item) use($selectedRegister) {return $item->id == $selectedRegister;})->first() @endphp
+                        @include('detections._detectionsModal', ['detailDetection'=>$info, 'closeMethod' =>'closeDataModal'])
+                    @endif
                     <ul class="p-4  md:w-full">
-
                         @if ($detectionsList->isNotEmpty())
                             @foreach ($detectionsList as $d)
-                                <li class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2
+                                <li wire:click.stop="openDataModal('{{$d->id}}')" class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2
                                 @if($d->intrusismo == 1) bg-amber-400 @endif
-                                ">
+                                cursor-pointer hover:bg-yellow-100">
                                     <div class="flex-grow">
                                         <h2 class="text-gray-900 text-lg title-font font-medium mb-3"> Detección en {{$d->sensor->tipo}} @if($d->intrusismo == 1) <b>Intrusismo</b> @endif </h2>
                                         <p class="leading-relaxed text-base">Nº detecciones consecutivas: {{$d->umbral}}</p>

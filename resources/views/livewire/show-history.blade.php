@@ -14,6 +14,7 @@
             </div>
         </section>
         <div class="container px-5 mx-auto flex flex-wrap">
+
             <ul class="px-5 py-5 rounded shadow bg-white">
             @forelse($history as $h)
                 @php $maxCount = max(sizeof($h->detections), sizeof($h->entries), sizeof($h->notices)) @endphp
@@ -42,7 +43,7 @@
                                 <div class="flex flex-wrap">
                                     @if(isset($h->detections[$i]))
                                         <div class="px-4 w-3/3">
-                                            <div class="h-full flex items-start">
+                                            <div wire:click.stop="openDataModal('{{$h->detections[$i]->id}}')" class="h-full flex items-start">
                                                 <div class="flex pl-4 pr-4 pt-4  border-2 rounded-lg  border-gray-200 border-opacity-50 bg-indigo-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Detección en {{$h->detections[$i]->sensor->tipo}} @if($h->detections[$i]->intrusismo == 1) <b>Intrusismo</b> @endif</h1>
                                                     <p class="leading-relaxed mb-5 ml-3"> Fecha: {{$h->detections[$i]->fecha->format('d/m/Y H:i:s')}}</p>

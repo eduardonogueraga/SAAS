@@ -26,6 +26,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', [EntriesController::class, 'index'])->name('panel.index');
+Route::get('/panel/{entry}/show', [EntriesController::class, 'show'])->name('panel.show');
 Route::get('/history', [DataController::class, 'history'])->name('history.index');
 Route::get('/data', [DataController::class, 'index'])->name('data.index');
 

@@ -12,4 +12,8 @@ class EntriesController extends Controller
     {
         return view('entries.index');
     }
+    public function show(Entry $entry)
+    {
+        return view('entries.show', ['id' => $entry->id]);
+    }
 }

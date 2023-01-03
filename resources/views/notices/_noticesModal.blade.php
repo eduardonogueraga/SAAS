@@ -41,10 +41,23 @@
                     <p>{{$detailNotice->cuerpo}}</p>
                 </div>
                 @endif
+                <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
+                    <p class="font-bold">Fecha del registro:</p>
+                    <p>{{$detailNotice->created_at->format('d/m/Y H:i:s')}}</p>
+                    <p class="font-bold">Ultima actualizacion:</p>
+                    <p>{{$detailNotice->updated_at->format('d/m/Y H:i:s')}}</p>
+                    <p class="font-bold">Paquete:</p>
+                    <p>ID: {{sprintf("%09d", $detailNotice->package_id)}}</p>
+                </div>
             </div>
             <hr>
 
             <div class="ml-auto mt-2">
+                @if(!(in_array(Illuminate\Support\Str::afterLast(Request::path(), '/'), array('entry-manage-details', 'detail-notices', 'detail-logs'))))
+                <button wire:click="redirectToEntryPanel({{$detailNotice->entry_id}})" class="bg-transparent hover:bg-gray-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                        Ver en panel
+                    </button>
+                @endif
                 <button  wire:click="{{$closeMethod}}"class="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                     Volver
                 </button>

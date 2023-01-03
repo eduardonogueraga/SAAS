@@ -2,20 +2,20 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Entry;
 use App\Models\Notice;
 use Livewire\Component;
 
 class DetailNotices extends Component
 {
+    use ModalTrait;
+
     public Entry $entry;
     private $noticeLists;
     public int $entryId;
-
     public $paginate = 5;
 
-    public $selectedNotice;
-    public $noticeModal;
     protected $listeners = [
         'entrySelected' => 'setEntryId',
         'loadMoreNotices' => 'loadMoreNotices',
@@ -32,17 +32,6 @@ class DetailNotices extends Component
         $this->entryId = $id;
     }
 
-    public function openNoticeModal($id)
-    {
-        $this->selectedNotice = $id;
-        $this->noticeModal = true;
-    }
-
-    public function closeNoticeModal()
-    {
-        $this->selectedProduct = null;
-        $this->noticeModal = false;
-    }
 
     public function render()
     {

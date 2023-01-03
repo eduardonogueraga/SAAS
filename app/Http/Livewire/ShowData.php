@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Detection;
 use App\Models\Entry;
 use App\Models\Log;
@@ -13,11 +14,9 @@ use Livewire\Component;
 
 class ShowData extends Component
 {
-
+use ModalTrait;
     public $paginate = 15;
     public int $dataRadio = 0;
-    public $selectedRegister;
-    public $dataModal;
 
     private $data;
     private $infoRegistros;
@@ -30,18 +29,6 @@ class ShowData extends Component
     {
         $this->reset('paginate');
         $this->render();
-    }
-
-    public function openDataModal($id)
-    {
-        $this->selectedRegister = $id;
-        $this->dataModal = true;
-    }
-
-    public function closeDataModal()
-    {
-        $this->selectedRegister = null;
-        $this->dataModal = false;
     }
 
     protected $queryString = [

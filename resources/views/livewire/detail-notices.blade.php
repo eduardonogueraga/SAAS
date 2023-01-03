@@ -4,13 +4,13 @@
         <span class="title-font font-medium font-semibold">Avisos en esta entrada: {{$noticeLists->count()}} </span>
     </div>
     <div class="flex flex-wrap w-full relative mb-4  rounded shadow bg-white h-96 overflow-y-scroll">
-        @if($noticeModal)
-            @php $detailNotice = $noticeLists->filter(function($item) use($selectedNotice) {return $item->id == $selectedNotice;})->first() @endphp
-            @include('notices._noticesModal', ['detailNotice'=>$detailNotice, 'closeMethod' =>'closeNoticeModal'])
+        @if($dataModal)
+            @php $detailNotice = $noticeLists->filter(function($item) use($selectedRegister) {return $item->id == $selectedRegister;})->first() @endphp
+            @include('notices._noticesModal', ['detailNotice'=>$detailNotice, 'closeMethod' =>'closeDataModal'])
         @endif
         <ul class="p-4  md:w-full">
             @foreach ($noticeLists as $n)
-                <li wire:click.stop="openNoticeModal('{{$n->id}}')" class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2  cursor-pointer hover:bg-yellow-100" >
+                <li wire:click.stop="openDataModal('{{$n->id}}')" class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2  cursor-pointer hover:bg-yellow-100" >
                     <div class="flex-grow">
                         <div class="flex flex-wrap">
                             <div class="text-md italic text-gray-400 text-xs md:text-base">

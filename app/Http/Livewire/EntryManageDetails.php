@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Detection;
 use App\Models\Entry;
 use Livewire\Component;
 
 class EntryManageDetails extends Component
 {
+    use ModalTrait;
     public Entry $entry;
     private $detectionsList;
 
