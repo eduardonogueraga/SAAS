@@ -21,7 +21,7 @@
                         <div class="content">
                             <div class="flex justify-between items-center">
                                 <h3 class="selected-title text-sm md:text-lg w-48 py-2 font-semibold main-color-blue-text dark:main-color-yellow-text transition duration-500">
-                                     {{ucfirst($row->tipo)}} {{$row->modo}}</h3>
+                                   {{ucfirst($row->tipo)}} {{$row->modo}} </h3>
                                 @if($row->notices->isNotEmpty())
                                 <div class="text-md italic text-gray-400 text-xs md:text-base">
                                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="#21618c" viewBox="0 0 24 24" stroke="none">
@@ -37,6 +37,10 @@
                                   Inicio  {{$row->fecha->format('d/m/Y H:i:s')}}
                                 @endif
                             </div>
+                            <div class="text-sm italic text-gray-400 text-xs md:text-base">
+                                ID - {{sprintf("%09d", $row->id)}}
+                            </div>
+
                             <div class="text-md text-gray-400 text-right text-xs md:text-base">Importado: {{$row->created_at->format('d/m/Y')}}</div>
                         </div>
                     </li>
