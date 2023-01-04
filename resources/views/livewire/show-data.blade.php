@@ -1,8 +1,13 @@
-<div class="flex justify-center">
+<div class="w-full">
     <div class="p-6 rounded-lg shadow-lg bg-white">
         <div class="flex flex-col">
-            <h2 class="mb-4 text-2xl">Registro de datos</h2>
-
+            <div class="flex justify-between items-center  mb-2">
+                <h2 class="sm:text-3xl text-2xl text-gray-900 font-medium title-font mb-2 md:w-2/5">Registro de datos</h2>
+                <label class="px-3 w-full">
+                    <input class="rounded-lg p-4 bg-gray-200 transition duration-200 focus:outline-none focus:ring-2 w-full"
+                           name="search" wire:model.debounce.150ms="search"  value="{{ request('search') }}" placeholder="Buscar" />
+                </label>
+            </div>
             <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 <label wire:click="clearList"  class="flex items-start rounded-xl bg-white p-4 shadow-lg cursor-pointer hover:bg-indigo-100 @if($dataRadio == 0) bg-indigo-100 @else  bg-white @endif">
                     <input type="radio" value="0"  wire:model="dataRadio" name="data-radio" checked style="display:none" />
@@ -91,10 +96,10 @@
                         @include('packages._packagesModal', ['detailPackage'=>$info, 'closeMethod' =>'closeDataModal'])
                         @break;
                     @default
-                        @include('shared._emptyList', ['name'=> 'datos'])
+                        @include('shared._noData')
                 @endswitch
             @endif
-
+            <p class="px-4 py-2 text-sm font-semibold text-gray-700">Número de registros {{($dataCount) ?? 0}}</p>
             <ul class="w-full h-screen overflow-auto shadow bg-white mt-5">
                 @forelse($data as $d)
 
@@ -222,7 +227,7 @@
                     @endswitch
 
                 @empty
-                    @include('shared._emptyList', ['name'=> 'datos'])
+                   @include('shared._noData')
                 @endforelse
                 @include('shared._loadMoreRecords', ['collection'=>$data, 'loadMethod'=> 'loadMoreData'])
             </ul>

@@ -24,4 +24,8 @@ class Notice extends Model
         return $this->hasMany(Detection::class);
     }
 
+    public function newEloquentBuilder($query)
+    {
+        return new NoticeQuery($query);
+    }
 }

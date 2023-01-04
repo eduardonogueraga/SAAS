@@ -2,8 +2,9 @@
 
 namespace App\Filters;
 
-class EntryFilter extends QueryFilter
+class NoticeFilter extends QueryFilter
 {
+
     public function rules(): array
     {
         return [
@@ -16,9 +17,9 @@ class EntryFilter extends QueryFilter
         return $query->where(function ($query) use ($search){
             $search = trim($search);
             return $query->orWhere('tipo', 'like', "%$search%")
-                ->orWhere('modo', 'like', "%$search%")
-                ->orWhere('saa_version', 'like', "%$search%")
-                ->orWhere('id', $search); //Pendiente de implementar los datepickers
+                ->orWhere('asunto', 'like', "%$search%")
+                ->orWhere('cuerpo', 'like', "%$search%")
+                ->orWhere('id', $search);
         });
     }
 }

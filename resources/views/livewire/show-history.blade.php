@@ -1,5 +1,5 @@
-<div>
-    <section class="text-gray-600 body-font w-full">
+<div class="w-full">
+    <section class="text-gray-600 body-font">
         <section class="text-gray-600 body-font">
             <div class="container px-5 py-5 mx-auto flex flex-wrap">
                 <h2 class="sm:text-3xl text-2xl text-gray-900 font-medium title-font mb-2 md:w-2/5">ID Paquete</h2>
@@ -7,15 +7,15 @@
                     <div class="justify-between items-center h-32  mb-2">
                         <label class="flex px-3 w-full">
                             <input class="rounded-lg p-4 bg-gray-200 transition duration-200 focus:outline-none focus:ring-2 w-full"
-                                   name="search"  value="{{ request('search') }}" placeholder="Buscar" />
+                                   name="search"  wire:model.debounce.150ms="search" value="{{ request('search') }}" placeholder="Buscar" />
                         </label>
                     </div>
                 </div>
             </div>
         </section>
         <div class="container px-5 mx-auto flex flex-wrap">
-
-            <ul class="px-5 py-5 rounded shadow bg-white">
+            <p class="px-4 py-2 text-sm font-semibold text-gray-700">Número de registros {{($dataCount) ?? 0}}</p>
+            <ul class="px-5 py-5 rounded shadow bg-white w-full">
             @forelse($history as $h)
                 @php $maxCount = max(sizeof($h->detections), sizeof($h->entries), sizeof($h->notices)) @endphp
 
@@ -77,7 +77,7 @@
                 @endfor
 
                 @empty
-                    <p>Sin datos</p>
+                    @include('shared._noData')
                 @endforelse
                 @include('shared._loadMoreRecords', ['collection'=>$history, 'loadMethod'=> 'loadMorePackages'])
             </ul>

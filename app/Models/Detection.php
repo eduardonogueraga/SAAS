@@ -23,5 +23,10 @@ class Detection extends Model
         return $this->belongsTo(Package::class);
     }
 
+    public function newEloquentBuilder($query)
+    {
+        return new DetectionQuery($query);
+    }
+
 }
 

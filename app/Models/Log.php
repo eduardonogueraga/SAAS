@@ -13,4 +13,9 @@ class Log extends Model
     protected $guarded = [];
 
     protected $dates = ['fecha'];
+
+    public function newEloquentBuilder($query)
+    {
+        return new LogQuery($query);
+    }
 }

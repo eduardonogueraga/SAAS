@@ -26,4 +26,9 @@ class Package extends Model
     {
         return $this->hasMany(Detection::class);
     }
+
+    public function newEloquentBuilder($query)
+    {
+        return new PackageQuery($query);
+    }
 }

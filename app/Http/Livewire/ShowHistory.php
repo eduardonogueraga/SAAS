@@ -12,6 +12,11 @@ class ShowHistory extends Component
    use ModalTrait;
     public $paginate = 2;
     private $history;
+    public $search;
+    private $searchDataCount;
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
 
     public function loadMorePackages()
     {
@@ -20,11 +25,23 @@ class ShowHistory extends Component
 
     public function render()
     {
+        $filters = [
+            'search' => $this->search
+        ];
+
         $this->history = Package::query()
             ->with('entries', 'detections','detections.sensor','notices')
+            ->applyFilters($filters)
             ->orderBy('id', 'DESC')
             ->paginate($this->paginate);
 
-        return view('livewire.show-history', ['history' => $this->history]);
+        $this->searchDataCount = Package::query()
+            ->with('entries', 'detections','detections.sensor','notices')
+            ->applyFilters($filters)
+            ->count();
+
+        return view('livewire.show-history', [
+            'history' => $this->history,
+            'dataCount' => $this->searchDataCount]);
     }
 }

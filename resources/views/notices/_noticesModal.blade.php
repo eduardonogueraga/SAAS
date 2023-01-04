@@ -34,14 +34,15 @@
                     <p class="text-gray-600 font-bold">Fecha: {{$detailNotice->fecha->format('d/m/Y H:i:s')}}</p>
                 </div>
                 @if($detailNotice->tipo == 'sms')
-                <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
+                <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b">
                     <p class="font-bold">Asunto</p>
                     <p>{{$detailNotice->asunto}}</p>
                     <p class="font-bold">Cuerpo</p>
                     <p>{{$detailNotice->cuerpo}}</p>
                 </div>
+
                 @endif
-                <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
+                <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b">
                     <p class="font-bold">Fecha del registro:</p>
                     <p>{{$detailNotice->created_at->format('d/m/Y H:i:s')}}</p>
                     <p class="font-bold">Ultima actualizacion:</p>
