@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Controllers\CargaElementosPaginacion;
 use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Package;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class ShowHistory extends Component
@@ -14,6 +14,8 @@ class ShowHistory extends Component
     private $history;
     public $search;
     private $searchDataCount;
+    public $modalTypeId; //Id del switch
+    private $modalContent;
     protected $queryString = [
         'search' => ['except' => ''],
     ];
@@ -23,6 +25,19 @@ class ShowHistory extends Component
         $this->paginate += 2;
     }
 
+    public function openDataModalWithData($datos, $id)
+    {
+        $data = json_decode($datos);
+        $data->fecha = Carbon::parse($data->fecha);
+        $data->created_at = Carbon::parse($data->created_at);
+        $data->updated_at = Carbon::parse($data->updated_at);
+
+        $this->dataModal = true;
+
+        $this->modalTypeId = $id;
+        $this->modalContent =  $data;
+    }
+
     public function render()
     {
         $filters = [
@@ -30,18 +45,19 @@ class ShowHistory extends Component
         ];
 
         $this->history = Package::query()
-            ->with('entries', 'detections','detections.sensor','notices')
+            ->with('entries', 'detections','detections.sensor','notices', 'logs')
             ->applyFilters($filters)
             ->orderBy('id', 'DESC')
             ->paginate($this->paginate);
 
         $this->searchDataCount = Package::query()
-            ->with('entries', 'detections','detections.sensor','notices')
+            ->with('entries', 'detections','detections.sensor','notices', 'logs')
             ->applyFilters($filters)
             ->count();
 
         return view('livewire.show-history', [
             'history' => $this->history,
-            'dataCount' => $this->searchDataCount]);
+            'dataCount' => $this->searchDataCount,
+            'modalContent' => $this->modalContent]);
     }
 }

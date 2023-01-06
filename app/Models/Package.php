@@ -9,7 +9,7 @@ class Package extends Model
 {
     use HasFactory;
 
-    protected $dates = ['fecha','d_fecha', 'e_fecha', 'n_fecha'];
+    protected $dates = ['fecha','d_fecha', 'e_fecha', 'n_fecha', 'l_fecha'];
 
 
     public function notices()
@@ -27,6 +27,10 @@ class Package extends Model
         return $this->hasMany(Detection::class);
     }
 
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
+    }
     public function newEloquentBuilder($query)
     {
         return new PackageQuery($query);
