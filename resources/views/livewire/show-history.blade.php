@@ -15,6 +15,24 @@
         </section>
         <div class="container px-5 mx-auto flex flex-wrap">
             <p class="px-4 py-2 text-sm font-semibold text-gray-700">Número de registros {{($dataCount) ?? 0}}</p>
+
+            @if($dataModal)
+                @switch($modalTypeId)
+                    @case(0)
+                        @include('detections._detectionsModal', ['detailDetection'=>$modalContent, 'closeMethod' =>'closeDataModal'])
+                        @break;
+                    @case(1)
+                        @include('entries._entriesModal', ['detailEntry'=>$modalContent, 'closeMethod' =>'closeDataModal'])
+                        @break;
+                    @case(2)
+
+                        @include('notices._noticesModal', ['detailNotice'=>$modalContent, 'closeMethod' =>'closeDataModal'])
+                        @break;
+                    @default
+                        @include('shared._noData')
+                @endswitch
+            @endif
+
             <ul class="px-5 py-5 rounded shadow bg-white w-full">
             @forelse($history as $h)
                 @php $maxCount = max(sizeof($h->detections), sizeof($h->entries), sizeof($h->notices)) @endphp
@@ -43,7 +61,7 @@
                                 <div class="flex flex-wrap">
                                     @if(isset($h->detections[$i]))
                                         <div class="px-4 w-3/3">
-                                            <div wire:click.stop="openDataModal('{{$h->detections[$i]->id}}')" class="h-full flex items-start">
+                                            <div class="h-full flex items-start cursor-pointer hover:bg-yellow-100">
                                                 <div class="flex pl-4 pr-4 pt-4  border-2 rounded-lg  border-gray-200 border-opacity-50 bg-indigo-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Detección en {{$h->detections[$i]->sensor->tipo}} @if($h->detections[$i]->intrusismo == 1) <b>Intrusismo</b> @endif</h1>
                                                     <p class="leading-relaxed mb-5 ml-3"> Fecha: {{$h->detections[$i]->fecha->format('d/m/Y H:i:s')}}</p>
@@ -53,8 +71,8 @@
                                     @endif
                                     @if(isset($h->entries[$i]))
                                         <div class="px-4 w-3/3">
-                                            <div class="h-full flex items-start">
-                                                <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-blue-100">
+                                            <div wire:click.stop="openDataModalWithData('{{$h->entries[$i]}}', '1')" class="h-full flex items-start">
+                                                <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-blue-100 cursor-pointer hover:bg-yellow-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">{{ucfirst($h->entries[$i]->tipo)}} {{$h->entries[$i]->modo}} </h1>
                                                     <p class="leading-relaxed mb-5 ml-3"> Fecha: {{$h->entries[$i]->fecha->format('d/m/Y H:i:s')}}</p>
                                                 </div>
@@ -64,7 +82,7 @@
                                     @if(isset($h->notices[$i]))
                                         <div class="px-4 w-3/3">
                                             <div class="h-full flex items-start">
-                                                <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-green-100">
+                                                <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-green-100 cursor-pointer hover:bg-yellow-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Aviso {{ucfirst($h->notices[$i]->tipo)}} </h1>
                                                     <p class="leading-relaxed mb-5 ml-3">Fecha: {{$h->notices[$i]->fecha->format('d/m/Y H:i:s')}}</p>
                                                 </div>
