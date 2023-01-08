@@ -36,7 +36,11 @@
                                 <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
                             </svg>
                         </div>
-                        <p class="leading-relaxed text-base">Id del paquete:  {{sprintf("%09d",$entry->package->id)}}</p>
+                        <p class="leading-relaxed text-base">Id del paquete:  {{sprintf("%09d",$entry->package->id)}} </p>
+                        <div class="flex items-center">
+                            <a class="text-xs text-blue-500 underline" href="{{ route('history.show', ['package' => $entry->package->id]) }}"> (Ver en paquetes)</a>
+                        </div>
+
                     </div>
                     <p class="leading-relaxed text-base">Version del sistema SAA: {{$entry->saa_version}} </p>
                     <p class="leading-relaxed text-base">Fecha de creacion: {{$entry->created_at->format('d/m/Y H:i:s')}}</p>

@@ -45,7 +45,7 @@
                         <p class="font-bold">Ultima actualizacion:</p>
                         <p>{{$detailEntry->updated_at->format('d/m/Y H:i:s')}}</p>
                         <p class="font-bold">Paquete:</p>
-                        <p>ID: {{sprintf("%09d", $detailEntry->package_id)}}</p>
+                        <a class="text-blue-600 hover:underline" href="{{ route('history.show', ['package' => $detailEntry->package_id]) }}">ID: {{sprintf("%09d", $detailEntry->package_id)}}</a>
                     </div>
 
 
