@@ -24,6 +24,15 @@ class Notice extends Model
         return $this->hasMany(Detection::class);
     }
 
+    public function literales_asunto() //Formato snake_case para que se lo trage el json_encode
+    {
+        return $this->belongsTo('App\Models\Literal', 'asunto', 'codigo');
+    }
+    public function newQuery($excludeDeleted = true) //Carga la relacion por defecto
+    {
+        return parent::newQuery($excludeDeleted)->with('literales_asunto');
+    }
+
     public function newEloquentBuilder($query)
     {
         return new NoticeQuery($query);

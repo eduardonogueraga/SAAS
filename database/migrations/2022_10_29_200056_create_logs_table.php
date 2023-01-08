@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('package_id');
             $table->foreign('package_id')->references('id')->on('packages');
 
-            $table->string('descripcion', 1000);
+            $table->unsignedBigInteger('descripcion');
             $table->dateTime('fecha');
             $table->softDeletes();
             $table->timestamps();

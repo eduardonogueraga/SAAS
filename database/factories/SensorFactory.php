@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Literal;
 use App\Models\Package;
 use App\Models\Sensor;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,17 +23,16 @@ class SensorFactory extends Factory
     public function definition()
     {
         $packages = Package::inRandomOrder()->pluck('id');
+        $literalesSensores = Literal::query()->whereBetween('codigo', [102, 105])
+            ->pluck('codigo');
+
 
         return [
             'package_id' => $packages->random(),
-            'tipo' => Arr::random($this->getRandomSensorType()),
+            'tipo' => $literalesSensores->random(),
             'estado' =>  rand(0,10)?"ONLINE":"OFFLINE",
             'valor_sensor' => rand(0,1),
         ];
     }
 
-    public function getRandomSensorType()
-    {
-        return ['MG', 'PIR1','PIR2', 'PIR3'];
-    }
 }

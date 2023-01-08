@@ -54,13 +54,13 @@ class ShowHistory extends Component
         ];
 
         $this->history = Package::query()
-            ->with('entries', 'detections','detections.sensor','notices', 'logs.literales_descripcion')
+            ->with('entries', 'detections','detections.sensor','notices', 'logs')
             ->applyFilters($filters)
             ->orderBy('id', 'DESC')
             ->paginate($this->paginate);
 
         $this->searchDataCount = Package::query()
-            ->with('entries', 'detections','detections.sensor','notices', 'logs.literales_descripcion')
+            ->with('entries', 'detections','detections.sensor','notices', 'logs')
             ->applyFilters($filters)
             ->count();
 

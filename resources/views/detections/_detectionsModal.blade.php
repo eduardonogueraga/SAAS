@@ -20,7 +20,7 @@
                 <div class="">
                     <div class="p-4 border-b">
                         <h2 class="text-2xl">
-                            Detección en {{$detailDetection->sensor->tipo}} @if($detailDetection->intrusismo == 1) <b>Intrusismo</b>@endif
+                            Detección en {{$detailDetection->sensor->literales_tipo->literal}} @if($detailDetection->intrusismo == 1) <b>Intrusismo</b>@endif
                         </h2>
                     </div>
                     <div class="grid grid-cols-3 items-center md:space-y-0 space-y-1 p-4 border-b ">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
                         <p class="font-bold">Detalles del sensor:</p>
-                        <p>{{$detailDetection->sensor->tipo}}</p>
+                        <p>{{$detailDetection->sensor->literales_tipo->literal}}</p>
                         <p class="font-bold">Estado del sensor:</p>
                         <p>{{$detailDetection->sensor->estado}}</p>
                         <p class="font-bold">Valor recogido:</p>

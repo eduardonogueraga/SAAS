@@ -10,9 +10,11 @@ trait FilterTrait
     public $filtroDetectionModo;
     public $filtroDetectionIntrusismo;
     public $filtroDetectionEstado;
+    public $filtroDetectionSensor;
     public $filtroNoticeTipo;
     public $filtroPackageImplantado;
 
+    public $sensorTypes;
     public $filterQueryString = [
         'filtroEntryModo'  => ['except' => ''],
         'filtroEntryEstado'  => ['except' => ''],
@@ -20,6 +22,7 @@ trait FilterTrait
         'filtroDetectionModo'  => ['except' => ''],
         'filtroDetectionIntrusismo'  => ['except' => ''],
         'filtroDetectionEstado'  => ['except' => ''],
+        'filtroDetectionSensor' => ['except' => ''],
         'filtroNoticeTipo' => ['except' => ''],
         'filtroPackageImplantado' => ['except' => ''],
     ];

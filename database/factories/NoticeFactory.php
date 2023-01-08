@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Literal;
 use App\Models\Notice;
 use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,23 +25,16 @@ class NoticeFactory extends Factory
     {
         $tipo  = rand(0,1)? "sms":"llamada";
         $packages = Package::inRandomOrder()->pluck('id');
+        $literalesNotices = Literal::inRandomOrder()->where('tabla', 'notices')->pluck('codigo');
 
         return [
         'package_id' => $packages->random(),
         'tipo' => $tipo,
-        'asunto' => $tipo == "sms" ? Arr::random($this->getRandomAsunto()) : null,
+        'asunto' => $literalesNotices->random(),
         'cuerpo' =>  $tipo == "sms" ? $this->faker->sentence(rand(10,20))  : null,
         'telefono' => $this->faker->numerify('##########'),
         'fecha' => now()->subHours(2)
         ];
     }
 
-    public function getRandomAsunto()
-    {
-        return ['AVISO ALARMA MOVIMIENTO DETECTADO EN PORCHE',
-                'AVISO ALARMA MOVIMIENTO DETECTADO EN COCHERA',
-                'AVISO ALARMA MOVIMIENTO DETECTADO EN ALAMCEN',
-                'AVISO ALARMA PUERTA COCHERA ABIERTA',
-                'ALARMA REACTIVDA CON EXITO'];
-    }
 }

@@ -11,10 +11,11 @@ trait QueryTrait
         };
     }
 
-    public function subQueryRecursiva($search, $relation)
+
+    public function subQueryRecursiva($search, $relation, $subCol)
     {
-        return function ($query) use ($search, $relation) {
-            $query->whereHas($relation, $this->subQuery($search, 'tipo'));
+        return function ($query) use ($search, $relation, $subCol) {
+            $query->whereHas($relation, $this->subQuery($search, $subCol));
         };
     }
 }

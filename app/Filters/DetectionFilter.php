@@ -15,9 +15,18 @@ use QueryTrait;
             'filtroDetectionModo' =>'in:norm,phan,all',
             'filtroDetectionIntrusismo' => 'in:simp,deto,all',
             'filtroDetectionEstado' => 'in:original,restored,all',
+            'filtroDetectionSensor' => 'filled'
         ];
     }
 
+    public function filtroDetectionSensor($query, $sensor)
+    {
+        if ($sensor==='all')
+            return $query;
+
+        return $query->whereHas('sensor', $this->subQuery($sensor, 'tipo'));
+
+    }
     public function filtroDetectionIntrusismo($query, $instrusismo)
     {
         if ($instrusismo==='all')
@@ -47,9 +56,7 @@ use QueryTrait;
             $search = trim($search);
             return $query->orWhere('id', $search)
                 ->orWhere('modo_deteccion', 'like', "%$search%")
-                //->orWhere('intrusismo',  (str_contains('intrusismo', strtolower($search))))
-               // ->orWhere('restaurado',  (str_contains('restaurada', strtolower($search))))
-                ->orWhereHas('sensor', $this->subQuery($search, 'tipo'))
+                ->orWhereHas('sensor', $this->subQueryRecursiva($search, 'literales_tipo', 'literal'))
                 ->orWhereHas('sensor', $this->subQuery($search, 'estado'))
                 ;
         });

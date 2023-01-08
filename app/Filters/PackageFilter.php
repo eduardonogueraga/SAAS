@@ -29,11 +29,11 @@ class PackageFilter extends QueryFilter
             return $query->orWhere('contenido_peticion', 'like', "%$search%")
                 ->orWhere('id', $search)
                 ->orWhereHas('notices', $this->subQuery($search, 'tipo'))
-                ->orWhereHas('notices', $this->subQuery($search, 'asunto'))
+                //->orWhereHas('notices', $this->subQuery($search, 'asunto'))
                 ->orWhereHas('entries', $this->subQuery($search, 'tipo'))
                 ->orWhereHas('entries', $this->subQuery($search, 'modo'))
                 ->orWhereHas('detections', $this->subQuery($search, 'modo_deteccion'))
-                ->orWhereHas('detections', $this->subQueryRecursiva($search, 'sensor'))
+                ->orWhereHas('detections.sensor', $this->subQueryRecursiva($search, 'literales_tipo', 'literal'))
                 ;
         });
     }

@@ -19,6 +19,10 @@ class Log extends Model
         return $this->belongsTo('App\Models\Literal', 'descripcion', 'codigo');
     }
 
+    public function newQuery($excludeDeleted = true) //Carga la relacion por defecto
+    {
+        return parent::newQuery($excludeDeleted)->with('literales_descripcion');
+    }
     public function newEloquentBuilder($query)
     {
         return new LogQuery($query);

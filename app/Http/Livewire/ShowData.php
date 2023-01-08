@@ -7,6 +7,7 @@ use App\Http\Livewire\shared\ModalTrait;
 use App\Models\DataQuery;
 use App\Models\Detection;
 use App\Models\Entry;
+use App\Models\Literal;
 use App\Models\Log;
 use App\Models\Notice;
 use App\Models\Package;
@@ -45,6 +46,7 @@ use FilterTrait;
     public function mount()
     {
         $this->queryString = array_merge($this->queryString, $this->filterQueryString);
+        $this->sensorTypes = Literal::query()->whereTabla('sensors')->orderBy('id')->pluck('literal','codigo');
     }
 
 
@@ -53,6 +55,7 @@ use FilterTrait;
         $filters = [
             'search' => $this->search
         ];
+
 
         $this->infoRegistros = DB::select('SELECT
             (SELECT COUNT(*) FROM entries) AS num_entries,
@@ -84,6 +87,7 @@ use FilterTrait;
                     'filtroDetectionModo' => $this->filtroDetectionModo,
                     'filtroDetectionIntrusismo' => $this->filtroDetectionIntrusismo,
                     'filtroDetectionEstado' => $this->filtroDetectionEstado,
+                    'filtroDetectionSensor' => $this->filtroDetectionSensor,
                 ]);
 
                 $this->data = Detection::query()
@@ -115,7 +119,6 @@ use FilterTrait;
 
             case 3:
                 $this->data = Log::query()
-                    ->with('literales_descripcion')
                     ->applyFilters($filters)
                     ->orderBy('id', 'DESC')
                     ->paginate($this->paginate);

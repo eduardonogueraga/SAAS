@@ -36,7 +36,7 @@
                 @if($detailNotice->tipo == 'sms')
                 <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b">
                     <p class="font-bold">Asunto</p>
-                    <p>{{$detailNotice->asunto}}</p>
+                    <p>{{$detailNotice->literales_asunto->literal}}</p>
                     <p class="font-bold">Cuerpo</p>
                     <p>{{$detailNotice->cuerpo}}</p>
                 </div>

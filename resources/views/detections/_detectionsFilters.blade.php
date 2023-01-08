@@ -9,6 +9,7 @@
                 @endforeach
             </select>
         </div>
+        @if(isset($intrusismo))
         <div class="relative">
             <select wire:model="filtroDetectionIntrusismo" id="filtroDetectionIntrusismo"
                     class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
@@ -17,6 +18,7 @@
                 @endforeach
             </select>
         </div>
+        @endif
         <div class="relative">
             <select wire:model="filtroDetectionEstado" id="filtroDetectionEstado"
                     class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
@@ -25,6 +27,16 @@
                 @endforeach
             </select>
         </div>
+        <div class="relative">
+            <select wire:model="filtroDetectionSensor" id="filtroDetectionSensor"
+                    class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
+                <option value="all">Sensor(Todos)</option>
+                @foreach($sensorTypes as $value => $text)
+                    <option value="{{ $value }}" {{ request('filtroDetectionSensor') === $value ? 'selected' : ''}}  >{{ $text }}</option>
+                @endforeach
+            </select>
+        </div>
+
         @if(isset($search))
         <div class="block relative">
                 <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
@@ -38,7 +50,7 @@
         </div>
         @endif
         <div class="relative">
-            <button wire:click="clearFilters({{json_encode(['filtroDetectionModo','filtroDetectionIntrusismo', 'filtroDetectionEstado'])}})"
+            <button wire:click="clearFilters({{json_encode(['filtroDetectionModo','filtroDetectionIntrusismo', 'filtroDetectionEstado', 'filtroDetectionSensor'])}})"
                     class="appearance-none rounded-r rounded-l sm:rounded-l-none  border-gray-400  block pl-8 pr-6 py-2 text-slate-800 hover:text-blue-600 text-sm bg-white  hover:bg-slate-100 border   rounded-r-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">

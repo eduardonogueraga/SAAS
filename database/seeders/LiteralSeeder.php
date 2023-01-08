@@ -16,16 +16,6 @@ class LiteralSeeder extends Seeder
     {
         DB::table('literals')->insert([
             [
-                'codigo' => 100,
-                'tabla' =>  'sensors',
-                'literal' => 'ONLINE',
-            ],
-            [
-                'codigo' => 101,
-                'tabla' =>  'sensors',
-                'literal' => 'OFFLINE',
-            ],
-            [
                 'codigo' => 102,
                 'tabla' =>  'sensors',
                 'literal' => 'MG',

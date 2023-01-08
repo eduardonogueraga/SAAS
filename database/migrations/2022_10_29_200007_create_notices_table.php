@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign('package_id')->references('id')->on('packages');
 
             $table->string('tipo',45);
-            $table->string('asunto', 300)->nullable();
+            $table->unsignedBigInteger('asunto')->nullable();
             $table->string('cuerpo',500)->nullable();
             $table->string('telefono',10);
             $table->dateTime('fecha');

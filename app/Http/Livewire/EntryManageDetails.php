@@ -6,6 +6,7 @@ use App\Http\Livewire\shared\FilterTrait;
 use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Detection;
 use App\Models\Entry;
+use App\Models\Literal;
 use Livewire\Component;
 
 class EntryManageDetails extends Component
@@ -32,6 +33,7 @@ class EntryManageDetails extends Component
     public function mount()
     {
         $this->queryString = array_merge($this->queryString, $this->filterQueryString);
+        $this->sensorTypes = Literal::query()->whereTabla('sensors')->orderBy('id')->pluck('literal','codigo');
     }
     public function loadMoreDetections()
     {
@@ -53,6 +55,7 @@ class EntryManageDetails extends Component
             'filtroDetectionModo' => $this->filtroDetectionModo,
             'filtroDetectionIntrusismo' => $this->filtroDetectionIntrusismo,
             'filtroDetectionEstado' => $this->filtroDetectionEstado,
+            'filtroDetectionSensor' => $this->filtroDetectionSensor,
         ]);
 
         if(empty($this->entryId)){
