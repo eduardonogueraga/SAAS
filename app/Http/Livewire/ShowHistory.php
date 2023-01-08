@@ -35,6 +35,7 @@ class ShowHistory extends Component
     public function openDataModalWithData($datos, $id)
     {
         $data = json_decode($datos);
+
         $data->fecha = Carbon::parse($data->fecha);
         $data->created_at = Carbon::parse($data->created_at);
         $data->updated_at = Carbon::parse($data->updated_at);
@@ -53,13 +54,13 @@ class ShowHistory extends Component
         ];
 
         $this->history = Package::query()
-            ->with('entries', 'detections','detections.sensor','notices', 'logs')
+            ->with('entries', 'detections','detections.sensor','notices', 'logs.literales_descripcion')
             ->applyFilters($filters)
             ->orderBy('id', 'DESC')
             ->paginate($this->paginate);
 
         $this->searchDataCount = Package::query()
-            ->with('entries', 'detections','detections.sensor','notices', 'logs')
+            ->with('entries', 'detections','detections.sensor','notices', 'logs.literales_descripcion')
             ->applyFilters($filters)
             ->count();
 

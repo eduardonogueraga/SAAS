@@ -2,9 +2,11 @@
 
 namespace App\Filters;
 
+use App\Filters\shared\QueryTrait;
+
 class PackageFilter extends QueryFilter
 {
-
+    use QueryTrait;
     public function rules(): array
     {
         return [
@@ -36,18 +38,5 @@ class PackageFilter extends QueryFilter
         });
     }
 
-    public function subQuery($search, $column)
-    {
-        return function ($query) use ($search, $column) {
-            $query->where($column, 'like', "%{$search}%");
-        };
-    }
-
-    public function subQueryRecursiva($search, $relation)
-    {
-        return function ($query) use ($search, $relation) {
-            $query->whereHas($relation, $this->subQuery($search, 'tipo'));
-        };
-    }
 
 }

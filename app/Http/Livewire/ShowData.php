@@ -115,6 +115,7 @@ use FilterTrait;
 
             case 3:
                 $this->data = Log::query()
+                    ->with('literales_descripcion')
                     ->applyFilters($filters)
                     ->orderBy('id', 'DESC')
                     ->paginate($this->paginate);

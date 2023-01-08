@@ -14,6 +14,11 @@ class Log extends Model
 
     protected $dates = ['fecha'];
 
+    public function literales_descripcion() //Formato snake_case para que se lo trage el json_encode
+    {
+        return $this->belongsTo('App\Models\Literal', 'descripcion', 'codigo');
+    }
+
     public function newEloquentBuilder($query)
     {
         return new LogQuery($query);

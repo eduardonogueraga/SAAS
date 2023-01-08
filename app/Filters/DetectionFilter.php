@@ -2,11 +2,12 @@
 
 namespace App\Filters;
 
+use App\Filters\shared\QueryTrait;
 use Psy\Util\Str;
 
 class DetectionFilter extends QueryFilter
 {
-
+use QueryTrait;
     public function rules(): array
     {
         return [
@@ -54,11 +55,6 @@ class DetectionFilter extends QueryFilter
         });
     }
 
-    public function subQuery($search, $column)
-    {
-        return function ($query) use ($search, $column) {
-            $query->where($column, 'like', "%{$search}%");
-        };
-    }
+
 
 }

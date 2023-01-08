@@ -2,9 +2,11 @@
 
 namespace App\Filters;
 
+use App\Filters\shared\QueryTrait;
+
 class LogFilter extends QueryFilter
 {
-
+    use QueryTrait;
     public function rules(): array
     {
         return [
@@ -16,8 +18,9 @@ class LogFilter extends QueryFilter
     {
         return $query->where(function ($query) use ($search){
             $search = trim($search);
-            return $query->orWhere('descripcion', 'like', "%$search%")
-                ->orWhere('id', $search);
+            return $query->orWhere('id', $search)
+                ->orWhereHas('literales_descripcion', $this->subQuery($search, 'literal'));
         });
     }
+
 }

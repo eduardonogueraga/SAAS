@@ -97,7 +97,7 @@
                                         <div class="px-4 my-3 w-3/3">
                                             <div wire:click.stop="openDataModalWithData('{{json_encode($h->logs[$i])}}', '3')" class="h-full flex items-start">
                                                 <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-cyan-200 cursor-pointer hover:bg-yellow-100">
-                                                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Log: {{ucfirst(Str::limit($h->logs[$i]->descripcion, 8))}} </h1>
+                                                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Log: {{ucfirst(Str::limit($h->logs[$i]->literales_descripcion->literal, 20))}} </h1>
                                                     <p class="leading-relaxed mb-5 ml-3">Fecha: {{$h->logs[$i]->fecha->format('d/m/Y H:i:s')}}</p>
                                                 </div>
                                             </div>

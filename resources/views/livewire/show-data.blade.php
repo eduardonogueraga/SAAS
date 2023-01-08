@@ -200,7 +200,7 @@
                                             <span class="px-4 text-sm font-semibold text-gray-600">Fecha: {{$d->fecha->format('d/m/Y H:i:s')}}</span>
                                         </div>
                                     </div>
-                                    <p class="px-4 py-2 text-sm font-semibold text-gray-700">{{Str::limit($d->descripcion,60)}}</p>
+                                    <p class="px-4 py-2 text-sm font-semibold text-gray-700">{{Str::limit($d->literales_descripcion->literal,60)}}</p>
                                 </div>
                             </li>
                             @break

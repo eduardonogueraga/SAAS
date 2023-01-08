@@ -41,6 +41,7 @@ class DetailLogs extends Component
 
         $this->logsLists = Log::query()
             ->whereEntry_id($this->entryId)
+            ->with('literales_descripcion')
             ->orderBy('fecha', 'DESC')
             ->paginate($this->paginate);
 
