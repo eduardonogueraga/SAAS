@@ -12,7 +12,7 @@
                 @foreach ($logsLists as $l)
                     <li wire:click.stop="openDataModal('{{$l->id}}')" class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2 cursor-pointer hover:bg-yellow-100">
                         <div class="flex-grow">
-                            <h4 class="text-gray-900 text-md title-font font-medium mb-3">Log [{{$l->fecha->format('d/m/Y H:i:s')}}]</h4>
+                            <h4 class="text-gray-900 text-md title-font font-medium mb-3">Log [{{$l->fecha->format('d/m/Y H:i:s')}}]</h4><span>[ID-{{sprintf("%09d",$l->id)}}]</span>
                             <p class="font-light">{{$l->descripcion}}</p>
                         </div>
                     </li>

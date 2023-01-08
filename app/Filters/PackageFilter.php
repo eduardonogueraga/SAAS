@@ -9,9 +9,17 @@ class PackageFilter extends QueryFilter
     {
         return [
             'search' => 'filled',
+            'filtroPackageImplantado' => 'in:ok,ko,all',
         ];
     }
 
+    public function filtroPackageImplantado($query, $implantado)
+    {
+        if ($implantado==='all')
+            return $query;
+
+        return $query->where('implantado', '=', (($implantado==='ok')? 1 : 0));
+    }
     public function search($query, $search)
     {
         return $query->where(function ($query) use ($search){

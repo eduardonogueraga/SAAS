@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\shared\FilterTrait;
 use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Package;
 use Illuminate\Support\Carbon;
@@ -10,6 +11,7 @@ use Livewire\Component;
 class ShowHistory extends Component
 {
    use ModalTrait;
+    use FilterTrait;
     public $paginate = 2;
     private $history;
     public $search;
@@ -19,6 +21,11 @@ class ShowHistory extends Component
     protected $queryString = [
         'search' => ['except' => ''],
     ];
+
+    public function mount()
+    {
+        $this->queryString = array_merge($this->queryString, $this->filterQueryString);
+    }
 
     public function loadMorePackages()
     {
@@ -41,7 +48,8 @@ class ShowHistory extends Component
     public function render()
     {
         $filters = [
-            'search' => $this->search
+            'search' => $this->search,
+            'filtroPackageImplantado' => $this->filtroPackageImplantado,
         ];
 
         $this->history = Package::query()

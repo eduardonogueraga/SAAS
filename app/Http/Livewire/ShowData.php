@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\shared\FilterTrait;
 use App\Http\Livewire\shared\ModalTrait;
 use App\Models\DataQuery;
 use App\Models\Detection;
@@ -16,12 +17,14 @@ use Livewire\Component;
 class ShowData extends Component
 {
 use ModalTrait;
+use FilterTrait;
     public $paginate = 15;
     public int $dataRadio = 0;
     private $data;
     private $searchDataCount;
     private $infoRegistros;
     public $search;
+
 
     public function loadMoreData()
     {
@@ -39,6 +42,12 @@ use ModalTrait;
         'search' => ['except' => ''],
     ];
 
+    public function mount()
+    {
+        $this->queryString = array_merge($this->queryString, $this->filterQueryString);
+    }
+
+
     public function render()
     {
         $filters = [
@@ -54,6 +63,12 @@ use ModalTrait;
 
         switch ($this->dataRadio) {
             case 0:
+                $filters = array_merge($filters, [
+                    'filtroEntryModo' => $this->filtroEntryModo,
+                    'filtroEntryEstado' => $this->filtroEntryEstado,
+                    'filtroEntryTipo' => $this->filtroEntryTipo,
+                ]);
+
                 $this->data = Entry::query()
                     ->applyFilters($filters)
                     ->orderBy('id', 'DESC')
@@ -65,6 +80,12 @@ use ModalTrait;
                 break;
 
             case 1:
+                $filters = array_merge($filters, [
+                    'filtroDetectionModo' => $this->filtroDetectionModo,
+                    'filtroDetectionIntrusismo' => $this->filtroDetectionIntrusismo,
+                    'filtroDetectionEstado' => $this->filtroDetectionEstado,
+                ]);
+
                 $this->data = Detection::query()
                     ->with('sensor')
                     ->applyFilters($filters)
@@ -78,6 +99,10 @@ use ModalTrait;
                 break;
 
             case 2:
+
+                $filters = array_merge($filters, [
+                    'filtroNoticeTipo' => $this->filtroNoticeTipo,
+                ]);
                 $this->data = Notice::query()
                     ->applyFilters($filters)
                     ->orderBy('id', 'DESC')
@@ -100,6 +125,10 @@ use ModalTrait;
                 break;
 
             case 4:
+                $filters = array_merge($filters, [
+                    'filtroPackageImplantado' => $this->filtroPackageImplantado,
+                ]);
+
                 $this->data = Package::query()
                     ->applyFilters($filters)
                     ->orderBy('id', 'DESC')
@@ -111,6 +140,12 @@ use ModalTrait;
                 break;
 
             default:
+
+                $filters = array_merge($filters, [
+                    'filtroEntryModo' => $this->filtroEntryModo,
+                    'filtroEntryEstado' => $this->filtroEntryEstado,
+                ]);
+
                 $this->data = Entry::query()
                     ->applyFilters($filters)
                     ->orderBy('id', 'DESC')

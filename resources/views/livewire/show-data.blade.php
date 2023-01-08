@@ -100,6 +100,22 @@
                 @endswitch
             @endif
             <p class="px-4 py-2 text-sm font-semibold text-gray-700">Número de registros {{($dataCount) ?? 0}}</p>
+
+                @switch($dataRadio)
+                    @case(0)
+                        @include('entries._entriesFilters')
+                    @break
+                    @case(1)
+                        @include('detections._detectionsFilters')
+                    @break
+                    @case(2)
+                        @include('notices._noticesFilters')
+                    @break
+                    @case(4)
+                        @include('packages._packagesFilters')
+                    @break
+
+                @endswitch
             <ul class="w-full h-screen overflow-auto shadow bg-white mt-5">
                 @forelse($data as $d)
 

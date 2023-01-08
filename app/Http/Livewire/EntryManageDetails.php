@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\shared\FilterTrait;
 use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Detection;
 use App\Models\Entry;
@@ -10,6 +11,7 @@ use Livewire\Component;
 class EntryManageDetails extends Component
 {
     use ModalTrait;
+    use FilterTrait;
     public Entry $entry;
     private $detectionsList;
 
@@ -17,11 +19,20 @@ class EntryManageDetails extends Component
     public $previousDatetime;
     public int $entryId;
 
+    public $search;
+
     protected $listeners = [
         'entrySelected' => 'setEntryId',
         'loadMoreDetections' => 'loadMoreDetections'
     ];
 
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
+    public function mount()
+    {
+        $this->queryString = array_merge($this->queryString, $this->filterQueryString);
+    }
     public function loadMoreDetections()
     {
         $this->paginate += 5;
@@ -34,6 +45,15 @@ class EntryManageDetails extends Component
 
     public function render()
     {
+        $filters = [
+            'search' => $this->search
+        ];
+
+        $filters = array_merge($filters, [
+            'filtroDetectionModo' => $this->filtroDetectionModo,
+            'filtroDetectionIntrusismo' => $this->filtroDetectionIntrusismo,
+            'filtroDetectionEstado' => $this->filtroDetectionEstado,
+        ]);
 
         if(empty($this->entryId)){
            $this->entryId = Entry::max('id');
@@ -47,6 +67,7 @@ class EntryManageDetails extends Component
         $this->detectionsList = Detection::query()
             ->with('sensor')
             ->whereEntry_id($this->entryId)
+            ->applyFilters($filters)
             ->orderBy('fecha', 'DESC')
             ->paginate($this->paginate);
 

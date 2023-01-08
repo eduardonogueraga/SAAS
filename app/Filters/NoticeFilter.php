@@ -9,7 +9,16 @@ class NoticeFilter extends QueryFilter
     {
         return [
             'search' => 'filled',
+            'filtroNoticeTipo' => 'in:sms,call,all',
         ];
+    }
+
+    public function filtroNoticeTipo($query, $tipo)
+    {
+        if ($tipo==='all')
+            return $query;
+
+        return $query->where('tipo', '=', (($tipo==='sms')? 'sms' : 'llamada'));
     }
 
     public function search($query, $search)

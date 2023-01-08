@@ -30,14 +30,25 @@
                     @else {{$entry->fecha->diffInDays($previousDatetime->fecha)}} dias @endif</p>
                 </div>
                     <span class="inline-block py-1 px-2 rounded bg-indigo-50 text-indigo-500 text-xs font-medium tracking-widest mb-2 mt-2">Datos del registro</span>
-                    <p class="leading-relaxed text-base">Id del paquete:  {{sprintf("%09d",$entry->package->id)}}</p>
+                    <div class="flex flex-wrap">
+                        <div class="text-md italic text-gray-400 text-xs md:text-base">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="#239b56" viewBox="0 0 24 24" stroke="none">
+                                <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+                            </svg>
+                        </div>
+                        <p class="leading-relaxed text-base">Id del paquete:  {{sprintf("%09d",$entry->package->id)}}</p>
+                    </div>
                     <p class="leading-relaxed text-base">Version del sistema SAA: {{$entry->saa_version}} </p>
-                    <p class="leading-relaxed text-base">Fecha del registro: {{$entry->created_at->format('d/m/Y H:i:s')}}</p>
+                    <p class="leading-relaxed text-base">Fecha de creacion: {{$entry->created_at->format('d/m/Y H:i:s')}}</p>
                     <p class="leading-relaxed text-base">Ultima actualizacion: {{$entry->updated_at->format('d/m/Y H:i:s')}}</p>
             </div>
             <div class="flex flex-col md:w-1/2 md:pl-12">
                 <h2 class="title-font font-semibold text-gray-800 tracking-wider text-sm mb-3">Info</h2>
                 <nav class="flex flex-wrap list-none -mb-1">
+
+                    <li class="lg:w-1/3 mb-1 w-1/2">
+                        <a class="text-gray-600 hover:text-gray-800">Detecciones: {{$entry->detections_count}}</a>
+                    </li>
                     <li class="lg:w-1/3 mb-1 w-1/2">
                         <a class="text-gray-600 hover:text-gray-800">Mensajes: {{$entry->notices_count}}</a>
                     </li>
@@ -51,10 +62,22 @@
 
     <section class="text-gray-600 body-font">
         <div class="container px-5 py-5 mx-auto flex-wrap">
-            <div class="lg:w-3/3 mx-auto">
+            <div x-data="{ mostrarFiltros: false }" class="lg:w-3/3 mx-auto">
 
-                <div class="bg-gray-100 rounded flex mb-2 p-4 h-full items-center">
+                <div  class="bg-gray-100 rounded flex mb-2 p-4 h-full items-center">
                     <span class="title-font font-medium font-semibold">Detecciones en esta entrada: {{$entry->detections_count}}</span>
+
+                    <div class="block relative">
+                        <span x-on:click="mostrarFiltros = !mostrarFiltros" class="h-full absolute inset-y-0 left-0 flex items-center pl-2 cursor-pointer">
+                            <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
+                                    <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                    </div>
+
+                </div>
+                <div x-show="mostrarFiltros" class="bg-indigo-100 rounded flex mb-2 p-4 h-full items-center">
+                    @include('detections._detectionsFilters', ['search' => 1])
                 </div>
                 <div class="flex flex-wrap w-full relative mb-4  rounded shadow bg-white h-96 overflow-y-scroll">
                     @if($dataModal)
@@ -68,7 +91,7 @@
                                 @if($d->intrusismo == 1) bg-amber-400 @endif
                                 cursor-pointer hover:bg-yellow-100">
                                     <div class="flex-grow">
-                                        <h2 class="text-gray-900 text-lg title-font font-medium mb-3"> Detección en {{$d->sensor->tipo}} @if($d->intrusismo == 1) <b>Intrusismo</b> @endif </h2>
+                                        <h2 class="text-gray-900 text-lg title-font font-medium mb-3"> Detección en {{$d->sensor->tipo}} @if($d->intrusismo == 1) <b>Intrusismo</b> @endif</h2><span>[ID-{{sprintf("%09d",$d->id)}}]</span>
                                         <p class="leading-relaxed text-base">Nº detecciones consecutivas: {{$d->umbral}}</p>
                                         <p class="leading-relaxed text-base">Modo de detección: {{ucfirst($d->modo_deteccion)}} @if($d->restaurado == 1) Restaurada @endif</p>
                                     </div>

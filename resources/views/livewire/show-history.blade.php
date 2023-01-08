@@ -1,7 +1,7 @@
 <div class="w-full">
     <section class="text-gray-600 body-font">
         <section class="text-gray-600 body-font">
-            <div class="container px-5 py-5 mx-auto flex flex-wrap">
+            <div class="container px-5 pt-5 mx-auto flex flex-wrap">
                 <h2 class="sm:text-3xl text-2xl text-gray-900 font-medium title-font mb-2 md:w-2/5">ID Paquete</h2>
                 <div class="md:w-3/5 md:pl-6">
                     <div class="justify-between items-center h-32  mb-2">
@@ -13,9 +13,9 @@
                 </div>
             </div>
         </section>
-        <div class="container px-5 mx-auto flex flex-wrap">
+        <div class="container px-5 mx-auto  flex-wrap">
             <p class="px-4 py-2 text-sm font-semibold text-gray-700">Número de registros {{($dataCount) ?? 0}}</p>
-
+            @include('packages._packagesFilters')
             @if($dataModal)
                 @switch($modalTypeId)
                     @case(0)
@@ -37,7 +37,6 @@
                         @include('shared._noData')
                 @endswitch
             @endif
-
             <ul class="px-5 py-5 rounded shadow bg-white w-full">
             @forelse($history as $h)
                 @php $maxCount = max(sizeof($h->detections), sizeof($h->entries), sizeof($h->notices), sizeof($h->logs)) @endphp

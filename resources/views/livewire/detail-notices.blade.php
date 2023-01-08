@@ -24,7 +24,7 @@
                                     @endif
                                 </svg>
                             </div>
-                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Aviso {{ucfirst($n->tipo)}} </h2>
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Aviso {{ucfirst($n->tipo)}} </h2><span>[ID-{{sprintf("%09d",$n->id)}}]</span>
                         </div>
                         <p class="font-light">@if($n->tipo == 'sms') {{Str::limit($n->asunto,25)}} @else Tlf: {{$n->telefono}} @endif</p>
 

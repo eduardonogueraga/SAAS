@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class EntryManageSidebar extends Component
 {
-
     public $paginate = 10;
 
     public $select;
