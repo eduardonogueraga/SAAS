@@ -14,7 +14,7 @@ class DetailNotices extends Component
     public Entry $entry;
     private $noticeLists;
     public int $entryId;
-    public $paginate = 5;
+    public $paginate = 10;
 
     protected $listeners = [
         'entrySelected' => 'setEntryId',

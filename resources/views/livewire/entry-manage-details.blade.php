@@ -119,8 +119,8 @@
         </div>
 
         <div class="flex flex-wrap -mx-2">
-            @livewire('detail-notices')
-            @livewire('detail-logs')
+            @livewire('detail-notices', ['entryId' => $entryId])
+            @livewire('detail-logs', ['entryId' => $entryId])
         </div>
 
 

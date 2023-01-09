@@ -43,7 +43,7 @@ class EntrySeeder extends Seeder
             'created_at' => $date
         ]);
 
-        if(!rand(0,7)){
+        if(rand(0,7)){
             $entrada->notices()->save(Notice::factory()->make());
             $entrada->save();
 

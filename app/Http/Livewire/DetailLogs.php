@@ -14,7 +14,7 @@ class DetailLogs extends Component
     private $logsLists;
     public int $entryId;
 
-    public $paginate;
+    public $paginate = 10;
     protected $listeners = [
         'entrySelected' => 'setEntryId',
         'loadMoreLog' => 'loadMoreLog'
@@ -29,10 +29,7 @@ class DetailLogs extends Component
         $this->reset('paginate');
         $this->entryId = $id;
     }
-    public function mount()
-    {
-        $this->paginate = 5;
-    }
+
     public function render()
     {
         if(empty($this->entryId)){
