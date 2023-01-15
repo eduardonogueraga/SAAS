@@ -23,7 +23,6 @@ class EntrySeeder extends Seeder
             'modo' =>  "manual",
             'restaurada' => 1,
             'intentos_reactivacion' => 0,
-            'saa_version' => 'VE20R2',
             'fecha' => now()->subHours(2),
             'created_at' => now()
         ]);

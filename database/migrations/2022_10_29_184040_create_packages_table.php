@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('contenido_peticion', 5000);
+            $table->json('contenido_peticion')->nullable();
             $table->tinyInteger('intentos')->default(0);
             $table->tinyInteger('implantado')->default(0);
+            $table->string('saa_version', 50);
             $table->dateTime('fecha');
             $table->timestamps();
         });

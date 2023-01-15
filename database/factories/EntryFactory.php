@@ -52,7 +52,6 @@ class EntryFactory extends Factory
             'modo' => rand(0,3) ? "manual":"automatica",
             'restaurada' => rand(0,10)? 0:1,
             'intentos_reactivacion' => rand(0,3),
-            'saa_version' => 'VE20R2',
             'fecha' => now()->subDays(rand(0,60)),
         ];
     }

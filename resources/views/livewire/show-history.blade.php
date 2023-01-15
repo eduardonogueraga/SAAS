@@ -41,6 +41,34 @@
             @forelse($history as $h)
                 @php $maxCount = max(sizeof($h->detections), sizeof($h->entries), sizeof($h->notices), sizeof($h->logs)) @endphp
 
+                @if($maxCount==0)
+                        <li class="flex relative pb-3">
+                            <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                                <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                            </div>
+                            <div class="flex-shrink-0 w-10 h-10  relative z-10">
+                                <div wire:click.stop="openDataModalWithData('{{json_encode($h)}}', '4')" class="flex-shrink-0 w-10 h-10 rounded-full  @if($h->implantado) bg-green-500  @else bg-red-500 @endif inline-flex items-center justify-center text-white relative z-10 cursor-pointer hover:bg-indigo-500">
+                                    <svg class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+
+                        <div class="flex-shrink-0 flex leading-none ml-2 mr-2 mb-2">
+                            <h2 class="text-gray-500">Paquete: {{sprintf("%09d", $h->id)}} ({{$h->fecha->format('d/m/Y H:i:s')}})</h2>
+                        </div>
+                        <div class="flex flex-wrap">
+                            <div class="px-4 my-3 w-3/3">
+                                <div  class="h-full flex items-start">
+                                    <div class="flex pl-4 pr-4 pt-4  border-2 rounded-lg  border-gray-200 border-opacity-50 bg-lime-500">
+                                        <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Paquete vacio, sin novedad</h1>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                @endif
+
                 @for($i = 0; $i < $maxCount; $i++)
                         <li class="flex relative pb-3">
                             <div class="h-full w-10 absolute inset-0 flex items-center justify-center">

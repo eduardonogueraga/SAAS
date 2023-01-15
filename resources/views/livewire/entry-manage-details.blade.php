@@ -42,7 +42,7 @@
                         </div>
 
                     </div>
-                    <p class="leading-relaxed text-base">Version del sistema SAA: {{$entry->saa_version}} </p>
+                    <p class="leading-relaxed text-base">Version del sistema SAA: {{$entry->package->saa_version}} </p>
                     <p class="leading-relaxed text-base">Fecha de creacion: {{$entry->created_at->format('d/m/Y H:i:s')}}</p>
                     <p class="leading-relaxed text-base">Ultima actualizacion: {{$entry->updated_at->format('d/m/Y H:i:s')}}</p>
             </div>

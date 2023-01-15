@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('modo', 50);
             $table->tinyInteger('restaurada')->default(0);;
             $table->integer('intentos_reactivacion');
-            $table->string('saa_version', 50);
             $table->dateTime('fecha');
             $table->softDeletes();
             $table->timestamps();

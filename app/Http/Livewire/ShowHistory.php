@@ -34,7 +34,9 @@ class ShowHistory extends Component
 
     public function openDataModalWithData($datos, $id)
     {
+
         $data = json_decode($datos);
+
 
         $data->fecha = Carbon::parse($data->fecha);
         $data->created_at = Carbon::parse($data->created_at);

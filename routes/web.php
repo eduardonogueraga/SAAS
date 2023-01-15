@@ -32,5 +32,4 @@ Route::get('/history/{package}/show', [DataController::class, 'showInHistory'])-
 Route::get('/data', [DataController::class, 'index'])->name('data.index');
 
 
-
 require __DIR__.'/auth.php';

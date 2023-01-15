@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     protected $dates = ['fecha','d_fecha', 'e_fecha', 'n_fecha', 'l_fecha'];
 

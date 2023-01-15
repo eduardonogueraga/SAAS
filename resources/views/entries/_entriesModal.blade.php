@@ -37,7 +37,7 @@
                         <p class="font-bold">Veces que la entrada ha sido reactivada automáticamente:</p>
                         <p>{{$detailEntry->intentos_reactivacion}}</p>
                         <p class="font-bold">Version del sistema SAA:</p>
-                        <p>{{$detailEntry->saa_version}}</p>
+                        <p>{{$detailEntry->package->saa_version}}</p>
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
                         <p class="font-bold">Fecha del registro:</p>
