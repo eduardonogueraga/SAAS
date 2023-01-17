@@ -30,10 +30,20 @@
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
                         <p class="font-bold">Número de intentos</p>
                         <p>{{$detailPackage->intentos}}</p>
+                        @if($detailPackage->error)
+                        <p class="font-bold">Error</p>
+                        <p>{{$detailPackage->error}}</p>
+                        @endif
+                        @if($detailPackage->respuesta_http)
+                        <p class="font-bold">Respuesta HTTP</p>
+                        <p>{{$detailPackage->respuesta_http}}</p>
+                        @endif
                         <p class="font-bold">Contenido del paquete:</p>
                         <p>{{Str::limit($detailPackage->contenido_peticion,80)}}</p>
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
+                        <p class="font-bold">Version del sistema</p>
+                        <p>{{$detailPackage->saa_version}}</p>
                         <p class="font-bold">Fecha del registro:</p>
                         <p>{{$detailPackage->created_at->format('d/m/Y H:i:s')}}</p>
                         <p class="font-bold">Ultima actualizacion:</p>

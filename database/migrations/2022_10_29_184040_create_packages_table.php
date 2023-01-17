@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('contenido_peticion')->nullable();
-            $table->tinyInteger('intentos')->default(0);
+            $table->string('contenido_peticion',5000)->nullable();
+            $table->tinyInteger('intentos')->default(1);
             $table->tinyInteger('implantado')->default(0);
-            $table->string('saa_version', 50);
+            $table->string('respuesta_http',100)->nullable();
+            $table->string('error',1000)->nullable();
+            $table->string('saa_version', 50)->default("Undefined");
             $table->dateTime('fecha');
             $table->timestamps();
         });

@@ -25,17 +25,6 @@ class DataController extends Controller
 
     public function createPackage(CreatePackageRequest $request)
     {
-        $response = [];
-
-        if($request->createNewPackage()){
-            $response["status"] = "200";
-            $response["msg"] = "Paquete instalado OK";
-
-        }else {
-            $response["status"] = "400";
-            $response["msg"] = "Error al instalar el paquete";
-        }
-
-        return $response;
+        return $request->createNewPackage();
     }
 }
