@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Applogs;
 use App\Models\Entry;
 use App\Models\Package;
 use Carbon\Carbon;
@@ -10,12 +11,14 @@ use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CreatePackageRequest extends FormRequest
 {
 
     public bool $error = false;
     public $currentEntry;
+    public  $appLog;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -40,36 +43,46 @@ class CreatePackageRequest extends FormRequest
 
     public function createNewPackage()
     {
+        try {
 
-        $paqueteJSON = json_decode($this->getContent());
+            $paqueteJSON = json_decode($this->getContent());
 
-        //Comprobar que el JSON no viene vacio
-        if($paqueteJSON === null){
-            //En el caso de problemas con el formato debera crearse el paquete junto con los datos de la peticion
-            $package = new Package([
-                'contenido_peticion' => $this->getContent(),
-                'respuesta_http' => '400 Formato de erroneo',
-                'error' => 'Formato de erroneo en JSON no se puede instalar el paquete',
-                'fecha' => Carbon::now()->format('Y-m-d'),
+            //Guardamos en contenido en el log de la aplicacion
+            $this->appLog = Applogs::create([
+                'contenido_peticion' => Str::limit($this->getContent(),1000),
+                'respuesta_http' => '',
             ]);
 
-            if (!$package->save()) {
-                return response()->json(['error' => 'Error al crear el paquete con formato erroneo'], 400);
+            //Comprobar que el JSON no viene vacio
+            if($paqueteJSON === null){
+                //En el caso de problemas con el formato debera crearse el paquete junto con los datos de la peticion
+                $package = new Package([
+                    'contenido_peticion' => Str::limit($this->getContent(),4500),
+                    'respuesta_http' => '400 Formato de erroneo',
+                    'error' => 'Formato de erroneo en JSON no se puede instalar el paquete',
+                    'fecha' => Carbon::now()->format('Y-m-d'),
+                ]);
+
+                if (!$package->save()) {
+                    $this->appLog->update(['respuesta_http' => '400 Error insertando entrada', 'error' => 'Error al crear el paquete con formato erroneo',]);
+                    return response()->json(['error' => 'Error al crear el paquete con formato erroneo'], 400);
+                }
+                $this->appLog->update(['respuesta_http' => '400 Formato de erroneo', 'error' => 'Formato de erroneo',]);
+
+                return response()->json(['error' => 'Formato de erroneo'], 400);
             }
 
-            return response()->json(['error' => 'Formato de erroneo'], 400);
-        }
+            //Comprobar que no se encuentra ya instalado (ID)
+            if(Package::find($paqueteJSON->id)){
+                $this->appLog->update(['respuesta_http' => '400 Error al crear el paquete', 'error' => 'Id de paquete duplicado',]);
+                //return response()->json(['error' => 'Error al crear el paquete'], 400); //PONER EN PRODUCCION
+            }
 
-        //Si tiene formato JSON procedemos con la creacion del paquete
-        try {
+            //Si tiene formato JSON procedemos con la creacion del paquete
             try {
 
-                //Comprobar que no se encuentra ya instalado (ID)
-
-                //...
-
                 //Si el formato es el adecuado creamos el paquete
-                $package =  Package::create([
+                $package = Package::create([
                     'contenido_peticion' => json_encode($paqueteJSON),
                     'intentos' => $paqueteJSON->retry,
                     'saa_version' => $paqueteJSON->version,
@@ -77,14 +90,20 @@ class CreatePackageRequest extends FormRequest
                 ]);
 
             } catch (QueryException $e) {
+
+                $this->appLog->update(['respuesta_http' => '400 Error al crear el paquete', 'error' => $e->getMessage(),]);
                 return response()->json(['error' => 'Error al crear el paquete'], 400);
             }
+
+
+            //Instalar elementos del paquete
+            return $this->insertarContenidoPaquete($paqueteJSON, $package);
+
         } catch (\Exception $e) {
+            $this->appLog->update(['respuesta_http' => '500 Error al crear el paquete', 'error' => $e->getMessage(),]);
             return response()->json(['error' => 'Error creando el paquete'], 500);
         }
 
-        //Instalar elementos del paquete
-        return $this->insertarContenidoPaquete($paqueteJSON, $package);
     }
 
     /**
@@ -97,6 +116,7 @@ class CreatePackageRequest extends FormRequest
 
         //Comprobamos que existe al menos una entrada
         if(data_get($paqueteJSON, 'Entry') === null){
+            $package->update(['respuesta_http' => '400 Error insertando entrada', 'error' =>  'No hay entrada',]);
             return response()->json(['error' => 'No hay entrada'], 400);
         }
 
@@ -262,6 +282,8 @@ class CreatePackageRequest extends FormRequest
         $package->update([
             'implantado' => 1,
         ]);
+
+        $this->appLog->update(['respuesta_http' => '200 Paquete instalado',]);
 
         return response()->json(['msg' => 'Paquete instalado']);
     }

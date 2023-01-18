@@ -73,6 +73,31 @@
                         <h2 class="font-semibold">Paquetes {{$this->infoRegistros[0]->num_packages}}</h2>
                     </div>
                 </label>
+
+                <label wire:click="clearList" class="flex items-start rounded-xl bg-white p-4 shadow-lg cursor-pointer hover:bg-indigo-100 @if($dataRadio == 5) bg-indigo-100 @else  bg-white @endif">
+                    <input type="radio" value="5"  wire:model="dataRadio" name="data-radio" checked style="display:none" />
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full border border-indigo-100 bg-indigo-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="#099F77" viewBox="0 0 20 20" stroke="none">
+                            <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+
+                    <div class="ml-4">
+                        <h2 class="font-semibold">Configuracion SAA</h2>
+                    </div>
+                </label>
+                <label wire:click="clearList" class="flex items-start rounded-xl bg-white p-4 shadow-lg cursor-pointer hover:bg-indigo-100 @if($dataRadio == 6) bg-indigo-100 @else  bg-white @endif">
+                    <input type="radio" value="6"  wire:model="dataRadio" name="data-radio" checked style="display:none" />
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full border border-orange-100 bg-orange-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="#8A1D9F" viewBox="0 0 20 20" stroke="none">
+                            <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+
+                    <div class="ml-4">
+                        <h2 class="font-semibold">Logs SAAS</h2>
+                    </div>
+                </label>
             </div>
         </div>
         <div>
