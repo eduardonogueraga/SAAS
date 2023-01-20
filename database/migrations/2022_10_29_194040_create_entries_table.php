@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('package_id')->references('id')->on('packages');
             $table->string('tipo', 100);
             $table->string('modo', 50);
-            $table->tinyInteger('restaurada')->default(0);;
+            $table->tinyInteger('restaurada')->default(0);
             $table->integer('intentos_reactivacion');
             $table->dateTime('fecha');
             $table->softDeletes();

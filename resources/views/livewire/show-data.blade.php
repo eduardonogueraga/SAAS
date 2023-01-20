@@ -83,19 +83,19 @@
                     </div>
 
                     <div class="ml-4">
-                        <h2 class="font-semibold">Configuracion SAA</h2>
+                        <h2 class="font-semibold">SAA Info</h2>
                     </div>
                 </label>
                 <label wire:click="clearList" class="flex items-start rounded-xl bg-white p-4 shadow-lg cursor-pointer hover:bg-indigo-100 @if($dataRadio == 6) bg-indigo-100 @else  bg-white @endif">
                     <input type="radio" value="6"  wire:model="dataRadio" name="data-radio" checked style="display:none" />
                     <div class="flex h-12 w-12 items-center justify-center rounded-full border border-orange-100 bg-orange-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="#8A1D9F" viewBox="0 0 20 20" stroke="none">
-                            <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"></path>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                         </svg>
                     </div>
 
                     <div class="ml-4">
-                        <h2 class="font-semibold">Logs SAAS</h2>
+                        <h2 class="font-semibold">SAAS Logs {{$this->infoRegistros[0]->num_applogs}}</h2>
                     </div>
                 </label>
             </div>
@@ -119,6 +119,9 @@
                         @break;
                     @case(4)
                         @include('packages._packagesModal', ['detailPackage'=>$info, 'closeMethod' =>'closeDataModal'])
+                        @break;
+                    @case(6)
+                        @include('applogs._applogsModal', ['detailApplog'=>$info, 'closeMethod' =>'closeDataModal'])
                         @break;
                     @default
                         @include('shared._noData')
@@ -245,6 +248,31 @@
                                         </div>
                                     </div>
                                     <p class="px-4 py-2 text-sm font-semibold text-gray-700">@if($d->implantado) Paquete instalado @else Paquete KO @endif</p>
+                                </div>
+                            </li>
+                            @break
+                        @case(5)
+                            <li  class="shadow-lg pt-4 ml-2 mr-2 rounded-lg">
+                                <div class="block bg-white py-3 border-t pb-4 ">
+                                    @include('systems._systemPanel', ['systemInfo'=>$d])
+                                </div>
+                            </li>
+                            @break
+                        @case(6)
+                            <li wire:click.stop="openDataModal('{{$d->id}}')" class="shadow-lg pt-4 ml-2 mr-2 rounded-lg">
+                                <div class="block bg-white py-3 border-t pb-4 hover:bg-yellow-100 cursor-pointer">
+                                    <div class="px-4 py-2 flex  justify-between">
+                                        <div class="flex">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                                            </svg>
+                                            <span class="ml-3 text-sm font-semibold text-gray-900">ID: {{sprintf("%09d", $d->id)}} Log de la aplicacion web</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="px-4 text-sm font-semibold text-gray-600">Fecha: {{$d->created_at->format('d/m/Y H:i:s')}}</span>
+                                        </div>
+                                    </div>
+                                    <p class="px-4 py-2 text-sm font-semibold text-gray-700">{{Str::limit($d->respuesta_http,60)}}</p>
                                 </div>
                             </li>
                             @break

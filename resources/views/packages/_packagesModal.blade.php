@@ -39,7 +39,7 @@
                         <p>{{$detailPackage->respuesta_http}}</p>
                         @endif
                         <p class="font-bold">Contenido del paquete:</p>
-                        <p>{{Str::limit($detailPackage->contenido_peticion,80)}}</p>
+                        <textarea readonly class="w-full">{{$detailPackage->contenido_peticion}}</textarea>
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
                         <p class="font-bold">Version del sistema</p>

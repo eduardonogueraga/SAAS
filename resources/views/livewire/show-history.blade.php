@@ -2,7 +2,7 @@
     <section class="text-gray-600 body-font">
         <section class="text-gray-600 body-font">
             <div class="container px-5 pt-5 mx-auto flex flex-wrap">
-                <h2 class="sm:text-3xl text-2xl text-gray-900 font-medium title-font mb-2 md:w-2/5">ID Paquete</h2>
+                <h2 class="sm:text-3xl text-2xl text-gray-900 font-medium title-font mb-2 md:w-2/5">Historial de paquetes</h2>
                 <div class="md:w-3/5 md:pl-6">
                     <div class="justify-between items-center h-32  mb-2">
                         <label class="flex px-3 w-full">

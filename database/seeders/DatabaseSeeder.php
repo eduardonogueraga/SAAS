@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PackageSeeder::class);
         $this->call(EntrySeeder::class);
         $this->call(ApplogsSeeder::class);
+        $this->call(SystemSeeder::class);
     }
 
     public function truncateTables(array $tables)

@@ -15,7 +15,17 @@ return new class extends Migration
     {
         Schema::create('systems', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->tinyInteger('MODO_ALARMA');
+            $table->tinyInteger('MODO_SENSIBLE');
+            $table->tinyInteger('MODULO_SD');
+            $table->tinyInteger('MODULO_RTC');
+            $table->tinyInteger('MODULO_BLUETOOTH');
+            $table->string('SENSORES_HABLITADOS');
+            $table->integer('SMS_HISTORICO')->nullable();
+            $table->unsignedBigInteger('TIEMPO_ENCENDIDO');
+            $table->dateTime('FECHA_SMS_HITORICO')->nullable();
             $table->timestamps();
+
         });
     }
 

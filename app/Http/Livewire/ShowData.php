@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Http\Livewire\shared\FilterTrait;
 use App\Http\Livewire\shared\ModalTrait;
+use App\Models\Applogs;
 use App\Models\DataQuery;
 use App\Models\Detection;
 use App\Models\Entry;
@@ -11,6 +12,7 @@ use App\Models\Literal;
 use App\Models\Log;
 use App\Models\Notice;
 use App\Models\Package;
+use App\Models\System;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -24,6 +26,7 @@ use FilterTrait;
     private $data;
     private $searchDataCount;
     private $infoRegistros;
+    private $systemSensores;
     public $search;
 
 
@@ -62,7 +65,8 @@ use FilterTrait;
             (SELECT COUNT(*) FROM detections) AS num_detections,
             (SELECT COUNT(*) FROM notices) AS num_notices,
             (SELECT COUNT(*) FROM packages) AS num_packages,
-            (SELECT COUNT(*) FROM logs) AS num_logs');
+            (SELECT COUNT(*) FROM logs) AS num_logs,
+            (SELECT COUNT(*) FROM applogs) AS num_applogs');
 
         switch ($this->dataRadio) {
             case 0:
@@ -143,6 +147,30 @@ use FilterTrait;
                     ->count();
                 break;
 
+            case 5:
+                $this->data = System::query()->orderBy('id', 'DESC')->paginate(1);
+                $this->searchDataCount = 1;
+                $this->systemSensores = explode('|', $this->data[0]->SENSORES_HABLITADOS);
+
+                $tempArr = [];
+                foreach ($this->systemSensores as $value) {
+                    $parts = explode(";", $value);
+                    $tempArr[$parts[0]] = $parts[1];
+                }
+
+                $this->systemSensores = $tempArr;
+
+                break;
+            case 6:
+                $this->data = Applogs::query()
+                    ->applyFilters($filters)
+                    ->orderBy('id', 'DESC')
+                    ->paginate($this->paginate);
+
+                $this->searchDataCount = Applogs::query()
+                    ->applyFilters($filters)
+                    ->count();
+                break;
             default:
 
                 $filters = array_merge($filters, [
@@ -162,6 +190,7 @@ use FilterTrait;
 
         return view('livewire.show-data', ['data' => $this->data,
             'infoRegistros' => $this->infoRegistros,
+            'systemSensores' => $this->systemSensores,
             'dataCount' => $this->searchDataCount]);
 
     }

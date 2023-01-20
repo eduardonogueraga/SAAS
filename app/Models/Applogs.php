@@ -9,4 +9,9 @@ class Applogs extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function newEloquentBuilder($query)
+    {
+        return new ApplogsQuery($query);
+    }
 }
