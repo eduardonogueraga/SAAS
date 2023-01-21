@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Http\Livewire\shared\FilterTrait;
 use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Package;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 
@@ -32,21 +33,22 @@ class ShowHistory extends Component
         $this->paginate += 2;
     }
 
-    public function openDataModalWithData($datos, $id)
+    public function openDataModalWithData(Package $datos,  $id, $index = null)
     {
-
-        $data = json_decode($datos);
-
-
-        $data->fecha = Carbon::parse($data->fecha);
-        $data->created_at = Carbon::parse($data->created_at);
-        $data->updated_at = Carbon::parse($data->updated_at);
-
         $this->dataModal = true;
-
         $this->modalTypeId = $id;
-        $this->modalContent =  $data;
+
+        if($id < 4 && $id >= 0){
+            $modelRelations= ['detections', 'entries', 'notices','logs'];
+            $relation = $modelRelations[$id];
+
+            $this->modalContent =  $datos->$relation[$index];
+        } else {
+            $this->modalContent =  $datos;
+        }
+
     }
+
 
     public function render()
     {

@@ -47,8 +47,14 @@
                         <p class="font-bold">Ultima actualizacion:</p>
                         <p>{{$detailDetection->updated_at->format('d/m/Y H:i:s')}}</p>
                         <p class="font-bold">Paquete:</p>
-                        <a class="text-blue-600 hover:underline" href="{{ route('history.show', ['package' => $detailDetection->package_id]) }}">ID: {{sprintf("%09d", $detailDetection->package_id)}}</a>
-                    </div>
+                        <p>
+                            ID: {{sprintf("%09d", $detailDetection->package_id)}}
+                            <svg class="inline-block h-6 w-6 ml-2" xmlns="http://www.w3.org/2000/svg" fill="#239b56" viewBox="0 0 24 24" stroke="none">
+                                <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+                            </svg>
+                            <a class="inline-block text-xs text-blue-500 underline" href="{{ route('history.show', ['package' => $detailDetection->package_id]) }}"> (Ver en paquetes)</a>
+                        </p>
+                  </div>
 
 
                 </div>

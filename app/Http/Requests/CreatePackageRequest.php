@@ -84,7 +84,7 @@ class CreatePackageRequest extends FormRequest
 
                 //Si el formato es el adecuado creamos el paquete
                 $package = Package::create([
-                    'contenido_peticion' => json_encode($paqueteJSON),
+                    'contenido_peticion' => json_encode($paqueteJSON, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE),
                     'intentos' => $paqueteJSON->retry,
                     'saa_version' => $paqueteJSON->version,
                     'fecha' =>  $paqueteJSON->date,

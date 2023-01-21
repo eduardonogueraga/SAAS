@@ -33,7 +33,7 @@ class PackageFactory extends Factory
                 'catchPhrase' => $this->faker->catchPhrase,
             ],
             'date' => $this->faker->dateTime->format('Y-m-d H:i:s')
-        ]);
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
         return [
             'contenido_peticion' => $json,//$this->faker->sentence(rand(200, 500)),

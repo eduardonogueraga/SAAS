@@ -24,7 +24,7 @@
                     </div>
                     <div class="grid grid-cols-3 items-center md:space-y-0 space-y-1 p-4 border-b ">
                         <p class="text-gray-600 font-bold">ID: {{sprintf("%09d", $detailPackage->id)}}</p>
-                        <p class="text-gray-600 font-bold">Implantacion: @if($detailPackage->implantado) Instalado correctamente @else KO al instalar @endif</p>
+                        <p class="text-gray-600 font-bold">Implantacion: @if($detailPackage->implantado) Instalado OK @else KO al instalar @endif</p>
                         <p class="text-gray-600 font-bold">Fecha: {{$detailPackage->fecha->format('d/m/Y H:i:s')}}</p>
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">

@@ -47,7 +47,7 @@
                                 <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
                             </div>
                             <div class="flex-shrink-0 w-10 h-10  relative z-10">
-                                <div wire:click.stop="openDataModalWithData('{{json_encode($h)}}', '4')" class="flex-shrink-0 w-10 h-10 rounded-full  @if($h->implantado) bg-green-500  @else bg-red-500 @endif inline-flex items-center justify-center text-white relative z-10 cursor-pointer hover:bg-indigo-500">
+                                <div wire:click.stop="openDataModalWithData('{{$h->id}}', '4')" class="flex-shrink-0 w-10 h-10 rounded-full  @if($h->implantado) bg-green-500  @else bg-red-500 @endif inline-flex items-center justify-center text-white relative z-10 cursor-pointer hover:bg-indigo-500">
                                     <svg class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
                                     </svg>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="flex-shrink-0 w-10 h-10  relative z-10">
                                 @if($i == 0)
-                                    <div wire:click.stop="openDataModalWithData('{{json_encode($h)}}', '4')" class="flex-shrink-0 w-10 h-10 rounded-full  @if($h->implantado) bg-green-500  @else bg-red-500 @endif inline-flex items-center justify-center text-white relative z-10 cursor-pointer hover:bg-indigo-500">
+                                    <div wire:click.stop="openDataModalWithData('{{$h->id}}', '4')" class="flex-shrink-0 w-10 h-10 rounded-full  @if($h->implantado) bg-green-500  @else bg-red-500 @endif inline-flex items-center justify-center text-white relative z-10 cursor-pointer hover:bg-indigo-500">
                                         <svg class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
                                         </svg>
@@ -93,7 +93,7 @@
                                 <div class="flex flex-wrap">
                                     @if(isset($h->detections[$i]))
                                         <div class="px-4 my-3 w-3/3">
-                                            <div wire:click.stop="openDataModalWithData('{{json_encode($h->detections[$i])}}', '0')" class="h-full flex items-start">
+                                            <div wire:click.stop="openDataModalWithData('{{$h->id}}', '0',{{$i}})" class="h-full flex items-start">
                                                 <div class="flex pl-4 pr-4 pt-4  border-2 rounded-lg  border-gray-200 border-opacity-50 bg-indigo-100 cursor-pointer hover:bg-yellow-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Detección en {{$h->detections[$i]->sensor->literales_tipo->literal}} @if($h->detections[$i]->intrusismo == 1) <b>Intrusismo</b> @endif</h1>
                                                     <p class="leading-relaxed mb-5 ml-3"> Fecha: {{$h->detections[$i]->fecha->format('d/m/Y H:i:s')}}</p>
@@ -103,7 +103,7 @@
                                     @endif
                                     @if(isset($h->entries[$i]))
                                         <div class="px-4 my-3 w-3/3">
-                                            <div wire:click.stop="openDataModalWithData('{{json_encode($h->entries[$i])}}', '1')" class="h-full flex items-start">
+                                            <div wire:click.stop="openDataModalWithData('{{$h->id}}', '1',{{$i}})" class="h-full flex items-start">
                                                 <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-blue-100 cursor-pointer hover:bg-yellow-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">{{ucfirst($h->entries[$i]->tipo)}} {{$h->entries[$i]->modo}} </h1>
                                                     <p class="leading-relaxed mb-5 ml-3"> Fecha: {{$h->entries[$i]->fecha->format('d/m/Y H:i:s')}}</p>
@@ -113,7 +113,7 @@
                                     @endif
                                     @if(isset($h->notices[$i]))
                                         <div class="px-4 my-3 w-3/3">
-                                            <div wire:click.stop="openDataModalWithData('{{json_encode($h->notices[$i])}}', '2')" class="h-full flex items-start">
+                                            <div wire:click.stop="openDataModalWithData('{{$h->id}}', '2',{{$i}})" class="h-full flex items-start">
                                                 <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-green-100 cursor-pointer hover:bg-yellow-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Aviso {{ucfirst($h->notices[$i]->tipo)}} </h1>
                                                     <p class="leading-relaxed mb-5 ml-3">Fecha: {{$h->notices[$i]->fecha->format('d/m/Y H:i:s')}}</p>
@@ -123,7 +123,7 @@
                                     @endif
                                     @if(isset($h->logs[$i]))
                                         <div class="px-4 my-3 w-3/3">
-                                            <div wire:click.stop="openDataModalWithData('{{json_encode($h->logs[$i])}}', '3')" class="h-full flex items-start">
+                                            <div wire:click.stop="openDataModalWithData('{{$h->id}}', '3',{{$i}})" class="h-full flex items-start">
                                                 <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-cyan-200 cursor-pointer hover:bg-yellow-100">
                                                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Log: {{ucfirst(Str::limit($h->logs[$i]->literales_descripcion->literal, 20))}} </h1>
                                                     <p class="leading-relaxed mb-5 ml-3">Fecha: {{$h->logs[$i]->fecha->format('d/m/Y H:i:s')}}</p>
