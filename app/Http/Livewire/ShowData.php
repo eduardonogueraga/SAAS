@@ -150,15 +150,19 @@ use FilterTrait;
             case 5:
                 $this->data = System::query()->orderBy('id', 'DESC')->paginate(1);
                 $this->searchDataCount = 1;
-                $this->systemSensores = explode('|', $this->data[0]->SENSORES_HABLITADOS);
 
-                $tempArr = [];
-                foreach ($this->systemSensores as $value) {
-                    $parts = explode(";", $value);
-                    $tempArr[$parts[0]] = $parts[1];
+                if($this->data[0] !== null){ //Si no hay filas no se procesa nada
+                    $this->systemSensores = explode('|', $this->data[0]->SENSORES_HABLITADOS);
+
+                    $tempArr = [];
+                    foreach ($this->systemSensores as $value) {
+                        $parts = explode(";", $value);
+                        $tempArr[$parts[0]] = $parts[1];
+                    }
+
+                    $this->systemSensores = $tempArr;
                 }
 
-                $this->systemSensores = $tempArr;
 
                 break;
             case 6:

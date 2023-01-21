@@ -20,7 +20,7 @@ class DataController extends Controller
 
     public function showInHistory(Package $package)
     {
-        return view('data.packages.show', ['id' => '0'.$package->id]);
+        return view('data.packages.show', ['id' => '00000000'.$package->id]);
     }
 
     public function createPackage(CreatePackageRequest $request)

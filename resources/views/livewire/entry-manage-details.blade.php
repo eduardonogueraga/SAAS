@@ -127,6 +127,6 @@
     </section>
 </div>
 @else
-    <div>Sin datos</div>
+    @include('shared._noData')
 @endif
 

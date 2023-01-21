@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Applogs;
 use App\Models\Entry;
 use App\Models\Package;
+use App\Models\System;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -95,6 +96,8 @@ class CreatePackageRequest extends FormRequest
                 return response()->json(['error' => 'Error al crear el paquete'], 400);
             }
 
+            //Si existen cambios en SAA se actualizaran
+            $this->actualizarDatosDelSistema($paqueteJSON, $package);
 
             //Instalar elementos del paquete
             return $this->insertarContenidoPaquete($paqueteJSON, $package);
@@ -286,5 +289,56 @@ class CreatePackageRequest extends FormRequest
         $this->appLog->update(['respuesta_http' => '200 Paquete instalado',]);
 
         return response()->json(['msg' => 'Paquete instalado']);
+    }
+
+    /**
+     * @param mixed $paqueteJSON
+     * @return void
+     */
+    public function actualizarDatosDelSistema(mixed $paqueteJSON , Package $package): void
+    {
+        //Comprobamos si existen datos del sistema
+        if (data_get($paqueteJSON, 'System') !== null) {
+
+            $system = System::latest()->firstOrFail();
+
+            $system->update(['package_id' => $package->id]); //Actualizamos el id
+
+            if (isset($paqueteJSON->System[0]->action)) {
+                $system->update(['MODO_ALARMA' => $paqueteJSON->System[0]->action]);
+            }
+
+            if (isset($paqueteJSON->System[0]->msen)) {
+                $system->update(['MODO_SENSIBLE' => $paqueteJSON->System[0]->msen]);
+            }
+
+            if (isset($paqueteJSON->System[0]->numsms)) {
+                $system->update(['SMS_DIARIOS' => $paqueteJSON->System[0]->numsms]);
+            }
+
+            if (isset($paqueteJSON->System[0]->alive)) {
+                $system->update(['TIEMPO_ENCENDIDO' => $paqueteJSON->System[0]->alive]);
+            }
+
+            if (isset($paqueteJSON->System[0]->reset)) {
+                $system->update(['FECHA_RESET' => $paqueteJSON->System[0]->reset]);
+            }
+
+            if (isset($paqueteJSON->System[0]->modules)) {
+
+                $systemModules = explode('|', $paqueteJSON->System[0]->modules);
+
+                $system->update([
+                    'MODULO_SD' => $systemModules[0],
+                    'MODULO_RTC' => $systemModules[1],
+                    'MODULO_BLUETOOTH' => $systemModules[2],
+                ]);
+            }
+
+            if (isset($paqueteJSON->System[0]->sensors)) {
+                $system->update(['SENSORES_HABLITADOS' => $paqueteJSON->System[0]->sensors]);
+            }
+
+        }
     }
 }

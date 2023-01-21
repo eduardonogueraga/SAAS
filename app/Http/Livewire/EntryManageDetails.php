@@ -13,7 +13,7 @@ class EntryManageDetails extends Component
 {
     use ModalTrait;
     use FilterTrait;
-    public Entry $entry;
+    public  $entry;
     private $detectionsList;
 
     public $paginate = 5;
@@ -59,7 +59,11 @@ class EntryManageDetails extends Component
         ]);
 
         if(empty($this->entryId)){
-           $this->entryId = Entry::max('id');
+            $this->entryId = 1;
+
+            $maxEntryId = Entry::max('id');
+
+            if($maxEntryId !== null){$this->entryId = $maxEntryId;}
         }
 
         $this->entry = Entry::query()

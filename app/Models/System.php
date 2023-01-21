@@ -9,4 +9,6 @@ class System extends Model
 {
     use HasFactory;
 
+    protected $dates = ['FECHA_RESET'];
+    protected $guarded = [];
 }

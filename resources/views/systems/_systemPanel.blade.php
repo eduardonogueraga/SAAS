@@ -3,6 +3,10 @@
         <div class="p-4">
             <h1 class="font-bold py-4 uppercase inline-block">Información sobre el sistema SAA</h1>
             <span class="inline-block ml-3 italic">Ultima actualización {{$d->updated_at}}</span>
+            <svg class="inline-block h-6 w-6 ml-2" xmlns="http://www.w3.org/2000/svg" fill="#239b56" viewBox="0 0 24 24" stroke="none">
+                <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+            </svg>
+            <a class="inline-block text-xs text-blue-500 underline" href="{{ route('history.show', ['package' => $d->package_id]) }}"> (Ver en paquetes)</a>
         </div>
 
         <div id="stats" class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -57,6 +61,38 @@
                         <p class="text-sm font-medium uppercase leading-4">Modo sensible</p>
                         <p class="font-bold text-2xl inline-flex items-center space-x-2">
                             <span> @if($systemInfo->MODO_SENSIBLE) Activado @else Desactivado @endif </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-lg @if($systemInfo->SMS_DIARIOS < 15) bg-white @else bg-red-200 @endif  shadow-lg hover:bg-indigo-100">
+                <div class="flex flex-row space-x-4 items-center">
+                    <div id="stats-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium uppercase leading-4">SMS Diarios realizados (Max. 15)</p>
+                        <p class="font-bold text-2xl inline-flex items-center space-x-2">
+                            <span>{{$systemInfo->SMS_DIARIOS}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-lg  bg-white shadow-lg hover:bg-indigo-100">
+                <div class="flex flex-row space-x-4 items-center">
+                    <div id="stats-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium uppercase leading-4">Proximo reinicio del sistema</p>
+                        <p class="font-bold text-2xl inline-flex items-center space-x-2">
+                            <span> {{$systemInfo->FECHA_RESET->format('d/m/Y')}} </span>
                         </p>
                     </div>
                 </div>
