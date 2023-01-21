@@ -1,9 +1,9 @@
 <?php
 
 
+use App\Http\Controllers\AlarmController;
 use App\Http\Controllers\EntriesController;
 use App\Http\Controllers\DataController;
-use App\Http\Livewire\ShowData;
 use Illuminate\Support\Facades\Route;
 
 
@@ -30,6 +30,7 @@ Route::get('/panel/{entry}/show', [EntriesController::class, 'show'])->name('pan
 Route::get('/history', [DataController::class, 'history'])->name('history.index');
 Route::get('/history/{package}/show', [DataController::class, 'showInHistory'])->name('history.show');
 Route::get('/data', [DataController::class, 'index'])->name('data.index');
+Route::get('/alarm', [AlarmController::class, 'index'])->name('alarm.index');
 
 
 require __DIR__.'/auth.php';

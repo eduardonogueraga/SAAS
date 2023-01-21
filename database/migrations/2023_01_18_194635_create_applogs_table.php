@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('applogs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('tipo');
             $table->string('contenido_peticion',5000);
             $table->string('respuesta_http',300);
             $table->string('error',1000)->nullable();

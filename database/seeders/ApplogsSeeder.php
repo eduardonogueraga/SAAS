@@ -15,7 +15,7 @@ class ApplogsSeeder extends Seeder
      */
     public function run()
     {
-        foreach (range(0,30) as $i){
+        foreach (range(0,100) as $i){
             $this->createRandomLogs();
         }
 

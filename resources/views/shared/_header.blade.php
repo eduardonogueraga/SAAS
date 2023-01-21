@@ -7,7 +7,7 @@
             <a href="{{route('panel.index')}}" class="mr-5 hover:text-gray-900 @if(request()->routeIs('panel.index')) font-bold @endif">Panel de control</a>
             <a  href="{{route('data.index')}}" class="mr-5 hover:text-gray-900 @if(request()->routeIs('data.index')) font-bold @endif">Datos</a>
             <a href="{{route('history.index')}}" class="mr-5 hover:text-gray-900 @if(request()->routeIs('history.index')) font-bold @endif">Paquetes</a>
-            <a class="mr-5 hover:text-gray-900">Configuración y avisos</a>
+            <a href="{{route('alarm.index')}}" class="mr-5 hover:text-gray-900 @if(request()->routeIs('alarm.index')) font-bold @endif">Configuración y avisos</a>
         </nav>
         <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Usuarios
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
