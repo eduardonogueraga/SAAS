@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('alarms', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('last_package_id')->nullable();
+            $table->foreign('last_package_id')->references('id')->on('packages');
             $table->tinyInteger('activa')->default(0);
             $table->tinyInteger('notificaciones')->default(0);
             $table->tinyInteger('max_intentos')->default(2);
             $table->tinyInteger('intentos_realizados')->default(0);
             $table->tinyInteger('periodo')->default(10);
-            $table->dateTime('ultima_ejecucion')->nullable();
             $table->timestamps();
         });
     }

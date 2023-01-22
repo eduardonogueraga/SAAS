@@ -15,6 +15,6 @@ class AlarmSeeder extends Seeder
      */
     public function run()
     {
-        Alarm::create(['ultima_ejecucion' => now()]);
+        Alarm::create();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Alarm;
 use App\Models\Applogs;
+use App\Models\Package;
 use Livewire\Component;
 
 class AlarmManage extends Component
@@ -39,12 +40,20 @@ class AlarmManage extends Component
 
     {
         $this->alarmSettings = Alarm::query()->firstOrFail();
+        $ultimoPaqueteIntalado = Package::max('id');
+
+        $appLog = Applogs::create(['tipo' => 'alarm',]);
+        $desc =  'Alarma ' .(($this->alarmStatus)? 'activada': 'desactivada') . ', Tiempo:' . $this->frecuenyTime .
+            ' Min, Intentos: ' . $this->numIntentos . ', Notificaciones ' . (($this->noticeStatus)? 'ON ': 'OFF');
+
+        $appLog->update(['desc' => $desc]);
 
         $this->alarmSettings->update([
             'activa' => $this->alarmStatus,
             'notificaciones' => $this->noticeStatus,
             'periodo' => $this->frecuenyTime,
             'max_intentos' => $this->numIntentos,
+            'last_package_id' => $ultimoPaqueteIntalado,
         ]);
     }
     public function render()

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('systems', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('package_id')->default(1);
+            $table->unsignedBigInteger('package_id')->nullable();
             $table->foreign('package_id')->references('id')->on('packages');
             $table->tinyInteger('MODO_ALARMA');
             $table->tinyInteger('MODO_SENSIBLE');

@@ -3,10 +3,12 @@
         <div class="p-4">
             <h1 class="font-bold py-4 uppercase inline-block">Información sobre el sistema SAA</h1>
             <span class="inline-block ml-3 italic">Ultima actualización {{$d->updated_at}}</span>
+            @if(isset($d->package_id))
             <svg class="inline-block h-6 w-6 ml-2" xmlns="http://www.w3.org/2000/svg" fill="#239b56" viewBox="0 0 24 24" stroke="none">
                 <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
             </svg>
             <a class="inline-block text-xs text-blue-500 underline" href="{{ route('history.show', ['package' => $d->package_id]) }}"> (Ver en paquetes)</a>
+            @endif
         </div>
 
         <div id="stats" class="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

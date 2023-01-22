@@ -15,7 +15,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                                 </svg>
-                                <span class="ml-3 text-sm font-semibold text-gray-900">ID: {{sprintf("%09d", $d->id)}} Log alarma</span>
+                                <span class="ml-3 text-sm font-semibold text-gray-900">[{{$d->desc}}]</span>
                             </div>
                             <div class="flex">
                                 <span class="px-4 text-sm font-semibold text-gray-600">Fecha: {{$d->created_at->format('d/m/Y H:i:s')}}</span>
@@ -95,16 +95,27 @@
                 <span class="ml-auto text-gray-900">@if($alarmSettings->notificaciones) Si @else No @endif</span>
             </div>
             <div class="flex border-t border-gray-200 py-2">
-                <span class="text-gray-500">Ultima ejecución</span>
-                <span class="ml-auto text-gray-900">{{$alarmSettings->ultima_ejecucion->format('d/m/Y')}}</span>
+                <span class="text-gray-500">Tiempo de comprobación</span>
+                <span class="ml-auto text-gray-900">{{trans('alarm.settings.form.time.'. $alarmSettings->periodo)}}</span>
             </div>
             <div class="flex border-t border-gray-200 py-2">
                 <span class="text-gray-500">Num de intentos de gracia</span>
                 <span class="ml-auto text-gray-900">{{$alarmSettings->max_intentos}}</span>
             </div>
+            <div class="flex border-t border-gray-200 py-2">
+                <span class="text-gray-500">Ultimo paquete controlado</span>
+                <span class="ml-auto text-gray-900">
+                   (ID-{{sprintf("%09d", $alarmSettings->last_package_id)}})
+                    <svg class="inline-block h-6 w-6 ml-2" xmlns="http://www.w3.org/2000/svg" fill="#239b56" viewBox="0 0 24 24" stroke="none">
+                        <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
+                    </svg>
+                    <a class="inline-block text-xs text-blue-500 underline" href="{{ route('history.show', ['package' => $alarmSettings->last_package_id]) }}"> (Ver en paquetes)</a>
+                </span>
+
+            </div>
             <div class="flex border-t border-b mb-6 border-gray-200 py-2">
-                <span class="text-gray-500">Tiempo de comprobación:</span>
-                <span class="ml-auto text-gray-900">{{trans('alarm.settings.form.time.'. $alarmSettings->periodo)}}</span>
+                <span class="text-gray-500">Ultima ejecución</span>
+                <span class="ml-auto text-gray-900">{{$alarmSettings->updated_at->format('d/m/Y H:i:s')}}</span>
             </div>
         </div>
     </div>

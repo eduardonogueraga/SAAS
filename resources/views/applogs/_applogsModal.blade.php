@@ -27,13 +27,22 @@
                         <p class="text-gray-600 font-bold">Fecha: {{$detailApplog->created_at->format('d/m/Y H:i:s')}}</p>
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
+                        <p class="font-bold">Tipo</p>
+                        <p class="font-bold">@if($detailApplog->tipo === 'api') [API] Log de entrada de datos @else [JOB] Log de alarmado @endif</p>
+                        @if($detailApplog->respuesta_http)
                         <p class="font-bold">Contenido del log</p>
                         <textarea readonly class="w-full">{{$detailApplog->contenido_peticion}}</textarea>
-
+                        @endif
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
+                        @if($detailApplog->desc)
+                            <p class="font-bold">Sobre este log</p>
+                            <p>{{$detailApplog->desc}}</p>
+                        @endif
+                        @if($detailApplog->respuesta_http)
                         <p class="font-bold">Respuesta HTTP:</p>
                         <p>{{$detailApplog->respuesta_http}}</p>
+                        @endif
                         @if($detailApplog->error)
                             <p class="font-bold">Error:</p>
                             <p>{{$detailApplog->error}}</p>

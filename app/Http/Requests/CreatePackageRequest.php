@@ -50,6 +50,7 @@ class CreatePackageRequest extends FormRequest
 
             //Guardamos en contenido en el log de la aplicacion
             $this->appLog = Applogs::create([
+                'tipo' => 'api',
                 'contenido_peticion' => Str::limit($this->getContent(),1000),
                 'respuesta_http' => '',
             ]);
@@ -155,7 +156,7 @@ class CreatePackageRequest extends FormRequest
                 //Si la entrada no es nueva buscaremos la actual
                 try {
 
-                    $this->currentEntry = Entry::latest()->firstOrFail();
+                    $this->currentEntry = Entry::orderBy('id', 'desc')->firstOrFail();
 
                 } catch (ModelNotFoundException $e) {
 

@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Alarm extends Model
 {
     use HasFactory;
-    protected $dates = ['ultima_ejecucion'];
     protected $guarded = [];
 }

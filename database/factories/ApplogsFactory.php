@@ -16,12 +16,14 @@ class ApplogsFactory extends Factory
      */
     public function definition()
     {
+        $tipo = rand(0,3) ? 'api': 'alarm';
 
         return [
-            'tipo' => rand(0,3) ? 'api': 'alarm',
-            'contenido_peticion' => $this->faker->sentence(rand(10,20)),
-            'respuesta_http' => $this->faker->sentence(3),
-            'error' => rand(0,10)? null:"400 Formato de erroneo",
+            'tipo' => $tipo,
+            'desc' => $tipo === 'alarm'? 'Estado alarma OK' : 'Entrada de datos',
+            'contenido_peticion' => $tipo === 'api'? ($this->faker->sentence(rand(10,20))) : null,
+            'respuesta_http' => $tipo === 'api'? $this->faker->sentence(3) : null,
+            'error' => $tipo === 'api'? (rand(0,10)? null:"400 Formato de erroneo") : null,
         ];
     }
 }
