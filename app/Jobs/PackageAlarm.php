@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\Alarm;
 use App\Models\Applogs;
 use App\Models\Package;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -12,6 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
+use Telegram\Bot\Api;
 
 class PackageAlarm implements ShouldQueue
 {
@@ -85,6 +87,14 @@ class PackageAlarm implements ShouldQueue
 
                 if($this->alarmSettings->notificaciones){
                     //Notificacion
+                    $telegram = new Api();
+                    $msg = "ALERTA Sistema SAA sin respuesta | Hora del servidor " . Carbon::now();
+                    $telegram->sendMessage([
+                        'chat_id' => env('TELEGRAM_CHAT_ID'),
+                        'text' => $msg,
+                        'disable_notification' => false,
+                    ]);
+
                     echo "Notificacion";
                 }
 
