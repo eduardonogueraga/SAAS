@@ -230,7 +230,7 @@ class CreatePackageRequest extends FormRequest
                                 'tipo' => ($noticeField[0]) ? "sms" : "llamada",
                                 'asunto' => ($noticeField[1]),
                                 'cuerpo' => ($noticeField[2]),
-                                'telefono' => ($noticeField[3]), //Pendiente de alias
+                                'telefono' => ($noticeField[3]),
                                 'fecha' => $notice->date
                             ]);
 

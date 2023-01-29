@@ -30,7 +30,7 @@
                 </div>
                 <div class="grid grid-cols-3 items-center md:space-y-0 space-y-1 p-4 border-b ">
                     <p class="text-gray-600 font-bold">ID: {{sprintf("%09d", $detailNotice->id)}}</p>
-                    <p class="text-gray-600 font-bold">Teléfono: {{$detailNotice->telefono}}</p>
+                    <p class="text-gray-600 font-bold">Teléfono: {{trans('data.notices.tlf.'.$detailNotice->telefono)}}</p>
                     <p class="text-gray-600 font-bold">Fecha: {{$detailNotice->fecha->format('d/m/Y H:i:s')}}</p>
                 </div>
                 @if($detailNotice->tipo == 'sms')

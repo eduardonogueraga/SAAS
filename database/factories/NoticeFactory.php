@@ -32,7 +32,7 @@ class NoticeFactory extends Factory
         'tipo' => $tipo,
         'asunto' => Arr::random($literalesNotices),
         'cuerpo' =>  $tipo == "sms" ? $this->faker->sentence(rand(10,20))  : null,
-        'telefono' => $this->faker->numerify('##########'),
+        'telefono' => rand(0,2),
         'fecha' => now()->subHours(2)
         ];
     }

@@ -33,6 +33,11 @@ return [
             '119' => 'FALLO EN LA ALIMENTACION PRINCIPAL',
             '120' => 'BATERIA DE EMERGENCIA DESACTIVADA'
         ],
+        'tlf' => [
+            '0' => '+34******038',
+            '1' => '+34******389',
+            '2' => '+34******032',
+        ],
     ],
 
     'packages' => [
