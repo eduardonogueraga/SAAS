@@ -16,7 +16,7 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+       $user = User::create([
             'name' => 'enoguerg',
             'email' => 'enoguerg@mail.com',
             'email_verified_at' => now(),
@@ -24,5 +24,7 @@ class UsersSeeder extends Seeder
             'remember_token' => Str::random(10),
             'created_at' => now(),
         ]);
+
+       $user->createToken('api-access')->plainTextToken;
     }
 }

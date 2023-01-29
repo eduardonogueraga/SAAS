@@ -53,14 +53,15 @@ class PackageAlarm implements ShouldQueue
 
         if($this->alarmSettings->last_package_id !== $ultimoPaqueteIntalado){
             //Existe un nuevo paquete, la comprobacion resulta OK
-            $appLog->update(['desc' => 'Alarma OK Existe nuevo paquete']);
+            $appLog->update(['desc' => 'Alarma OK Existe nuevo paquete ID '. sprintf("%09d", $ultimoPaqueteIntalado)]);
             echo "Existe el nuevo paquete OK";
 
 
             //Se actualizan los intentos y paquete
-            $this->alarmSettings->update(['last_package_id' => $ultimoPaqueteIntalado,
-                                         'intentos_realizados' => 0]);
-
+           if($this->alarmSettings->intentos_realizados > 0){
+               $this->alarmSettings->update(['last_package_id' => $ultimoPaqueteIntalado,
+                   'intentos_realizados' => 0]);
+           }
 
         }else{
 
@@ -83,7 +84,6 @@ class PackageAlarm implements ShouldQueue
                 $appLog->update(['desc' => $log]);
                 echo "Supera los intentos";
 
-                $this->alarmSettings->update(['intentos_realizados' => 0]);  //Se actualizan los intentos
 
                 if($this->alarmSettings->notificaciones){
                     //Notificacion
