@@ -33,7 +33,8 @@ class PackageFilter extends QueryFilter
                 ->orWhereHas('entries', $this->subQuery($search, 'tipo'))
                 ->orWhereHas('entries', $this->subQuery($search, 'modo'))
                 ->orWhereHas('detections', $this->subQuery($search, 'modo_deteccion'))
-                ->orWhereHas('detections.sensor', $this->subQueryRecursiva($search, 'literales_tipo', 'literal'))
+               // ->orWhereHas('detections.sensor', $this->subQueryIn($indices, 'tipo'))
+
                 ;
         });
     }

@@ -95,7 +95,7 @@
                                         <div class="px-4 my-3 w-3/3">
                                             <div wire:click.stop="openDataModalWithData('{{$h->id}}', '0',{{$i}})" class="h-full flex items-start">
                                                 <div class="flex pl-4 pr-4 pt-4  border-2 rounded-lg  border-gray-200 border-opacity-50 bg-indigo-100 cursor-pointer hover:bg-yellow-100">
-                                                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Detección en {{$h->detections[$i]->sensor->literales_tipo->literal}} @if($h->detections[$i]->intrusismo == 1) <b>Intrusismo</b> @endif</h1>
+                                                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Detección en {{trans('data.sensor.literales.'.$h->detections[$i]->sensor->tipo)}} @if($h->detections[$i]->intrusismo == 1) <b>Intrusismo</b> @endif</h1>
                                                     <p class="leading-relaxed mb-5 ml-3"> Fecha: {{$h->detections[$i]->fecha->format('d/m/Y H:i:s')}}</p>
                                                 </div>
                                             </div>
@@ -125,7 +125,7 @@
                                         <div class="px-4 my-3 w-3/3">
                                             <div wire:click.stop="openDataModalWithData('{{$h->id}}', '3',{{$i}})" class="h-full flex items-start">
                                                 <div class="flex pl-4 pr-4  pt-4 border-2 rounded-lg  border-gray-200 border-opacity-50 bg-cyan-200 cursor-pointer hover:bg-yellow-100">
-                                                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Log: {{ucfirst(Str::limit($h->logs[$i]->literales_descripcion->literal, 20))}} </h1>
+                                                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Log: {{ucfirst(Str::limit(trans('data.logs.literales.'.$h->logs[$i]->descripcion), 20))}} </h1>
                                                     <p class="leading-relaxed mb-5 ml-3">Fecha: {{$h->logs[$i]->fecha->format('d/m/Y H:i:s')}}</p>
                                                 </div>
                                             </div>

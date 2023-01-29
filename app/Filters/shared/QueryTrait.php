@@ -11,6 +11,12 @@ trait QueryTrait
         };
     }
 
+    public function subQueryIn($arr, $column)
+    {
+        return function ($query) use ($arr, $column) {
+            $query->whereIn($column, $arr);
+        };
+    }
 
     public function subQueryRecursiva($search, $relation, $subCol)
     {

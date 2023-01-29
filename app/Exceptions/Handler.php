@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
                     'message' => 'Unauthenticated.'
                 ], 401);
             }
-            return response('Unauthenticated',401);
+           //
         });
     }
 

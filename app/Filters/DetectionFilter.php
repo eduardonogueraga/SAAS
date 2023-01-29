@@ -3,7 +3,7 @@
 namespace App\Filters;
 
 use App\Filters\shared\QueryTrait;
-use Psy\Util\Str;
+use Illuminate\Support\Str;
 
 class DetectionFilter extends QueryFilter
 {
@@ -54,9 +54,16 @@ use QueryTrait;
     {
         return $query->where(function ($query) use ($search){
             $search = trim($search);
+            $search = Str::upper($search);
+
+            $filtered = array_filter(trans('data.sensor.literales'), function($value) use ($search) {
+                return str_contains($value, $search);
+            });
+            $indices = array_keys($filtered);
+
             return $query->orWhere('id', $search)
                 ->orWhere('modo_deteccion', 'like', "%$search%")
-                ->orWhereHas('sensor', $this->subQueryRecursiva($search, 'literales_tipo', 'literal'))
+                ->orWhereHas('sensor', $this->subQueryIn($indices, 'tipo'))
                 ->orWhereHas('sensor', $this->subQuery($search, 'estado'))
                 ;
         });

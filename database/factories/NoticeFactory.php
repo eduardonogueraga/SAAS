@@ -25,12 +25,12 @@ class NoticeFactory extends Factory
     {
         $tipo  = rand(0,1)? "sms":"llamada";
         $packages = Package::inRandomOrder()->pluck('id');
-        $literalesNotices = Literal::inRandomOrder()->where('tabla', 'notices')->pluck('codigo');
+        $literalesNotices = array_keys(trans('data.notices.literales'));
 
         return [
         'package_id' => $packages->random(),
         'tipo' => $tipo,
-        'asunto' => $literalesNotices->random(),
+        'asunto' => Arr::random($literalesNotices),
         'cuerpo' =>  $tipo == "sms" ? $this->faker->sentence(rand(10,20))  : null,
         'telefono' => $this->faker->numerify('##########'),
         'fecha' => now()->subHours(2)

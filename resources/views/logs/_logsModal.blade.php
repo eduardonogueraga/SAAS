@@ -28,7 +28,7 @@
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
                         <p class="font-bold">Contenido del log</p>
-                        <p>{{$detailLog->literales_descripcion->literal}}</p>
+                        <p>{{trans('data.logs.literales.'.$detailLog->descripcion)}}</p>
 
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">

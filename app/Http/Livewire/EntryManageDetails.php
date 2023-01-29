@@ -33,7 +33,7 @@ class EntryManageDetails extends Component
     public function mount()
     {
         $this->queryString = array_merge($this->queryString, $this->filterQueryString);
-        $this->sensorTypes = Literal::query()->whereTabla('sensors')->orderBy('id')->pluck('literal','codigo');
+        $this->sensorTypes = trans('data.sensor.literales');
     }
     public function loadMoreDetections()
     {

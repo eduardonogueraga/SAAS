@@ -3,6 +3,7 @@
 namespace App\Filters;
 
 use App\Filters\shared\QueryTrait;
+use Illuminate\Support\Str;
 
 class NoticeFilter extends QueryFilter
 {
@@ -27,8 +28,15 @@ use QueryTrait;
     {
         return $query->where(function ($query) use ($search){
             $search = trim($search);
+            $search = Str::upper($search);
+
+            $filtered = array_filter(trans('data.notices.literales'), function($value) use ($search) {
+                return str_contains($value, $search);
+            });
+            $indices = array_keys($filtered);
+
             return $query->orWhere('tipo', 'like', "%$search%")
-                ->orWhereHas('literales_asunto', $this->subQuery($search, 'literal'))
+                ->orWhereIn('asunto', $indices)
                 ->orWhere('cuerpo', 'like', "%$search%")
                 ->orWhere('id', $search);
         });

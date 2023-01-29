@@ -23,13 +23,12 @@ class SensorFactory extends Factory
     public function definition()
     {
         $packages = Package::inRandomOrder()->pluck('id');
-        $literalesSensores = Literal::query()->whereBetween('codigo', [102, 105])
-            ->pluck('codigo');
+        $literalesSensores = array_keys(trans('data.sensor.literales'));
 
 
         return [
             'package_id' => $packages->random(),
-            'tipo' => $literalesSensores->random(),
+            'tipo' =>Arr::random($literalesSensores),
             'estado' =>  rand(0,10)?"ONLINE":"OFFLINE",
             'valor_sensor' => rand(0,1),
         ];
