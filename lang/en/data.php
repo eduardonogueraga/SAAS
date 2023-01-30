@@ -43,6 +43,7 @@ return [
     'packages' => [
         'filters'=> [
             'implantado' => ['all' => 'Implantacion (Todos)', 'ok' => 'Instalados', 'ko' => 'No instalados'],
+            'contenido' => ['all' => 'Contenido (Todos)', 'full' => 'Paquetes con contenido', 'empty' => 'Paquetes vacios'],
         ],
     ],
 
@@ -72,5 +73,13 @@ return [
           '134' => 'FALLO EN SENSOR'
       ],
     ],
+
+    'applogs' => [
+        'filters'=> [
+            'tipo' => ['all' => 'Tipo (Todos)', 'api' => 'Api request', 'alarm' => 'Job alarmado'],
+            'err' => ['all' => 'Error (Todos)', 'ok' => 'Registros OK', 'err' => 'Registros de error'],
+        ],
+    ],
+
 
 ];

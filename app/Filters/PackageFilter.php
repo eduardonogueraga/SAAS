@@ -12,6 +12,7 @@ class PackageFilter extends QueryFilter
         return [
             'search' => 'filled',
             'filtroPackageImplantado' => 'in:ok,ko,all',
+            'filtroPackageContenido' => 'in:full,empty,all'
         ];
     }
 
@@ -21,6 +22,19 @@ class PackageFilter extends QueryFilter
             return $query;
 
         return $query->where('implantado', '=', (($implantado==='ok')? 1 : 0));
+    }
+
+    public function filtroPackageContenido($query, $contenido)
+    {
+        if ($contenido==='all')
+            return $query;
+
+        $metodo = $contenido === 'full' ? 'orWhereHas': 'doesntHave';
+
+        return $query->$metodo('entries')
+            ->$metodo('detections')
+            ->$metodo('notices')
+            ->$metodo('logs');
     }
     public function search($query, $search)
     {

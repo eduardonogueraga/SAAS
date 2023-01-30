@@ -135,6 +135,7 @@ use FilterTrait;
             case 4:
                 $filters = array_merge($filters, [
                     'filtroPackageImplantado' => $this->filtroPackageImplantado,
+                    'filtroPackageContenido' => $this->filtroPackageContenido,
                 ]);
 
                 $this->data = Package::query()
@@ -166,6 +167,11 @@ use FilterTrait;
 
                 break;
             case 6:
+                $filters = array_merge($filters, [
+                    'filtroApplogsTipo' => $this->filtroApplogsTipo,
+                    'filtroApplogsError' => $this->filtroApplogsError,
+                ]);
+
                 $this->data = Applogs::query()
                     ->applyFilters($filters)
                     ->orderBy('id', 'DESC')

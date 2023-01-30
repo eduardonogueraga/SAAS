@@ -11,6 +11,8 @@ class ApplogsFilter extends QueryFilter
     {
         return [
             'search' => 'filled',
+            'filtroApplogsTipo' => 'in:alarm,api,all',
+            'filtroApplogsError' => 'in:alarm,ok,err',
         ];
     }
 
@@ -20,8 +22,24 @@ class ApplogsFilter extends QueryFilter
             $search = trim($search);
             return $query->orWhere('id', $search)
                 ->orWhere('respuesta_http', 'like', "%$search%")
+                ->orWhere('contenido_peticion', 'like', "%$search%")
+                ->orWhere('desc', 'like', "%$search%")
                 ->orWhere('error', 'like', "%$search%");
-
         });
+    }
+    public function filtroApplogsTipo($query, $tipo)
+    {
+        if ($tipo==='all')
+            return $query;
+        return $query->where('tipo', '=', $tipo);
+    }
+
+    public function filtroApplogsError($query, $err)
+    {
+        if ($err==='all')
+            return $query;
+
+        $metodo = $err === 'err' ? 'whereNotNull': 'whereNull';
+        return $query->$metodo('error');
     }
 }

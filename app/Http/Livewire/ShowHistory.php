@@ -55,6 +55,7 @@ class ShowHistory extends Component
         $filters = [
             'search' => $this->search,
             'filtroPackageImplantado' => $this->filtroPackageImplantado,
+            'filtroPackageContenido' => $this->filtroPackageContenido,
         ];
 
         $this->history = Package::query()

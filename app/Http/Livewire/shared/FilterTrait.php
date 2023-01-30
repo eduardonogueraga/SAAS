@@ -13,6 +13,9 @@ trait FilterTrait
     public $filtroDetectionSensor;
     public $filtroNoticeTipo;
     public $filtroPackageImplantado;
+    public $filtroPackageContenido;
+    public $filtroApplogsTipo;
+    public $filtroApplogsError;
 
     public $sensorTypes;
     public $filterQueryString = [
@@ -25,6 +28,9 @@ trait FilterTrait
         'filtroDetectionSensor' => ['except' => ''],
         'filtroNoticeTipo' => ['except' => ''],
         'filtroPackageImplantado' => ['except' => ''],
+        'filtroPackageContenido' => ['except' => ''],
+        'filtroApplogsTipo' => ['except' => ''],
+        'filtroApplogsError' => ['except' => ''],
     ];
 
     public function clearFilters($filtro)

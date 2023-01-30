@@ -6,6 +6,8 @@
                 @php $info = $data->filter(function($item) use($selectedRegister) {return $item->id == $selectedRegister;})->first() @endphp
                     @include('applogs._applogsModal', ['detailApplog'=>$info, 'closeMethod' =>'closeDataModal'])
             @endif
+            @include('applogs._applogsFilters', ['search' => 1])
+            <p class="px-4 py-2 text-sm font-semibold text-gray-700">Número de registros {{($dataCount) ?? 0}}</p>
             <ul class="w-full h-screen overflow-auto shadow bg-white mt-5">
                 @forelse($data as $d)
                 <li wire:click.stop="openDataModal('{{$d->id}}')" class="shadow-lg pt-4 ml-2 mr-2 rounded-lg">
@@ -17,11 +19,16 @@
                                 </svg>
                                 <span class="ml-3 text-sm font-semibold text-gray-900">[{{$d->desc}}]</span>
                             </div>
-                            <div class="flex">
-                                <span class="px-4 text-sm font-semibold text-gray-600">Fecha: {{$d->created_at->format('d/m/Y H:i:s')}}</span>
-                            </div>
                         </div>
                         <p class="px-4 py-2 text-sm font-semibold text-gray-700">{{Str::limit($d->respuesta_http,60)}}</p>
+                        <div class="block py-3 pb-4">
+                            <div class="flex  justify-between">
+                                <div class="flex">
+                                    <span class="ml-3 text-sm font-semibold text-gray-900"> ID: {{sprintf("%09d", $d->id)}}</span>
+                                    <span class="px-4 text-sm font-semibold text-gray-600">Fecha: {{$d->created_at->format('d/m/Y H:i:s')}}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </li>
                 @empty

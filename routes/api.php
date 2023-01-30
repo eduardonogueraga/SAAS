@@ -41,3 +41,4 @@ Route::post('/sanctum/token', function (Request $request) {
 
 
 Route::middleware('auth:sanctum')->post('/package/new/', [DataController::class, 'createPackage']);
+

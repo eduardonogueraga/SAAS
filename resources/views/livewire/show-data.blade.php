@@ -142,6 +142,10 @@
                     @case(4)
                         @include('packages._packagesFilters')
                     @break
+                    @case(6)
+                        @include('applogs._applogsFilters',['tipo' => 1])
+                    @break
+
 
                 @endswitch
             <ul class="w-full h-screen overflow-auto shadow bg-white mt-5">
@@ -209,7 +213,7 @@
                                             <span class="px-4 text-sm font-semibold text-gray-600">Fecha: {{$d->fecha->format('d/m/Y H:i:s')}}</span>
                                         </div>
                                     </div>
-                                    <p class="px-4 py-2 text-sm font-semibold text-gray-700">@if($d->tipo == 'sms') {{Str::limit(trans('data.notices.literales.'.$d->asunto),60)}} @else Tlf: {{$d->telefono}} @endif</p>
+                                    <p class="px-4 py-2 text-sm font-semibold text-gray-700">@if($d->tipo == 'sms') {{Str::limit(trans('data.notices.literales.'.$d->asunto),60)}} @else Tlf: {{trans('data.notices.tlf.'.$d->telefono)}} @endif</p>
                                 </div>
                             </li>
                             @break
@@ -278,14 +282,18 @@
                             @break
 
                         @default
-                            <li wire:click.stop="openDataModal('{{$d->id}}')" class="shadow-lg pt-4 ml-2 mr-2 rounded-lg">
-                                <div class="block bg-white py-3 border-t pb-4 hover:bg-yellow-100 cursor-pointer">
+                            <li class="shadow-lg pt-4 ml-2 mr-2 rounded-lg ">
+                                <div  class="block bg-white py-3 border-t pb-4 hover:bg-yellow-100">
                                     <div class="px-4 py-2 flex  justify-between">
                                         <div class="flex">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="#39ba13" viewBox="0 0 20 20" stroke="currentColor" stroke-width="2">
-                                                <path  stroke-linecap="round" stroke-linejoin="round"  d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 4h3a3 3 0 006 0h3a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm2.5 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45 4a2.5 2.5 0 10-4.9 0h4.9zM12 9a1 1 0 100 2h3a1 1 0 100-2h-3zm-1 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="@if($d->tipo == 'activacion') #21618c @else green @endif" viewBox="0 0 24 24" stroke="none">
+                                                @if($d->tipo == 'activacion')
+                                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                                                @else
+                                                    <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z"></path>
+                                                @endif
                                             </svg>
-                                        <span class="ml-3 text-sm font-semibold text-gray-900"> {{ucfirst($d->tipo)}} {{$d->modo}} </span>
+                                            <span class="ml-3 text-sm font-semibold text-gray-900">ID: {{sprintf("%09d", $d->id)}} {{ucfirst($d->tipo)}} {{$d->modo}} </span>
                                         </div>
                                         <div class="flex">
                                             <span class="px-4 text-sm font-semibold text-gray-600">Fecha: {{$d->fecha->format('d/m/Y H:i:s')}}</span>

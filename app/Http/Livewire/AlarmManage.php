@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\shared\FilterTrait;
 use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Alarm;
 use App\Models\Applogs;
@@ -12,6 +13,7 @@ class AlarmManage extends Component
 {
 
     use ModalTrait;
+    use FilterTrait;
     private $data;
     private $alarmSettings;
     public $paginate = 15;
@@ -20,8 +22,12 @@ class AlarmManage extends Component
     public $noticeStatus;
     public $frecuenyTime;
     public $numIntentos;
+    public $search;
+    public $searchDataCount;
 
-
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
     public function loadMoreData()
     {
         $this->paginate += 5;
@@ -58,13 +64,31 @@ class AlarmManage extends Component
     }
     public function render()
     {
+        $filters = [
+            'search' => $this->search
+        ];
+
+        $filters = array_merge($filters, [
+            'filtroApplogsTipo' => $this->filtroApplogsTipo,
+            'filtroApplogsError' => $this->filtroApplogsError,
+        ]);
+
         $this->alarmSettings = Alarm::query()->firstOrFail();
 
         $this->data = Applogs::query()
             ->whereTipo('alarm')
+            ->applyFilters($filters)
             ->orderBy('created_at', 'DESC')
             ->paginate($this->paginate);
 
-        return view('livewire.alarm-manage', ['data' => $this->data, 'alarmSettings' => $this->alarmSettings]);
+        $this->searchDataCount = Applogs::query()
+            ->whereTipo('alarm')
+            ->applyFilters($filters)
+            ->count();
+
+
+        return view('livewire.alarm-manage', ['data' => $this->data,
+            'alarmSettings' => $this->alarmSettings,
+            'dataCount' => $this->searchDataCount]);
     }
 }
