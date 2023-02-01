@@ -13,7 +13,12 @@
         @endif
         <div class="relative">
             <select wire:model="filtroApplogsError" id="filtroApplogsError"
+                @if(isset($tipo))
                     class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
+                @else
+                    class="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                @endif
+
                 @foreach(trans('data.applogs.filters.err') as $value => $text)
                     <option value="{{ $value }}"  {{ request('filtroApplogsError') === $value ? 'selected' : ''}} >{{ $text }}</option>
                 @endforeach

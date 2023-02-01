@@ -3,6 +3,7 @@
 namespace App\Filters;
 
 use App\Filters\shared\QueryTrait;
+use Illuminate\Support\Str;
 
 class PackageFilter extends QueryFilter
 {
@@ -40,15 +41,29 @@ class PackageFilter extends QueryFilter
     {
         return $query->where(function ($query) use ($search){
             $search = trim($search);
+            $search = Str::upper($search);
+
+            //Filtros trans
+            $filteredLogs = array_filter(trans('data.logs.literales'), function($value) use ($search) {return str_contains($value, $search);});
+            $indicesLogs = array_keys($filteredLogs);
+
+            $filteredNotices = array_filter(trans('data.notices.literales'), function($value) use ($search) {return str_contains($value, $search);});
+            $indicesNotices = array_keys($filteredNotices);
+
+            $filteredSensor = array_filter(trans('data.sensor.literales'), function($value) use ($search) { return str_contains($value, $search);});
+            $indicesSensor = array_keys($filteredSensor);
+
+
             return $query->orWhere('contenido_peticion', 'like', "%$search%")
                 ->orWhere('id', $search)
-                ->orWhereHas('notices', $this->subQuery($search, 'tipo'))
-                //->orWhereHas('notices', $this->subQuery($search, 'asunto'))
                 ->orWhereHas('entries', $this->subQuery($search, 'tipo'))
                 ->orWhereHas('entries', $this->subQuery($search, 'modo'))
                 ->orWhereHas('detections', $this->subQuery($search, 'modo_deteccion'))
-               // ->orWhereHas('detections.sensor', $this->subQueryIn($indices, 'tipo'))
-
+                ->orWhereHas('detections.sensor', $this->subQueryIn($indicesSensor, 'tipo'))
+                ->orWhereHas('notices', $this->subQuery($search, 'tipo'))
+                ->orWhereHas('notices', $this->subQuery($search, 'cuerpo'))
+                ->orWhereHas('notices', $this->subQueryIn($indicesNotices, 'asunto'))
+                ->orWhereHas('logs', $this->subQueryIn($indicesLogs, 'descripcion'))
                 ;
         });
     }
