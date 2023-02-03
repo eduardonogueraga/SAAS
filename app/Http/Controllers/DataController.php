@@ -27,4 +27,10 @@ class DataController extends Controller
     {
         return $request->createNewPackage();
     }
+
+    public function getLastPackageId()
+    {
+        $maxId = Package::max('id');
+        return response()->json(['packid' => $maxId]);
+    }
 }

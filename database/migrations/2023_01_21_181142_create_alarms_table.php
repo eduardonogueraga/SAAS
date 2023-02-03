@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('last_package_id')->nullable();
             $table->foreign('last_package_id')->references('id')->on('packages');
+            $table->unsignedBigInteger('last_notice_id')->nullable();
+            $table->foreign('last_notice_id')->references('id')->on('notices');
             $table->tinyInteger('activa')->default(0);
             $table->tinyInteger('notificaciones')->default(0);
             $table->tinyInteger('max_intentos')->default(2);

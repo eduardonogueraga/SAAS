@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\NoticeAlarm;
 use App\Jobs\PackageAlarm;
 use App\Models\Alarm;
 use Illuminate\Console\Scheduling\Schedule;
@@ -23,6 +24,11 @@ class Kernel extends ConsoleKernel
         $schedule->job(new PackageAlarm($alarmSettings))
             ->cron($time)
             ->name('packageAlarm')
+            ->withoutOverlapping();
+
+        $schedule->job(new NoticeAlarm($alarmSettings))
+            ->everyMinute()
+            ->name('noticeAlarm')
             ->withoutOverlapping();
 
     }
