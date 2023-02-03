@@ -2,15 +2,21 @@
 
 namespace App\Filters;
 
+use App\Filters\shared\QueryTrait;
+
 class EntryFilter extends QueryFilter
 {
+    use QueryTrait;
+
     public function rules(): array
     {
         return [
             'search' => 'filled',
             'filtroEntryModo' => 'in:auto,man,all',
             'filtroEntryEstado' => 'in:original,restored,all',
-            'filtroEntryTipo' => 'in:on,off,all'
+            'filtroEntryTipo' => 'in:on,off,all',
+            'dateFrom' => 'date_format:d-m-Y H:i',
+            'dateTo' => 'date_format:d-m-Y H:i',
         ];
     }
 
@@ -44,4 +50,5 @@ class EntryFilter extends QueryFilter
                 ->orWhere('id', $search); //Pendiente de implementar los datepickers
         });
     }
+
 }

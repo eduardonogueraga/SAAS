@@ -15,7 +15,9 @@ use QueryTrait;
             'filtroDetectionModo' =>'in:norm,phan,all',
             'filtroDetectionIntrusismo' => 'in:simp,deto,all',
             'filtroDetectionEstado' => 'in:original,restored,all',
-            'filtroDetectionSensor' => 'filled'
+            'filtroDetectionSensor' => 'filled',
+            'dateFrom' => 'date_format:d-m-Y H:i',
+            'dateTo' => 'date_format:d-m-Y H:i',
         ];
     }
 

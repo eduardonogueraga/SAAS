@@ -81,7 +81,7 @@
 
                 </div>
                 <div x-show="mostrarFiltros" class="bg-indigo-100 rounded flex mb-2 p-4 h-full items-center">
-                    @include('detections._detectionsFilters', ['search' => 1])
+                    @include('detections._detectionsFilters', ['search' => 1, 'dateBlock' => 1])
                 </div>
                 <div class="flex flex-wrap w-full relative mb-4  rounded shadow bg-white h-96 overflow-y-scroll">
                     @if($dataModal)
@@ -94,6 +94,12 @@
                                 <li wire:click.stop="openDataModal('{{$d->id}}')" class="flex border-2 rounded-lg  border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col mb-2
                                 @if($d->intrusismo == 1) bg-amber-400 @endif
                                 cursor-pointer hover:bg-yellow-100">
+                                    <div class="flex pr-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="@if($d->intrusismo) red @else #e47d09 @endif" viewBox="0 0 20 20" stroke="none" >
+                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
                                     <div class="flex-grow">
                                         <h2 class="text-gray-900 text-lg title-font font-medium mb-3"> Detección en {{trans('data.sensor.literales.'.$d->sensor->tipo)}} @if($d->intrusismo == 1) <b>Intrusismo</b> @endif</h2><span>[ID-{{sprintf("%09d",$d->id)}}]</span>
                                         <p class="leading-relaxed text-base">Nº detecciones consecutivas: {{$d->umbral}}</p>

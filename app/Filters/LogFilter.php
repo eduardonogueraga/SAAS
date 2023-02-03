@@ -12,6 +12,8 @@ class LogFilter extends QueryFilter
     {
         return [
             'search' => 'filled',
+            'dateFrom' => 'date_format:d-m-Y H:i',
+            'dateTo' => 'date_format:d-m-Y H:i',
         ];
     }
 

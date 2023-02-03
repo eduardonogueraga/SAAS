@@ -13,7 +13,9 @@ class PackageFilter extends QueryFilter
         return [
             'search' => 'filled',
             'filtroPackageImplantado' => 'in:ok,ko,all',
-            'filtroPackageContenido' => 'in:full,empty,all'
+            'filtroPackageContenido' => 'in:full,empty,all',
+            'dateFrom' => 'date_format:d-m-Y H:i',
+            'dateTo' => 'date_format:d-m-Y H:i',
         ];
     }
 

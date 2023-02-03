@@ -2,23 +2,25 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\shared\FilterTrait;
 use App\Models\Entry;
 use Livewire\Component;
 
 class EntryManageSidebar extends Component
 {
+    use FilterTrait;
     public $paginate = 10;
 
     public $select;
     public $search;
 
+
     protected $queryString = [
-        'search' => ['except' => '']
+        'search' => ['except' => ''],
     ];
     protected $listeners = [
         'loadMore' => 'loadMore',
         'entrySelected' => 'entrySelected'
-
     ];
 
     public function entrySelected($id){
@@ -31,7 +33,12 @@ class EntryManageSidebar extends Component
     public function render()
     {
         $filters = [
-            'search' => $this->search
+            'search' => $this->search,
+            'filtroEntryModo' => $this->filtroEntryModo,
+            'filtroEntryEstado' => $this->filtroEntryEstado,
+            'filtroEntryTipo' => $this->filtroEntryTipo,
+            'dateFrom' => $this->dateFrom,
+            'dateTo' => $this->dateTo,
         ];
 
         $entries = Entry::query()

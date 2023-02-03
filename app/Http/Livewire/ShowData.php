@@ -8,7 +8,6 @@ use App\Models\Applogs;
 use App\Models\DataQuery;
 use App\Models\Detection;
 use App\Models\Entry;
-use App\Models\Literal;
 use App\Models\Log;
 use App\Models\Notice;
 use App\Models\Package;
@@ -56,7 +55,9 @@ use FilterTrait;
     public function render()
     {
         $filters = [
-            'search' => $this->search
+            'search' => $this->search,
+            'dateFrom' => $this->dateFrom,
+            'dateTo' => $this->dateTo,
         ];
 
 
@@ -74,6 +75,7 @@ use FilterTrait;
                     'filtroEntryModo' => $this->filtroEntryModo,
                     'filtroEntryEstado' => $this->filtroEntryEstado,
                     'filtroEntryTipo' => $this->filtroEntryTipo,
+
                 ]);
 
                 $this->data = Entry::query()

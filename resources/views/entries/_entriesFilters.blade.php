@@ -10,6 +10,24 @@
             </select>
         </div>
         <div class="relative">
+            <input type="text" wire:model="dateFrom"  placeholder="{{trans('data.app.filters.datepickerFrom')}}" name="dateFrom" id="dateFrom"
+                   class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
+            <div class="absolute top-0 right-0 px-3 py-2">
+                <svg class="h-6 w-6 text-gray-400"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="relative">
+            <input type="text" wire:model="dateTo"  placeholder="{{trans('data.app.filters.datepickerTo')}}" name="dateTo" id="dateTo"
+                   class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
+            <div class="absolute top-0 right-0 px-3 py-2">
+                <svg class="h-6 w-6 text-gray-400"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="relative">
             <select wire:model="filtroEntryModo" id="filtroEntryModo"
                     class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
             @foreach(trans('data.entries.filters.modo') as $value => $text)
@@ -17,16 +35,19 @@
                 @endforeach
             </select>
         </div>
+        @if(isset($estadoBlock) == 0)
+            <div class="relative">
+                <select wire:model="filtroEntryEstado" id="filtroEntryEstado"
+                        class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
+                    @foreach(trans('data.entries.filters.estado') as $value => $text)
+                        <option value="{{ $value }}"  {{ request('filtroEntryEstado') === $value ? 'selected' : ''}} >{{ $text }}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endif
+
         <div class="relative">
-            <select wire:model="filtroEntryEstado" id="filtroEntryEstado"
-                    class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
-                @foreach(trans('data.entries.filters.estado') as $value => $text)
-                    <option value="{{ $value }}"  {{ request('filtroEntryEstado') === $value ? 'selected' : ''}} >{{ $text }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="relative">
-            <button wire:click="clearFilters({{json_encode(['filtroEntryModo','filtroEntryEstado', 'filtroEntryTipo'])}})"
+            <button wire:click="clearFilters({{json_encode(['filtroEntryModo','filtroEntryEstado', 'filtroEntryTipo', 'dateFrom','dateTo'])}})"
                     class="appearance-none rounded-r rounded-l sm:rounded-l-none  border-gray-400  block pl-8 pr-6 py-2 text-slate-800 hover:text-blue-600 text-sm bg-white  hover:bg-slate-100 border   rounded-r-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">

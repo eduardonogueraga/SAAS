@@ -32,6 +32,23 @@
             </main>
         </div>
         @livewireScripts
+        <script>
+            document.addEventListener("livewire:load", function (event) {
+                flatpickr("input[wire\\:model='dateFrom']", {
+                    dateFormat: "d-m-Y H:i",
+                    enableTime: true,
+                    time_24hr: true
+                });
+            });
+
+            document.addEventListener("livewire:load", function (event) {
+                flatpickr("input[wire\\:model='dateTo']", {
+                    dateFormat: "d-m-Y H:i",
+                    enableTime: true,
+                    time_24hr: true
+                });
+            });
+        </script>
     </body>
     <footer class="text-gray-600 body-font">
         <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">

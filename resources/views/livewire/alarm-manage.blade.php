@@ -6,7 +6,7 @@
                 @php $info = $data->filter(function($item) use($selectedRegister) {return $item->id == $selectedRegister;})->first() @endphp
                     @include('applogs._applogsModal', ['detailApplog'=>$info, 'closeMethod' =>'closeDataModal'])
             @endif
-            @include('applogs._applogsFilters', ['search' => 1])
+            @include('applogs._applogsFilters', ['search' => 1, 'dateBlock' => 1])
             <p class="px-4 py-2 text-sm font-semibold text-gray-700">Número de registros {{($dataCount) ?? 0}}</p>
             <ul class="w-full h-screen overflow-auto shadow bg-white mt-5">
                 @forelse($data as $d)

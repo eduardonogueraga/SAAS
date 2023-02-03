@@ -16,8 +16,9 @@ trait FilterTrait
     public $filtroPackageContenido;
     public $filtroApplogsTipo;
     public $filtroApplogsError;
-
     public $sensorTypes;
+    public $dateFrom;
+    public $dateTo;
     public $filterQueryString = [
         'filtroEntryModo'  => ['except' => ''],
         'filtroEntryEstado'  => ['except' => ''],
@@ -31,6 +32,8 @@ trait FilterTrait
         'filtroPackageContenido' => ['except' => ''],
         'filtroApplogsTipo' => ['except' => ''],
         'filtroApplogsError' => ['except' => ''],
+        'dateFrom' => ['except' => ''],
+        'dateTo' => ['except' => ''],
     ];
 
     public function clearFilters($filtro)

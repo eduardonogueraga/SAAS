@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Filters;
-
-use App\Filters\shared\QueryTrait;
+use Carbon\Carbon;
 
 class ApplogsFilter extends QueryFilter
 {
-    use QueryTrait;
+
     public function rules(): array
     {
         return [
             'search' => 'filled',
             'filtroApplogsTipo' => 'in:alarm,api,all',
             'filtroApplogsError' => 'in:alarm,ok,err',
+            'dateFrom' => 'date_format:d-m-Y H:i',
+            'dateTo' => 'date_format:d-m-Y H:i',
         ];
     }
 
@@ -41,5 +42,23 @@ class ApplogsFilter extends QueryFilter
 
         $metodo = $err === 'err' ? 'whereNotNull': 'whereNull';
         return $query->$metodo('error');
+    }
+
+    public function dateFrom($query, $date)
+    {
+        if($date === null)
+            return $query;
+
+        $date = Carbon::createFromFormat('d-m-Y H:i', $date);
+        $query->where('created_at', '>=', $date->format('Y-m-d H:i:s'));
+    }
+
+    public function dateTo($query, $date)
+    {
+        if($date === null)
+            return $query;
+
+        $date = Carbon::createFromFormat('d-m-Y H:i', $date);
+        $query->where('created_at', '<=', $date->format('Y-m-d H:i:s'));
     }
 }

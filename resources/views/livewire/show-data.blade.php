@@ -139,9 +139,16 @@
                     @case(2)
                         @include('notices._noticesFilters')
                     @break
+                    @case(3)
+                        @include('logs._logsFilters')
+                    @break
                     @case(4)
                         @include('packages._packagesFilters')
                     @break
+                    @case(5)
+                        <input type="text" class="hidden" name="dateFrom" id="dateFrom">
+                        <input type="text" class="hidden" name="dateTo" id="dateTo">
+                        @break
                     @case(6)
                         @include('applogs._applogsFilters',['tipo' => 1])
                     @break

@@ -13,6 +13,8 @@ use QueryTrait;
         return [
             'search' => 'filled',
             'filtroNoticeTipo' => 'in:sms,call,all',
+            'dateFrom' => 'date_format:d-m-Y H:i',
+            'dateTo' => 'date_format:d-m-Y H:i',
         ];
     }
 

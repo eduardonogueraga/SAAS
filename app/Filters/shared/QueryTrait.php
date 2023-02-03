@@ -2,6 +2,8 @@
 
 namespace App\Filters\shared;
 
+use Carbon\Carbon;
+
 trait QueryTrait
 {
     public function subQuery($search, $column)
@@ -23,5 +25,24 @@ trait QueryTrait
         return function ($query) use ($search, $relation, $subCol) {
             $query->whereHas($relation, $this->subQuery($search, $subCol));
         };
+    }
+
+
+    public function dateFrom($query, $date)
+    {
+        if($date === null)
+            return $query;
+
+        $date = Carbon::createFromFormat('d-m-Y H:i', $date);
+        $query->where('fecha', '>=', $date->format('Y-m-d H:i:s'));
+    }
+
+    public function dateTo($query, $date)
+    {
+        if($date === null)
+            return $query;
+
+        $date = Carbon::createFromFormat('d-m-Y H:i', $date);
+        $query->where('fecha', '<=', $date->format('Y-m-d H:i:s'));
     }
 }

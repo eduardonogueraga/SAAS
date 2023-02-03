@@ -4,6 +4,10 @@
             <input class="rounded-lg p-4 bg-gray-200 transition duration-200 focus:outline-none focus:ring-2 w-full"
                    name="search" wire:model.debounce.150ms="search" value="{{ request('search') }}" placeholder="Buscar" />
         </label>
+        <div class="px-3">
+            @include('entries._entriesFilters', ['estadoBlock' => 1])
+        </div>
+
     </div>
     <div class="max-h-[75rem] overflow-y-scroll">
         <ul class="mt-6">

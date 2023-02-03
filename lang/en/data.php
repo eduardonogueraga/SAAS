@@ -81,5 +81,12 @@ return [
         ],
     ],
 
+    'app' => [
+        'filters'=> [
+            'datepickerFrom' => 'Desde...',
+            'datepickerTo' => 'Hasta...'
+        ],
+    ],
+
 
 ];
