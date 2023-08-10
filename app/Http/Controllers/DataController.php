@@ -31,6 +31,6 @@ class DataController extends Controller
     public function getLastPackageId()
     {
         $maxId = Package::max('id');
-        return response()->json(['packid' => $maxId]);
+        return response($maxId)->header('Content-Type', 'text/plain');
     }
 }

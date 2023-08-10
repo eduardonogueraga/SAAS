@@ -36,7 +36,9 @@ Route::post('/sanctum/token', function (Request $request) {
     $user = User::find(1);
     $user->tokens()->delete();
 
-    return $user->createToken($request->device_name)->plainTextToken;
+
+    $token = $user->createToken($request->device_name)->plainTextToken;
+    return response($token)->header('Content-Type', 'text/plain');
 });
 
 Route::middleware('auth:sanctum')->get('/package/get/', [DataController::class, 'getLastPackageId']);
