@@ -192,9 +192,10 @@ class CreatePackageRequest extends FormRequest
 
                                 $detection->sensor()->create([
                                     'package_id' => $package->id,
-                                    'tipo' => ($detectionSensorField[4]),
-                                    'estado' => ($detectionSensorField[5]) ? "ONLINE" : "OFFLINE",
-                                    'valor_sensor' => ($detectionSensorField[6]),
+                                    'terminal_id'  => ($detectionSensorField[4] == 0)? null : $detectionSensorField[4],
+                                    'tipo' => ($detectionSensorField[5]),
+                                    'estado' => ($detectionSensorField[6]) ? "ONLINE" : "OFFLINE",
+                                    'valor_sensor' => ($detectionSensorField[7]),
                                 ]);
 
                             });

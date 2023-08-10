@@ -95,7 +95,15 @@
                                         <div class="px-4 my-3 w-3/3">
                                             <div wire:click.stop="openDataModalWithData('{{$h->id}}', '0',{{$i}})" class="h-full flex items-start">
                                                 <div class="flex pl-4 pr-4 pt-4  border-2 rounded-lg  border-gray-200 border-opacity-50 bg-orange-400 cursor-pointer hover:bg-yellow-100">
-                                                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Detección en {{trans('data.sensor.literales.'.$h->detections[$i]->sensor->tipo)}} @if($h->detections[$i]->intrusismo == 1) <b>Intrusismo</b> @endif</h1>
+                                                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">
+                                                        Detección en
+                                                        @if(isset($h->detections[$i]->sensor->terminal->nombre_terminal))
+                                                            <b> {{$h->detections[$i]->sensor->terminal->nombre_terminal}}</b> (Sensor: {{$h->detections[$i]->sensor->tipo}})
+                                                        @else
+                                                            {{trans('data.sensor.literales.'.$h->detections[$i]->sensor->tipo)}}
+                                                        @endif
+                                                        @if($h->detections[$i]->intrusismo == 1) (<b>Intrusismo</b>)@endif
+                                                    </h1>
                                                     <p class="leading-relaxed mb-5 ml-3"> Fecha: {{$h->detections[$i]->fecha->format('d/m/Y H:i:s')}}</p>
                                                 </div>
                                             </div>

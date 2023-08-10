@@ -12,5 +12,10 @@ class Sensor extends Model
 
     protected $guarded = [];
 
+    public function terminal(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Terminal::class);
+    }
+
 
 }

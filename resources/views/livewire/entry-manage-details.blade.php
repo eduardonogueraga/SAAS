@@ -101,14 +101,24 @@
                                         </svg>
                                     </div>
                                     <div class="flex-grow">
-                                        <h2 class="text-gray-900 text-lg title-font font-medium mb-3"> Detección en {{trans('data.sensor.literales.'.$d->sensor->tipo)}} @if($d->intrusismo == 1) <b>Intrusismo</b> @endif</h2><span>[ID-{{sprintf("%09d",$d->id)}}]</span>
+                                        <h2 class="text-gray-900 text-lg title-font font-medium mb-3">
+                                            Detección en
+                                            @if(isset($d->sensor->terminal->nombre_terminal))
+                                                <b> {{$d->sensor->terminal->nombre_terminal}}</b> (Sensor: {{$d->sensor->tipo}})
+                                            @else
+                                                {{trans('data.sensor.literales.'.$d->sensor->tipo)}}
+                                            @endif
+                                            @if($d->intrusismo == 1) (<b>Intrusismo</b>)@endif
+                                        </h2><span>[ID-{{sprintf("%09d",$d->id)}}]</span>
                                         <p class="leading-relaxed text-base">Nº detecciones consecutivas: {{$d->umbral}}</p>
                                         <p class="leading-relaxed text-base">Modo de detección: {{ucfirst($d->modo_deteccion)}} @if($d->restaurado == 1) Restaurada @endif</p>
                                     </div>
 
                                     <div class="flex-grow">
                                         <p class="leading-relaxed text-base text-right"> Fecha: {{$d->fecha->format('d/m/Y H:i:s')}}</p>
-                                        <p class="leading-relaxed text-base text-right"> Sensor: {{trans('data.sensor.literales.'.$d->sensor->tipo)}}  {{$d->sensor->estado}} ({{$d->sensor->valor_sensor}})</p>
+                                        <p class="leading-relaxed text-base text-right">
+                                            Sensor:@if(isset($d->sensor->terminal->nombre_terminal)){{$d->sensor->tipo}}@else{{trans('data.sensor.literales.'.$d->sensor->tipo)}}@endif
+                                            {{$d->sensor->estado}} ({{$d->sensor->valor_sensor}})</p>
                                     </div>
                                 </li>
                             @endforeach

@@ -15,7 +15,7 @@ class Detection extends Model
     protected $dates = ['fecha'];
     public function sensor()
     {
-        return $this->hasOne(Sensor::class);
+        return $this->hasOne(Sensor::class)->with('terminal');
     }
 
     public function package()

@@ -82,7 +82,7 @@ return [
           '143' => 'ERROR EN EL ID DEL MODELO DE DATOS',
           '144' => 'ERROR EN EL ENVIO DEL MODELO DE DATOS',
           '145' => 'MODELO DATOS ENVIADO',
-          
+
       ],
     ],
 

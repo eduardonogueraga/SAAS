@@ -20,7 +20,13 @@
                 <div class="">
                     <div class="p-4 border-b">
                         <h2 class="text-2xl">
-                            Detección en {{trans('data.sensor.literales.'.$detailDetection->sensor->tipo)}} @if($detailDetection->intrusismo == 1) <b>Intrusismo</b>@endif
+                            Detección en
+                           @if(isset($detailDetection->sensor->terminal->nombre_terminal))
+                                <b> {{$detailDetection->sensor->terminal->nombre_terminal}}</b> (Sensor: {{$detailDetection->sensor->tipo}})
+                            @else
+                               {{trans('data.sensor.literales.'.$detailDetection->sensor->tipo)}}
+                            @endif
+                               @if($detailDetection->intrusismo == 1) (<b>Intrusismo</b>)@endif
                         </h2>
                     </div>
                     <div class="grid grid-cols-3 items-center md:space-y-0 space-y-1 p-4 border-b ">
@@ -35,7 +41,11 @@
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
                         <p class="font-bold">Detalles del sensor:</p>
-                        <p>{{trans('data.sensor.literales.'.$detailDetection->sensor->tipo)}}</p>
+                        @if(isset($detailDetection->sensor->terminal->nombre_terminal))
+                            <p>Sensor número: {{$detailDetection->sensor->tipo}} Terminal: <b>{{$detailDetection->sensor->terminal->nombre_terminal}}</b> </p>
+                        @else
+                            <p>Sensor core: {{trans('data.sensor.literales.'.$detailDetection->sensor->tipo)}}</p>
+                        @endif
                         <p class="font-bold">Estado del sensor:</p>
                         <p>{{$detailDetection->sensor->estado}}</p>
                         <p class="font-bold">Valor recogido:</p>

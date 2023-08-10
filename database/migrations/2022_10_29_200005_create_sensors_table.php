@@ -17,6 +17,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('package_id');
             $table->foreign('package_id')->references('id')->on('packages');
+            $table->unsignedBigInteger('terminal_id')->nullable();
+            $table->foreign('terminal_id')->references('id')->on('terminals');
             $table->unsignedBigInteger('tipo');
             $table->string('estado',45);
             $table->integer('valor_sensor')->nullable();
