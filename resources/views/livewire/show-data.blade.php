@@ -74,6 +74,20 @@
                     </div>
                 </label>
 
+                <label wire:click="clearList" class="flex items-start rounded-xl bg-white p-4 shadow-lg cursor-pointer hover:bg-indigo-100 @if($dataRadio == 7) bg-indigo-100 @else  bg-white @endif">
+                    <input type="radio" value="7"  wire:model="dataRadio" name="data-radio" checked style="display:none" />
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full border border-orange-100 bg-orange-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="#21618c" viewBox="0 0 20 20" stroke="none">
+                            <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+                            <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+                        </svg>
+                    </div>
+
+                    <div class="ml-4">
+                        <h2 class="font-semibold">Notificaciones {{$this->infoRegistros[0]->num_system_notices}}</h2>
+                    </div>
+                </label>
+
                 <label wire:click="clearList" class="flex items-start rounded-xl bg-white p-4 shadow-lg cursor-pointer hover:bg-indigo-100 @if($dataRadio == 5) bg-indigo-100 @else  bg-white @endif">
                     <input type="radio" value="5"  wire:model="dataRadio" name="data-radio" checked style="display:none" />
                     <div class="flex h-12 w-12 items-center justify-center rounded-full border border-indigo-100 bg-indigo-50">
@@ -123,6 +137,9 @@
                     @case(6)
                         @include('applogs._applogsModal', ['detailApplog'=>$info, 'closeMethod' =>'closeDataModal'])
                         @break;
+                    @case(7)
+                        @include('systemNotices._systemNoticesModal', ['detaiSysNoticeLog'=>$info, 'closeMethod' =>'closeDataModal'])
+                        @break;
                     @default
                         @include('shared._noData')
                 @endswitch
@@ -151,6 +168,9 @@
                         @break
                     @case(6)
                         @include('applogs._applogsFilters',['tipo' => 1])
+                    @break
+                    @case(7)
+                        @include('systemNotices._systemNoticesFilters')
                     @break
 
 
@@ -295,7 +315,38 @@
                                 </div>
                             </li>
                             @break
-
+                        @case(7)
+                            <li wire:click.stop="openDataModal('{{$d->id}}')" class="shadow-lg pt-4 ml-2 mr-2 rounded-lg">
+                                <div class="block bg-white py-3 border-t pb-4 hover:bg-yellow-100 cursor-pointer">
+                                    <div class="px-4 py-2 flex  justify-between">
+                                        <div class="flex">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="@if($d->tipo == 'sys') #21618c @else #ba3613 @endif" viewBox="0 0 20 20" stroke="none">
+                                                @if($d->tipo == 'sys')
+                                                    <path d="M13 7H7v6h6V7z"></path>
+                                                    <path fill-rule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clip-rule="evenodd"></path>
+                                                @else
+                                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                                @endif
+                                            </svg>
+                                            <span class="ml-3 text-sm font-semibold text-gray-900">ID:{{sprintf("%09d", $d->id)}} [SAA]  @if($d->tipo == 'sys') Notificación sobre el sistema @else Detección en alarma @endif </span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="px-4 text-sm font-semibold text-gray-600">Fecha: {{$d->fecha->format('d/m/Y H:i:s')}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <p class="px-4 py-2 text-sm font-semibold text-gray-700">
+                                            @if($d->tipo == 'sys') {{Str::limit($d->desc,60)}} @else Ver detalle sensores @endif
+                                        </p>
+                                        @if($d->procesado)
+                                            <p class="px-4 py-2 text-sm font-semibold text-gray-700">Procesado</p>
+                                        @else
+                                            <p class="px-4 py-2 text-sm font-semibold text-gray-700">Pendiente</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </li>
+                            @break
                         @default
                             <li class="shadow-lg pt-4 ml-2 mr-2 rounded-lg ">
                                 <div  class="block bg-white py-3 border-t pb-4 hover:bg-yellow-100">

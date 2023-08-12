@@ -92,6 +92,13 @@ return [
             'err' => ['all' => 'Error (Todos)', 'ok' => 'Registros OK', 'err' => 'Registros de error'],
         ],
     ],
+    'systemNotices' => [
+        'filters'=> [
+            'tipo' => ['all' => 'Tipo (Todos)', 'sys' => 'Sistema', 'alarm' => 'Alertas'],
+            'estado' => ['all' => 'Estado (Todos)', '0' => 'Pendientes', '1' => 'Procesados'],
+        ],
+    ],
+
 
     'app' => [
         'filters'=> [

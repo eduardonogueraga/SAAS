@@ -16,6 +16,8 @@ trait FilterTrait
     public $filtroPackageContenido;
     public $filtroApplogsTipo;
     public $filtroApplogsError;
+    public $filtroSystemNoticesTipo;
+    public $filtroSystemNoticesEstado;
     public $sensorTypes;
     public $dateFrom;
     public $dateTo;
@@ -32,6 +34,8 @@ trait FilterTrait
         'filtroPackageContenido' => ['except' => ''],
         'filtroApplogsTipo' => ['except' => ''],
         'filtroApplogsError' => ['except' => ''],
+        'filtroSystemNoticesTipo'  => ['except' => ''],
+        'filtroSystemNoticesEstado' => ['except' => ''],
         'dateFrom' => ['except' => ''],
         'dateTo' => ['except' => ''],
     ];

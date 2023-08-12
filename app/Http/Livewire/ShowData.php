@@ -12,6 +12,7 @@ use App\Models\Log;
 use App\Models\Notice;
 use App\Models\Package;
 use App\Models\System;
+use App\Models\SystemNotice;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -67,7 +68,8 @@ use FilterTrait;
             (SELECT COUNT(*) FROM notices) AS num_notices,
             (SELECT COUNT(*) FROM packages) AS num_packages,
             (SELECT COUNT(*) FROM logs) AS num_logs,
-            (SELECT COUNT(*) FROM applogs) AS num_applogs');
+            (SELECT COUNT(*) FROM applogs) AS num_applogs,
+            (SELECT COUNT(*) FROM system_notices) AS num_system_notices');
 
         switch ($this->dataRadio) {
             case 0:
@@ -180,6 +182,21 @@ use FilterTrait;
                     ->paginate($this->paginate);
 
                 $this->searchDataCount = Applogs::query()
+                    ->applyFilters($filters)
+                    ->count();
+                break;
+            case 7:
+                $filters = array_merge($filters, [
+                    'filtroSystemNoticesTipo' => $this->filtroSystemNoticesTipo,
+                    'filtroSystemNoticesEstado' => $this->filtroSystemNoticesEstado,
+                ]);
+
+                $this->data = SystemNotice::query()
+                    ->applyFilters($filters)
+                    ->orderBy('id', 'DESC')
+                    ->paginate($this->paginate);
+
+                $this->searchDataCount = SystemNotice::query()
                     ->applyFilters($filters)
                     ->count();
                 break;
