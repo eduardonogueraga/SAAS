@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePackageRequest;
+use App\Http\Requests\CreateSystemNoticeRequest;
 use App\Models\Package;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,10 @@ class DataController extends Controller
         return $request->createNewPackage();
     }
 
+    public function createSystemNotification(CreateSystemNoticeRequest $request)
+    {
+        return $request->createNewSystemNotification();
+    }
     public function getLastPackageId()
     {
         $maxId = Package::max('id');

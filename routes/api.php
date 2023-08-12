@@ -43,4 +43,5 @@ Route::post('/sanctum/token', function (Request $request) {
 
 Route::middleware('auth:sanctum')->get('/package/get/', [DataController::class, 'getLastPackageId']);
 Route::middleware('auth:sanctum')->post('/package/new/', [DataController::class, 'createPackage']);
+Route::middleware('auth:sanctum')->post('/notice/new/', [DataController::class, 'createSystemNotification']);
 

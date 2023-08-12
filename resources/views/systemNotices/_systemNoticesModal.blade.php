@@ -25,7 +25,7 @@
                     </div>
                     <div class="grid grid-cols-3 items-center md:space-y-0 space-y-1 p-4 border-b ">
                         <p class="text-gray-600 font-bold">ID: {{sprintf("%09d", $detaiSysNoticeLog->id)}}</p>
-                        <p class="text-gray-600 font-bold">Fecha: {{$detaiSysNoticeLog->created_at->format('d/m/Y H:i:s')}}</p>
+                        <p class="text-gray-600 font-bold">Fecha: {{$detaiSysNoticeLog->fecha->format('d/m/Y H:i:s')}}</p>
                     </div>
                     <div class="grid grid-cols-2 md:space-y-0 items-center space-y-1 p-4 border-b ">
                         <p class="font-bold">Tipo</p>
