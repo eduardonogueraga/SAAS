@@ -57,9 +57,11 @@ class CreateSystemNoticeRequest extends FormRequest
                 return response()->json(['error' => 'Formato de erroneo'], 400);
             }
             //Compruebo si la fecha esta en condiciones en caso contrario creo una falsa
-            //WIP...
-
-
+            try {
+                Carbon::parse($peticionJSON->date);
+            } catch (\Exception $e) {
+                $peticionJSON->date = "2099-01-01T00:00:00";
+            }
 
             //Si tiene formato JSON procedemos con la creacion de la notificacion
             try {

@@ -24,6 +24,9 @@ return new class extends Migration
             $table->tinyInteger('MODULO_BLUETOOTH');
             $table->string('SENSORES_HABLITADOS');
             $table->integer('SMS_DIARIOS')->default(0);
+            $table->integer('NOTIFICACION_ALARMA')->default(0);
+            $table->integer('NOTIFICACION_SISTEMA')->default(0);
+            $table->integer('PAQUETES_ENVIADOS')->default(0);
             $table->unsignedBigInteger('TIEMPO_ENCENDIDO');
             $table->dateTime('FECHA_RESET');
             $table->timestamps();

@@ -52,7 +52,8 @@
                     </div>
                 </div>
             </div>
-            <div class="p-6 rounded-lg @if($systemInfo->MODO_SENSIBLE) bg-white @else bg-yellow-200 @endif  shadow-lg hover:bg-indigo-100">
+
+            <div class="p-6 rounded-lg  bg-white shadow-lg hover:bg-indigo-100">
                 <div class="flex flex-row space-x-4 items-center">
                     <div id="stats-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -60,9 +61,9 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm font-medium uppercase leading-4">Modo sensible</p>
+                        <p class="text-sm font-medium uppercase leading-4">Proximo reinicio del sistema</p>
                         <p class="font-bold text-2xl inline-flex items-center space-x-2">
-                            <span> @if($systemInfo->MODO_SENSIBLE) Activado @else Desactivado @endif </span>
+                            <span> {{$systemInfo->FECHA_RESET->format('d/m/Y')}} </span>
                         </p>
                     </div>
                 </div>
@@ -84,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="p-6 rounded-lg  bg-white shadow-lg hover:bg-indigo-100">
+            <div class="p-6 rounded-lg @if($systemInfo->NOTIFICACION_ALARMA < 50) bg-white @else bg-red-200 @endif  shadow-lg hover:bg-indigo-100">
                 <div class="flex flex-row space-x-4 items-center">
                     <div id="stats-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -92,9 +93,47 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm font-medium uppercase leading-4">Proximo reinicio del sistema</p>
+                        <p class="text-sm font-medium uppercase leading-4">Notificacion alarma (Max. Diario 80)</p>
                         <p class="font-bold text-2xl inline-flex items-center space-x-2">
-                            <span> {{$systemInfo->FECHA_RESET->format('d/m/Y')}} </span>
+                            <span>{{$systemInfo->NOTIFICACION_ALARMA}}</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium uppercase leading-4">Notificacion sistema (Max. Diario 50)</p>
+                        <p class="font-bold text-2xl inline-flex items-center space-x-2">
+                            <span>{{$systemInfo->NOTIFICACION_SISTEMA}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-lg @if($systemInfo->PAQUETES_ENVIADOS < 200) bg-white @else bg-red-200 @endif  shadow-lg hover:bg-indigo-100">
+                <div class="flex flex-row space-x-4 items-center">
+                    <div id="stats-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium uppercase leading-4">Paquetes enviados (Max. Diario 200)</p>
+                        <p class="font-bold text-2xl inline-flex items-center space-x-2">
+                            <span>{{$systemInfo->PAQUETES_ENVIADOS}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-lg @if($systemInfo->MODO_SENSIBLE) bg-white @else bg-yellow-200 @endif  shadow-lg hover:bg-indigo-100">
+                <div class="flex flex-row space-x-4 items-center">
+                    <div id="stats-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium uppercase leading-4">Modo sensible</p>
+                        <p class="font-bold text-2xl inline-flex items-center space-x-2">
+                            <span> @if($systemInfo->MODO_SENSIBLE) Activado @else Desactivado @endif </span>
                         </p>
                     </div>
                 </div>

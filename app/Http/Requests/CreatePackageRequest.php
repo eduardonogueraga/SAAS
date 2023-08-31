@@ -314,8 +314,12 @@ class CreatePackageRequest extends FormRequest
                 $system->update(['MODO_SENSIBLE' => $paqueteJSON->System[0]->msen]);
             }
 
-            if (isset($paqueteJSON->System[0]->numsms)) {
-                $system->update(['SMS_DIARIOS' => $paqueteJSON->System[0]->numsms]);
+            if (isset($paqueteJSON->System[0]->traffic)) {
+                $trafficField = explode('|', $paqueteJSON->System[0]->traffic);
+                $system->update(['SMS_DIARIOS' => $trafficField[0]]);
+                $system->update(['NOTIFICACION_ALARMA' => $trafficField[1]]);
+                $system->update(['NOTIFICACION_SISTEMA' => $trafficField[2]]);
+                $system->update(['PAQUETES_ENVIADOS' => $trafficField[3]]);
             }
 
             if (isset($paqueteJSON->System[0]->alive)) {
