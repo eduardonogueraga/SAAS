@@ -40,7 +40,7 @@ class PackageAlarm implements ShouldQueue
     {
         //Comprobamos que la alarma este activada en caso contrario no se hara nada
         if(!$this->alarmSettings->activa){
-            echo "Alarma desactivada";
+            echo "Alarma desactivada |Job PackageAlarm\n";
             return;
         }
 

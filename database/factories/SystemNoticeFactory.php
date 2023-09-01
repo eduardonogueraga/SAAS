@@ -21,6 +21,7 @@ class SystemNoticeFactory extends Factory
         return [
             'tipo' => $tipo,
             'desc' => $tipo === 'sys'? 'Error en el sistema ' : 'Salto en alarma sensores: N-N-N-N',
+            'procesado' => 1,
             'fecha' => now()->subDays(rand(0,60)),
         ];
     }

@@ -94,7 +94,7 @@
             </div>
 
             <div class="flex border-t border-gray-200 py-2">
-                <span class="text-gray-500">Estado de la alarma</span>
+                <span class="text-gray-500">Estado de la alarma de paquetes</span>
                 <span class="ml-auto text-gray-900">{{trans('alarm.settings.form.desc.'. $alarmSettings->activa)}}</span>
             </div>
             <div class="flex border-t border-gray-200 py-2">
