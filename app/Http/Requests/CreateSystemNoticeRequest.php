@@ -35,19 +35,31 @@ class CreateSystemNoticeRequest extends FormRequest
     }
     public function createNewSystemNotification(){
         try {
-            $peticionJSON = json_decode($this->getContent());
 
+            $respuestaErrorHttp = '400 Formato erroneo';
+            $errorPaquete = 'Formato erroneo';
+
+            //Comprobamos que el descifrado de la notificacion se este OK
+            $notificacionDescifrada = openssl_decrypt($this->getContent(), env('CIPHER'), env('AES_KEY'), 0, NULL);
+
+            //Deserializamos el paquete
+            if (($peticionJSON = json_decode($notificacionDescifrada)) === null) {
+                $respuestaErrorHttp = '400 Error cifrado';
+                $errorPaquete = 'Notifcacion cifrada, no se puede instalar la notificacion';
+            }
             //Guardamos en contenido en el log de la aplicacion
+            $contenidoRecibido = ($peticionJSON)? json_encode($peticionJSON) :  $this->getContent();
+
             $this->appLog = Applogs::create([
                 'tipo' => 'api',
-                'contenido_peticion' => Str::limit($this->getContent(),1000),
+                'contenido_peticion' => Str::limit($contenidoRecibido,1000),
                 'respuesta_http' => '',
             ]);
 
             //Comprobar que el JSON no viene vacio
             if($peticionJSON === null){
                 //En el caso de problemas con el formato unicamente actualizamos el log
-                $this->appLog->update(['respuesta_http' => '400 Formato de erroneo', 'error' => 'Formato de erroneo',]);
+                $this->appLog->update(['respuesta_http' => $respuestaErrorHttp, 'error' => $errorPaquete]);
                 return response()->json(['error' => 'Formato de erroneo'], 400);
             }
 

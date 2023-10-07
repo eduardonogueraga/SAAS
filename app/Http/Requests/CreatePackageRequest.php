@@ -7,6 +7,7 @@ use App\Models\Entry;
 use App\Models\Package;
 use App\Models\System;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Http\FormRequest;
@@ -44,14 +45,22 @@ class CreatePackageRequest extends FormRequest
 
     public function createNewPackage()
     {
+        $respuestaErrorHttp = '400 Formato erroneo';
+        $errorPaquete = 'Formato erroneo en JSON no se puede instalar el paquete';
+
         try {
+            //Comprobamos que el descifrado del paquete este OK
+            $paqueteDescifrado = openssl_decrypt($this->getContent(), env('CIPHER'), env('AES_KEY'), 0, NULL);
 
-            $paqueteJSON = json_decode($this->getContent());
-
+            //Deserializamos el paquete
+            if (($paqueteJSON = json_decode($paqueteDescifrado)) === null) {
+                $respuestaErrorHttp = '400 Error cifrado';
+                $errorPaquete = 'Paquete cifrado, no se puede instalar el paquete';
+            }
             //Guardamos en contenido en el log de la aplicacion
             $this->appLog = Applogs::create([
                 'tipo' => 'api',
-                'contenido_peticion' => Str::limit($this->getContent(),1000),
+                'contenido_peticion' => Str::limit(json_encode($paqueteJSON),1000),
                 'respuesta_http' => '',
             ]);
 
@@ -60,8 +69,8 @@ class CreatePackageRequest extends FormRequest
                 //En el caso de problemas con el formato debera crearse el paquete junto con los datos de la peticion
                 $package = new Package([
                     'contenido_peticion' => Str::limit($this->getContent(),4500),
-                    'respuesta_http' => '400 Formato de erroneo',
-                    'error' => 'Formato de erroneo en JSON no se puede instalar el paquete',
+                    'respuesta_http' => $respuestaErrorHttp,
+                    'error' => $errorPaquete,
                     'fecha' => Carbon::now()->format('Y-m-d'),
                 ]);
 
@@ -69,9 +78,9 @@ class CreatePackageRequest extends FormRequest
                     $this->appLog->update(['respuesta_http' => '400 Error insertando entrada', 'error' => 'Error al crear el paquete con formato erroneo',]);
                     return response()->json(['error' => 'Error al crear el paquete con formato erroneo'], 400);
                 }
-                $this->appLog->update(['respuesta_http' => '400 Formato de erroneo', 'error' => 'Formato de erroneo',]);
+                $this->appLog->update(['respuesta_http' => $respuestaErrorHttp, 'error' => 'Formato erroneo',]);
 
-                return response()->json(['error' => 'Formato de erroneo'], 400);
+                return response()->json(['error' => 'Formato erroneo'], 400);
             }
 
             //Comprobar que no se encuentra ya instalado (ID)
