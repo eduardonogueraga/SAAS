@@ -40,7 +40,7 @@ class CreateSystemNoticeRequest extends FormRequest
             $errorPaquete = 'Formato erroneo';
 
             //Comprobamos que el descifrado de la notificacion se este OK
-            $notificacionDescifrada = openssl_decrypt($this->getContent(), env('CIPHER'), env('AES_KEY'), 0, NULL);
+            $notificacionDescifrada = openssl_decrypt($this->getContent(), env('CIPHER'), env('AES_KEY'), 0, hex2bin(env('IV_HEX')));
 
             //Deserializamos el paquete
             if (($peticionJSON = json_decode($notificacionDescifrada)) === null) {

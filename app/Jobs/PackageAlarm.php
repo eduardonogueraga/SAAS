@@ -55,7 +55,7 @@ class PackageAlarm implements ShouldQueue
             //Existe un nuevo paquete, la comprobacion resulta OK
             $appLog->update(['desc' => 'Alarma OK Existe nuevo paquete ID '. sprintf("%09d", $ultimoPaqueteIntalado)]);
             echo "Existe el nuevo paquete OK";
-            
+
             //Se actualizan los intentos y paquete
             $this->alarmSettings->update(['last_package_id' => $ultimoPaqueteIntalado,'intentos_realizados' => 0]);
 

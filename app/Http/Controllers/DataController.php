@@ -36,6 +36,7 @@ class DataController extends Controller
     public function getLastPackageId()
     {
         $maxId = Package::max('id');
+        $maxId = openssl_encrypt($maxId, env('CIPHER'), env('AES_KEY'), 0, hex2bin(env('IV_HEX')));
         return response($maxId)->header('Content-Type', 'text/plain');
     }
 }

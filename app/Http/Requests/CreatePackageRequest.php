@@ -50,7 +50,7 @@ class CreatePackageRequest extends FormRequest
 
         try {
             //Comprobamos que el descifrado del paquete este OK
-            $paqueteDescifrado = openssl_decrypt($this->getContent(), env('CIPHER'), env('AES_KEY'), 0, NULL);
+            $paqueteDescifrado = openssl_decrypt($this->getContent(), env('CIPHER'), env('AES_KEY'), 0, hex2bin(env('IV_HEX')));
 
             //Deserializamos el paquete
             if (($paqueteJSON = json_decode($paqueteDescifrado)) === null) {

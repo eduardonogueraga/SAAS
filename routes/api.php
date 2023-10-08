@@ -38,6 +38,7 @@ Route::post('/sanctum/token', function (Request $request) {
 
 
     $token = $user->createToken($request->device_name)->plainTextToken;
+    $token = openssl_encrypt($token, env('CIPHER'), env('AES_KEY'), 0, hex2bin(env('IV_HEX')));
     return response($token)->header('Content-Type', 'text/plain');
 });
 
