@@ -28,6 +28,8 @@ class SystemFactory extends Factory
         'NOTIFICACION_ALARMA' => rand(2,15),
         'NOTIFICACION_SISTEMA' => rand(2,15),
         'PAQUETES_ENVIADOS' => rand(2,15),
+        'GSM_CSQ'=> rand(2,31),
+        'GSM_VOLTAJE'=> rand(1000,4700),
         'TIEMPO_ENCENDIDO' => 87403000, //ms
         'FECHA_RESET' => now()->subHours(2)
         ];

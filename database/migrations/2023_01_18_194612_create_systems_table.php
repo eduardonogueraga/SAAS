@@ -27,6 +27,8 @@ return new class extends Migration
             $table->integer('NOTIFICACION_ALARMA')->default(0);
             $table->integer('NOTIFICACION_SISTEMA')->default(0);
             $table->integer('PAQUETES_ENVIADOS')->default(0);
+            $table->integer('GSM_CSQ')->default(0);
+            $table->integer('GSM_VOLTAJE')->default(0);
             $table->unsignedBigInteger('TIEMPO_ENCENDIDO');
             $table->dateTime('FECHA_RESET');
             $table->timestamps();

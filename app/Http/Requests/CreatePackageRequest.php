@@ -331,6 +331,12 @@ class CreatePackageRequest extends FormRequest
                 $system->update(['PAQUETES_ENVIADOS' => $trafficField[3]]);
             }
 
+            if (isset($paqueteJSON->System[0]->gsm)) {
+                $gsmField = explode('|', $paqueteJSON->System[0]->gsm);
+                $system->update(['GSM_CSQ' => $gsmField[0]]);
+                $system->update(['GSM_VOLTAJE' => $gsmField[1]]);
+            }
+
             if (isset($paqueteJSON->System[0]->alive)) {
                 $system->update(['TIEMPO_ENCENDIDO' => $paqueteJSON->System[0]->alive]);
             }
