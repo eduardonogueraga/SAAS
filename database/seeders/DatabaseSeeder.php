@@ -17,13 +17,13 @@ class DatabaseSeeder extends Seeder
     {
         $this->truncateTables(['entries', 'sensors', 'notices', 'detections', 'logs', 'users', 'packages',  'applogs', 'systems', 'alarms', 'terminals', 'system_notices']);
         $this->call(UsersSeeder::class);
-        $this->call(PackageSeeder::class);
+        //$this->call(PackageSeeder::class);
         $this->call(TerminalSeeder::class);
-        $this->call(EntrySeeder::class);
-        $this->call(ApplogsSeeder::class);
+        //$this->call(EntrySeeder::class);
+        //$this->call(ApplogsSeeder::class);
         $this->call(AlarmSeeder::class);
         $this->call(SystemSeeder::class);
-        $this->call(SystemNoticeSeeder::class);
+        //$this->call(SystemNoticeSeeder::class);
 
     }
 
