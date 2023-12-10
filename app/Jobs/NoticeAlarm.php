@@ -82,6 +82,10 @@ class NoticeAlarm implements ShouldQueue
             if (!$notificacionesSistemaNuevas->isEmpty()){
                 echo "Notificaciones detectadas, procesando...\n";
                 foreach ($notificacionesSistemaNuevas as $notificacion) {
+                    //Marco la notificacion como procesada
+                    $notificacion->procesado = 1;
+                    $notificacion->save();
+
                     //Guardamos en contenido en el log de la aplicacion
                     $appLog = Applogs::create([
                         'tipo' => 'alarm',
@@ -94,8 +98,6 @@ class NoticeAlarm implements ShouldQueue
                     //Notificacion
                     $msg = $this->enviarMensajeTelegram($msg);
                     $appLog->update(['desc' => $msg]);
-                    //Marco la notificacion como procesada
-                    $notificacion->update(['procesado' => 1]);
                     //echo $msg;
                     sleep(2);
                 }
