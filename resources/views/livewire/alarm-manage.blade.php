@@ -106,11 +106,11 @@
                 <span class="ml-auto text-gray-900">{{trans('alarm.settings.form.time.'. $alarmSettings->periodo)}}</span>
             </div>
             <div class="flex border-t border-gray-200 py-2">
-                <span class="text-gray-500">Num de intentos de gracia</span>
+                <span class="text-gray-500">Núm de intentos de gracia</span>
                 <span class="ml-auto text-gray-900">{{$alarmSettings->max_intentos}}</span>
             </div>
             <div class="flex border-t border-gray-200 py-2">
-                <span class="text-gray-500">Ultimo paquete controlado</span>
+                <span class="text-gray-500">Último paquete controlado</span>
                 <span class="ml-auto text-gray-900">
                    (ID-{{sprintf("%09d", $alarmSettings->last_package_id)}})
                     <svg class="inline-block h-6 w-6 ml-2" xmlns="http://www.w3.org/2000/svg" fill="#239b56" viewBox="0 0 24 24" stroke="none">
@@ -123,7 +123,7 @@
 
             </div>
             <div class="flex border-t border-b mb-6 border-gray-200 py-2">
-                <span class="text-gray-500">Ultima ejecución</span>
+                <span class="text-gray-500">Última ejecución</span>
                 <span class="ml-auto text-gray-900">{{$alarmSettings->updated_at->format('d/m/Y H:i:s')}}</span>
             </div>
         </div>

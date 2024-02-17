@@ -48,10 +48,12 @@ class PackageAlarm implements ShouldQueue
         $appLog = Applogs::create([
             'tipo' => 'alarm',
         ]);
+        //Ultimo paquete OK
+        $ultimoPaqueteIntalado = Package::where('implantado', 1)
+            ->where('id', '>', $this->alarmSettings->last_package_id)
+            ->max('id');
 
-        $ultimoPaqueteIntalado = Package::max('id');
-
-        if($this->alarmSettings->last_package_id !== $ultimoPaqueteIntalado){
+        if($this->alarmSettings->last_package_id !== $ultimoPaqueteIntalado && $ultimoPaqueteIntalado !== NULL){
             //Existe un nuevo paquete, la comprobacion resulta OK
             $appLog->update(['desc' => 'Alarma OK Existe nuevo paquete ID '. sprintf("%09d", $ultimoPaqueteIntalado)]);
             echo "Existe el nuevo paquete OK";

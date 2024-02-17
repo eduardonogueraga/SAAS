@@ -30,8 +30,10 @@ class SystemFactory extends Factory
         'PAQUETES_ENVIADOS' => rand(2,15),
         'GSM_CSQ'=> rand(2,31),
         'GSM_VOLTAJE'=> rand(1000,4700),
+        'GSM_FTP' => rand(0,1),
         'TIEMPO_ENCENDIDO' => 87403000, //ms
         'FECHA_RESET' => now()->subHours(2)
         ];
+
     }
 }

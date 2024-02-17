@@ -86,7 +86,7 @@ class CreatePackageRequest extends FormRequest
             //Comprobar que no se encuentra ya instalado (ID)
             if(Package::find($paqueteJSON->id)){
                 $this->appLog->update(['respuesta_http' => '400 Error al crear el paquete', 'error' => 'Id de paquete duplicado',]);
-                //return response()->json(['error' => 'Error al crear el paquete'], 400); //PONER EN PRODUCCION
+                return response()->json(['error' => 'Error al crear el paquete'], 400); //PONER EN PRODUCCION
             }
 
             //Si tiene formato JSON procedemos con la creacion del paquete
@@ -335,6 +335,9 @@ class CreatePackageRequest extends FormRequest
                 $gsmField = explode('|', $paqueteJSON->System[0]->gsm);
                 $system->update(['GSM_CSQ' => $gsmField[0]]);
                 $system->update(['GSM_VOLTAJE' => $gsmField[1]]);
+                if (isset($gsmField[2])) { //Pendiente cambio en SAAM 17/02/2024
+                    $system->update(['GSM_FTP' => $gsmField[2]]);
+                }
             }
 
             if (isset($paqueteJSON->System[0]->alive)) {

@@ -26,8 +26,8 @@
                     </div>
                     @endif
 
-                <p class="leading-relaxed text-base">Duracion de la entrada: @if($entry->max('id') == $entry->id) <b>Actualmente activa</b>
-                    @else {{$entry->fecha->diffInDays($previousDatetime->fecha)}} dias @endif</p>
+                <p class="leading-relaxed text-base">Duración de la entrada: @if($entry->max('id') == $entry->id) <b>Actualmente activa</b>
+                    @else{{$entry->fecha->diff($previousDatetime->fecha)->format('%d días %H horas %I minutos')}}@endif</p>
                 </div>
                     <span class="inline-block py-1 px-2 rounded bg-indigo-50 text-indigo-500 text-xs font-medium tracking-widest mb-2 mt-2">Datos del registro</span>
                     <div class="flex flex-wrap">

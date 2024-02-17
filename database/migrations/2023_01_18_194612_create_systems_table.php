@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('PAQUETES_ENVIADOS')->default(0);
             $table->integer('GSM_CSQ')->default(0);
             $table->integer('GSM_VOLTAJE')->default(0);
+            $table->integer('GSM_FTP')->default(0);
             $table->unsignedBigInteger('TIEMPO_ENCENDIDO');
             $table->dateTime('FECHA_RESET');
             $table->timestamps();

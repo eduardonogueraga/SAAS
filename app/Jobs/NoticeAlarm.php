@@ -49,7 +49,7 @@ class NoticeAlarm implements ShouldQueue
         //Se comprueba si existen nuevos en cuyo caso se actualizara el id
         if($this->alarmSettings->last_notice_id != $ultimaNotificacionEnviada){
 
-            $notificacionesNuevas = Notice::whereBetween('id', [$this->alarmSettings->last_notice_id, $ultimaNotificacionEnviada])->get();
+          $notificacionesNuevas = Notice::where('id', '>', $this->alarmSettings->last_notice_id)->get();
 
             foreach ($notificacionesNuevas as $notificacion) {
 
