@@ -42,6 +42,7 @@ Route::post('/sanctum/token', function (Request $request) {
     return response($token)->header('Content-Type', 'text/plain');
 });
 
+Route::get('/unixtime/get/', [DataController::class, 'getUnixTime']);
 Route::middleware('auth:sanctum')->get('/package/get/', [DataController::class, 'getLastPackageId']);
 Route::middleware('auth:sanctum')->post('/package/new/', [DataController::class, 'createPackage']);
 Route::middleware('auth:sanctum')->post('/notice/new/', [DataController::class, 'createSystemNotification']);
