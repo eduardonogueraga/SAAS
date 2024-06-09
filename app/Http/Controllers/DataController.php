@@ -6,6 +6,7 @@ use App\Http\Requests\CreatePackageRequest;
 use App\Http\Requests\CreateSystemNoticeRequest;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DataController extends Controller
 {
@@ -40,6 +41,6 @@ class DataController extends Controller
         return response($maxId)->header('Content-Type', 'text/plain');
     }
     public function getUnixTime(){
-        return response(time())->header('Content-Type', 'text/plain');
+        return Carbon::now()->format('Y;m;d;H;i;s');
     }
 }
