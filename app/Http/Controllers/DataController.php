@@ -41,6 +41,6 @@ class DataController extends Controller
         return response($maxId)->header('Content-Type', 'text/plain');
     }
     public function getUnixTime(){
-        return Carbon::now()->format('Y;m;d;H;i;s');
+        return response(Carbon::now()->format('Y;m;d;H;i;s'))->header('Content-Type', 'text/plain');
     }
 }
