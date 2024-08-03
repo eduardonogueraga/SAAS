@@ -7,6 +7,8 @@ use App\Http\Livewire\shared\ModalTrait;
 use App\Models\Alarm;
 use App\Models\Applogs;
 use App\Models\Package;
+use App\Models\SystemNotice;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class AlarmManage extends Component
@@ -61,6 +63,13 @@ class AlarmManage extends Component
             'max_intentos' => $this->numIntentos,
             'last_package_id' => $ultimoPaqueteIntalado,
         ]);
+
+        if($this->noticeStatus){ //Si quedan notificaciones viejas pendientes se marcan como procesadas
+            $oneHourAgo = Carbon::now()->subHour();
+            SystemNotice::query()->where('procesado', 0)
+                ->where('created_at', '<', $oneHourAgo)
+                ->update(['procesado' => 1]);
+        }
     }
     public function render()
     {
