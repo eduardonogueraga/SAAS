@@ -86,7 +86,7 @@ class CreatePackageRequest extends FormRequest
             //Comprobar que no se encuentra ya instalado (ID)
             if(Package::find($paqueteJSON->id)){
                 $this->appLog->update(['respuesta_http' => '400 Error al crear el paquete', 'error' => 'Id de paquete duplicado',]);
-                return response()->json(['error' => 'Error al crear el paquete'], 401); //PONER EN PRODUCCION
+                //return response()->json(['error' => 'Error al crear el paquete'], 401); //PONER EN PRODUCCION
             }
 
             //Si tiene formato JSON procedemos con la creacion del paquete

@@ -7,6 +7,27 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## About SAAS
+
+Comandos para nuevos despliegues
+
+docker exec -it laravel-app /bin/bash
+
+php artisan key:generate
+
+php artisan config:clear
+php artisan cache:clear
+php artisan config:cache
+
+chmod -R 775 ./storage ./bootstrap
+chmod -R 775 ./storage/logs ./storage/framework
+
+composer install
+
+Testear la conexión a la base de datos DEV
+
+php artisan migrate:fresh --seed
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

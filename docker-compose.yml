@@ -8,6 +8,7 @@ services:
     container_name: laravel-app
     ports:
       - "24103:80"
+    restart: unless-stopped
     volumes:
       # Solo monta las carpetas necesarias (evita sobrescribir permisos)
       - ./bootstrap:/var/www/bootstrap
@@ -20,12 +21,13 @@ services:
     image: mysql:5.7.23
     container_name: laravel-mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    restart: unless-stopped
     volumes:
       - dbdata:/var/lib/mysql
       - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
